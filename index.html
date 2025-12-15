@@ -1,1 +1,199 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Dynamic SEO Meta Tags -->
+    <title id="pageTitle">AI Blogger Pro | SEO Optimized Blog Platform</title>
+    <meta name="description" id="metaDescription" content="AI-powered blogging platform with automatic SEO optimization and content generation">
+    <meta name="keywords" content="AI blog, content generator, SEO, blogging, DeepSeek">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="AI Blogger Pro">
+    <meta property="og:description" content="Create SEO-optimized blogs with AI assistance">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://yourdomain.com">
+    <meta property="og:image" content="assets/images/og-image.png">
+    
+    <!-- Twitter Cards -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="AI Blogger Pro">
+    <meta name="twitter:description" content="Create SEO-optimized blogs with AI assistance">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://yourdomain.com">
+    
+    <!-- Bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/animations.css">
+    
+    <!-- Schema Markup -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "AI Blogger Pro",
+        "description": "AI-powered blogging platform",
+        "url": "https://yourdomain.com"
+    }
+    </script>
+</head>
+<body>
+    <!-- Sticky Header -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white sticky-top shadow-sm">
+        <div class="container">
+            <a class="navbar-brand fw-bold fs-3 text-primary" href="index.html">
+                <i class="fas fa-robot me-2"></i>AI Blogger
+            </a>
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="blog-listing.html">Blog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="ai-writer.html">AI Writer</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="about.html">About</a>
+                    </li>
+                    <li class="nav-link">
+                        <a class="nav-link" href="contact.html">Contact</a>
+                    </li>
+                </ul>
+                
+                <!-- Search Bar -->
+                <div class="d-flex me-3">
+                    <input type="text" id="searchInput" class="form-control" placeholder="Search articles...">
+                    <button class="btn btn-primary ms-2" id="searchBtn">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+                
+                <!-- Dark Mode Toggle -->
+                <button class="btn btn-outline-secondary me-2" id="darkModeToggle">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section py-5">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <h1 class="display-4 fw-bold mb-4 animate-fade-in">
+                        Create SEO-Optimized Blogs with AI
+                    </h1>
+                    <p class="lead mb-4 animate-fade-in-delay">
+                        Generate professional blog posts instantly. No database needed. Fully indexable by Google.
+                    </p>
+                    <div class="animate-slide-up">
+                        <a href="ai-writer.html" class="btn btn-primary btn-lg me-3">
+                            <i class="fas fa-magic me-2"></i>Generate with AI
+                        </a>
+                        <a href="#latest-posts" class="btn btn-outline-primary btn-lg">
+                            <i class="fas fa-book-open me-2"></i>Read Articles
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="hero-image animate-float">
+                        <i class="fas fa-laptop-code display-1 text-primary"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Latest Posts -->
+    <section id="latest-posts" class="py-5 bg-light">
+        <div class="container">
+            <h2 class="text-center mb-5">Latest Articles</h2>
+            <div class="row" id="blogPostsContainer">
+                <!-- Blog posts will be loaded dynamically -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Features -->
+    <section class="py-5">
+        <div class="container">
+            <h2 class="text-center mb-5">Why Choose AI Blogger</h2>
+            <div class="row text-center">
+                <div class="col-md-4 mb-4 animate-on-scroll">
+                    <div class="feature-card p-4 h-100">
+                        <i class="fas fa-bolt fa-3x text-primary mb-3"></i>
+                        <h4>AI Powered</h4>
+                        <p>Generate content instantly with DeepSeek AI integration</p>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4 animate-on-scroll">
+                    <div class="feature-card p-4 h-100">
+                        <i class="fas fa-search fa-3x text-primary mb-3"></i>
+                        <h4>SEO Optimized</h4>
+                        <p>Automatic SEO meta tags and schema markup</p>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4 animate-on-scroll">
+                    <div class="feature-card p-4 h-100">
+                        <i class="fas fa-database fa-3x text-primary mb-3"></i>
+                        <h4>No Database</h4>
+                        <p>Static HTML generation with persistent content</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <h5 class="mb-3">AI Blogger</h5>
+                    <p>Create professional blogs without technical complexity.</p>
+                </div>
+                <div class="col-md-4">
+                    <h5 class="mb-3">Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="index.html" class="text-light">Home</a></li>
+                        <li><a href="blog-listing.html" class="text-light">All Articles</a></li>
+                        <li><a href="ai-writer.html" class="text-light">AI Writer</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h5 class="mb-3">SEO Tools</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="sitemap.xml" class="text-light">Sitemap</a></li>
+                        <li><a href="robots.txt" class="text-light">Robots.txt</a></li>
+                    </ul>
+                </div>
+            </div>
+            <hr class="bg-light">
+            <div class="text-center">
+                <p>&copy; 2024 AI Blogger Pro. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/main.js"></script>
+    <script src="assets/js/seo-manager.js"></script>
+</body>
+                                                                           </html>
