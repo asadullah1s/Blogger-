@@ -4,52 +4,430 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <!-- Dynamic SEO Meta Tags -->
-    <title id="pageTitle">AI Blogger Pro | SEO Optimized Blog Platform</title>
-    <meta name="description" id="metaDescription" content="AI-powered blogging platform with automatic SEO optimization and content generation">
-    <meta name="keywords" content="AI blog, content generator, SEO, blogging, DeepSeek">
+    <title>Asad's AI Blogger | SEO Optimized Blog Platform</title>
+    <meta name="description" content="AI-powered blogging platform with automatic SEO optimization. Generate blog posts instantly with DeepSeek AI.">
+    <meta name="keywords" content="AI blog, content generator, SEO, blogging, Asad's Blog">
     
     <!-- Open Graph -->
-    <meta property="og:title" content="AI Blogger Pro">
+    <meta property="og:title" content="Asad's AI Blogger">
     <meta property="og:description" content="Create SEO-optimized blogs with AI assistance">
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://yourdomain.com">
-    <meta property="og:image" content="assets/images/og-image.png">
+    <meta property="og:url" content="https://asadblogg.netlify.app/">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=1200&h=630&fit=crop">
     
     <!-- Twitter Cards -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="AI Blogger Pro">
+    <meta name="twitter:title" content="Asad's AI Blogger">
     <meta name="twitter:description" content="Create SEO-optimized blogs with AI assistance">
     
     <!-- Canonical URL -->
-    <link rel="canonical" href="https://yourdomain.com">
-    
-    <!-- Bootstrap 5 -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="assets/css/style.css">
-    <link rel="stylesheet" href="assets/css/animations.css">
+    <link rel="canonical" href="https://asadblogg.netlify.app/">
     
     <!-- Schema Markup -->
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
         "@type": "WebSite",
-        "name": "AI Blogger Pro",
+        "name": "Asad's AI Blogger",
         "description": "AI-powered blogging platform",
-        "url": "https://yourdomain.com"
+        "url": "https://asadblogg.netlify.app/"
     }
     </script>
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Prism.js for code highlighting -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet">
+    
+    <style>
+        /* ===== CSS VARIABLES ===== */
+        :root {
+            --primary-color: #4361ee;
+            --secondary-color: #3a0ca3;
+            --accent-color: #4cc9f0;
+            --light-color: #f8f9fa;
+            --dark-color: #212529;
+            --success-color: #2ecc71;
+            --warning-color: #f39c12;
+            --danger-color: #e74c3c;
+            --border-radius: 10px;
+            --box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            --transition: all 0.3s ease;
+        }
+
+        [data-theme="dark"] {
+            --light-color: #121212;
+            --dark-color: #f8f9fa;
+            --box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        /* ===== BASE STYLES ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--dark-color);
+            background-color: var(--light-color);
+            transition: var(--transition);
+            overflow-x: hidden;
+        }
+
+        [data-theme="dark"] body {
+            background-color: #121212;
+            color: #e0e0e0;
+        }
+
+        /* ===== LAYOUT ===== */
+        .container-fluid {
+            padding-left: 15px;
+            padding-right: 15px;
+        }
+
+        @media (min-width: 1200px) {
+            .container-fluid {
+                max-width: 1140px;
+                margin: 0 auto;
+            }
+        }
+
+        /* ===== HEADER & NAVIGATION ===== */
+        .navbar {
+            background: rgba(255, 255, 255, 0.95) !important;
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(0,0,0,0.1);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            transition: var(--transition);
+        }
+
+        [data-theme="dark"] .navbar {
+            background: rgba(30, 30, 30, 0.95) !important;
+            border-bottom: 1px solid #333;
+        }
+
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--primary-color) !important;
+        }
+
+        .nav-link {
+            font-weight: 500;
+            padding: 0.5rem 1rem !important;
+            transition: var(--transition);
+        }
+
+        .nav-link:hover, .nav-link.active {
+            color: var(--primary-color) !important;
+        }
+
+        /* ===== HERO SECTION ===== */
+        .hero-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 120px 0 80px;
+            margin-top: 56px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="%23ffffff" fill-opacity="0.1" d="M0,96L48,112C96,128,192,160,288,186.7C384,213,480,235,576,213.3C672,192,768,128,864,122.7C960,117,1056,171,1152,197.3C1248,224,1344,224,1392,224L1440,224L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>');
+            background-size: cover;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        /* ===== BLOG CARDS ===== */
+        .blog-card {
+            transition: var(--transition);
+            border: none;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            background: white;
+            box-shadow: var(--box-shadow);
+            height: 100%;
+            margin-bottom: 1.5rem;
+        }
+
+        [data-theme="dark"] .blog-card {
+            background: #1e1e1e;
+        }
+
+        .blog-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+        }
+
+        .blog-card-img {
+            height: 200px;
+            width: 100%;
+            object-fit: cover;
+        }
+
+        .blog-card-body {
+            padding: 1.5rem;
+        }
+
+        .blog-card-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: var(--dark-color);
+        }
+
+        [data-theme="dark"] .blog-card-title {
+            color: #fff;
+        }
+
+        .blog-card-text {
+            color: #666;
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+        }
+
+        [data-theme="dark"] .blog-card-text {
+            color: #aaa;
+        }
+
+        /* ===== AI WRITER ===== */
+        .editor-toolbar {
+            background: #f8f9fa;
+            padding: 10px;
+            border-radius: var(--border-radius) var(--border-radius) 0 0;
+            border: 1px solid #dee2e6;
+            border-bottom: none;
+        }
+
+        [data-theme="dark"] .editor-toolbar {
+            background: #2d2d2d;
+            border-color: #444;
+        }
+
+        #contentEditor {
+            min-height: 300px;
+            border: 1px solid #dee2e6;
+            border-radius: 0 0 var(--border-radius) var(--border-radius);
+            padding: 1rem;
+            outline: none;
+            background: white;
+        }
+
+        [data-theme="dark"] #contentEditor {
+            background: #1e1e1e;
+            border-color: #444;
+            color: #fff;
+        }
+
+        /* ===== BUTTONS ===== */
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: var(--border-radius);
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 7px 14px rgba(67, 97, 238, 0.3);
+        }
+
+        /* ===== ANIMATIONS ===== */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @keyframes loading {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .animate-fade-in {
+            animation: fadeIn 0.6s ease-out;
+        }
+
+        .animate-float {
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .loading-spinner {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255,255,255,0.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: loading 1s linear infinite;
+        }
+
+        /* ===== RESPONSIVE DESIGN ===== */
+        @media (max-width: 768px) {
+            .hero-section {
+                padding: 100px 0 60px;
+                text-align: center;
+            }
+            
+            .hero-section h1 {
+                font-size: 2rem;
+            }
+            
+            .navbar-nav {
+                text-align: center;
+                padding-top: 1rem;
+            }
+            
+            .search-box {
+                margin: 1rem 0;
+            }
+            
+            .blog-card {
+                margin-bottom: 1rem;
+            }
+            
+            .editor-toolbar .btn-group {
+                flex-wrap: wrap;
+                margin-bottom: 0.5rem;
+            }
+            
+            .editor-toolbar .btn {
+                margin-bottom: 0.25rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .container-fluid {
+                padding-left: 10px;
+                padding-right: 10px;
+            }
+            
+            .hero-section h1 {
+                font-size: 1.75rem;
+            }
+            
+            .blog-card-body {
+                padding: 1rem;
+            }
+            
+            .btn {
+                width: 100%;
+                margin-bottom: 0.5rem;
+            }
+        }
+
+        /* ===== DARK MODE SPECIFIC ===== */
+        [data-theme="dark"] .btn-outline-secondary {
+            border-color: #666;
+            color: #ddd;
+        }
+
+        [data-theme="dark"] .form-control,
+        [data-theme="dark"] .form-select {
+            background-color: #2d2d2d;
+            border-color: #444;
+            color: #fff;
+        }
+
+        [data-theme="dark"] .form-control:focus,
+        [data-theme="dark"] .form-select:focus {
+            background-color: #333;
+            border-color: var(--primary-color);
+            color: #fff;
+        }
+
+        [data-theme="dark"] .modal-content {
+            background-color: #1e1e1e;
+            color: #fff;
+        }
+
+        [data-theme="dark"] .modal-header,
+        [data-theme="dark"] .modal-footer {
+            border-color: #444;
+        }
+
+        /* ===== SCROLLBAR ===== */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        [data-theme="dark"] ::-webkit-scrollbar-track {
+            background: #2d2d2d;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary-color);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--secondary-color);
+        }
+
+        /* ===== UTILITY CLASSES ===== */
+        .min-vh-80 {
+            min-height: 80vh;
+        }
+
+        .cursor-pointer {
+            cursor: pointer;
+        }
+
+        .text-gradient {
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        [data-theme="dark"] .glass-effect {
+            background: rgba(30, 30, 30, 0.7);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+    </style>
 </head>
-<body>
-    <!-- Sticky Header -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-white sticky-top shadow-sm">
-        <div class="container">
-            <a class="navbar-brand fw-bold fs-3 text-primary" href="index.html">
-                <i class="fas fa-robot me-2"></i>AI Blogger
+<body data-theme="light">
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+                <i class="fas fa-robot me-2"></i>Asad's AI Blogger
             </a>
             
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
@@ -59,141 +437,141 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav me-auto">
                     <li class="nav-item">
-                        <a class="nav-link active" href="index.html">Home</a>
+                        <a class="nav-link active" href="#home" onclick="showSection('home')">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="blog-listing.html">Blog</a>
+                        <a class="nav-link" href="#ai-writer" onclick="showSection('ai-writer')">AI Writer</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="ai-writer.html">AI Writer</a>
+                        <a class="nav-link" href="#blog" onclick="showSection('blog')">Blog</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="about.html">About</a>
-                    </li>
-                    <li class="nav-link">
-                        <a class="nav-link" href="contact.html">Contact</a>
+                        <a class="nav-link" href="#about" onclick="showSection('about')">About</a>
                     </li>
                 </ul>
                 
-                <!-- Search Bar -->
-                <div class="d-flex me-3">
-                    <input type="text" id="searchInput" class="form-control" placeholder="Search articles...">
-                    <button class="btn btn-primary ms-2" id="searchBtn">
-                        <i class="fas fa-search"></i>
+                <div class="d-flex align-items-center">
+                    <div class="input-group search-box me-2" style="max-width: 300px;">
+                        <input type="text" class="form-control" placeholder="Search articles..." id="searchInput">
+                        <button class="btn btn-primary" onclick="searchArticles()">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                    
+                    <button class="btn btn-outline-secondary me-2" onclick="toggleTheme()" title="Toggle Theme">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                    
+                    <button class="btn btn-primary" onclick="showSection('new-post')">
+                        <i class="fas fa-plus me-1"></i> New Post
                     </button>
                 </div>
-                
-                <!-- Dark Mode Toggle -->
-                <button class="btn btn-outline-secondary me-2" id="darkModeToggle">
-                    <i class="fas fa-moon"></i>
-                </button>
             </div>
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <section class="hero-section py-5">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-lg-6">
-                    <h1 class="display-4 fw-bold mb-4 animate-fade-in">
-                        Create SEO-Optimized Blogs with AI
-                    </h1>
-                    <p class="lead mb-4 animate-fade-in-delay">
-                        Generate professional blog posts instantly. No database needed. Fully indexable by Google.
-                    </p>
-                    <div class="animate-slide-up">
-                        <a href="ai-writer.html" class="btn btn-primary btn-lg me-3">
-                            <i class="fas fa-magic me-2"></i>Generate with AI
-                        </a>
-                        <a href="#latest-posts" class="btn btn-outline-primary btn-lg">
-                            <i class="fas fa-book-open me-2"></i>Read Articles
-                        </a>
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    <div class="hero-image animate-float">
-                        <i class="fas fa-laptop-code display-1 text-primary"></i>
-                    </div>
-                </div>
-            </div>
+    <!-- Loading Overlay -->
+    <div id="loadingOverlay" class="position-fixed top-0 start-0 w-100 h-100 bg-dark bg-opacity-75 d-none justify-content-center align-items-center" style="z-index: 9999;">
+        <div class="text-center text-white">
+            <div class="loading-spinner mb-3" style="width: 50px; height: 50px;"></div>
+            <h4 id="loadingText">Loading...</h4>
         </div>
-    </section>
+    </div>
 
-    <!-- Latest Posts -->
-    <section id="latest-posts" class="py-5 bg-light">
-        <div class="container">
-            <h2 class="text-center mb-5">Latest Articles</h2>
-            <div class="row" id="blogPostsContainer">
-                <!-- Blog posts will be loaded dynamically -->
-            </div>
-        </div>
-    </section>
-
-    <!-- Features -->
-    <section class="py-5">
-        <div class="container">
-            <h2 class="text-center mb-5">Why Choose AI Blogger</h2>
-            <div class="row text-center">
-                <div class="col-md-4 mb-4 animate-on-scroll">
-                    <div class="feature-card p-4 h-100">
-                        <i class="fas fa-bolt fa-3x text-primary mb-3"></i>
-                        <h4>AI Powered</h4>
-                        <p>Generate content instantly with DeepSeek AI integration</p>
-                    </div>
-                </div>
-                <div class="col-md-4 mb-4 animate-on-scroll">
-                    <div class="feature-card p-4 h-100">
-                        <i class="fas fa-search fa-3x text-primary mb-3"></i>
-                        <h4>SEO Optimized</h4>
-                        <p>Automatic SEO meta tags and schema markup</p>
-                    </div>
-                </div>
-                <div class="col-md-4 mb-4 animate-on-scroll">
-                    <div class="feature-card p-4 h-100">
-                        <i class="fas fa-database fa-3x text-primary mb-3"></i>
-                        <h4>No Database</h4>
-                        <p>Static HTML generation with persistent content</p>
+    <!-- Main Content Sections -->
+    <main id="mainContent">
+        <!-- Home Section -->
+        <section id="home" class="container-fluid animate-fade-in">
+            <div class="hero-section">
+                <div class="hero-content">
+                    <div class="row align-items-center">
+                        <div class="col-lg-6 mb-4 mb-lg-0">
+                            <h1 class="display-4 fw-bold mb-4">
+                                Create SEO-Optimized Blogs with AI
+                            </h1>
+                            <p class="lead mb-4">
+                                Generate professional blog posts instantly using DeepSeek AI. No database needed. Fully indexable by Google.
+                            </p>
+                            <div class="d-flex flex-wrap gap-2">
+                                <button class="btn btn-primary btn-lg" onclick="showSection('ai-writer')">
+                                    <i class="fas fa-magic me-2"></i>Generate with AI
+                                </button>
+                                <button class="btn btn-outline-light btn-lg" onclick="showSection('blog')">
+                                    <i class="fas fa-book-open me-2"></i>Read Articles
+                                </button>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 text-center">
+                            <div class="animate-float">
+                                <i class="fas fa-laptop-code display-1 opacity-75"></i>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
 
-    <!-- Footer -->
-    <footer class="bg-dark text-white py-5">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-4">
-                    <h5 class="mb-3">AI Blogger</h5>
-                    <p>Create professional blogs without technical complexity.</p>
-                </div>
-                <div class="col-md-4">
-                    <h5 class="mb-3">Quick Links</h5>
-                    <ul class="list-unstyled">
-                        <li><a href="index.html" class="text-light">Home</a></li>
-                        <li><a href="blog-listing.html" class="text-light">All Articles</a></li>
-                        <li><a href="ai-writer.html" class="text-light">AI Writer</a></li>
-                    </ul>
-                </div>
-                <div class="col-md-4">
-                    <h5 class="mb-3">SEO Tools</h5>
-                    <ul class="list-unstyled">
-                        <li><a href="sitemap.xml" class="text-light">Sitemap</a></li>
-                        <li><a href="robots.txt" class="text-light">Robots.txt</a></li>
-                    </ul>
+            <!-- Features -->
+            <div class="py-5">
+                <h2 class="text-center mb-5">Why Choose AI Blogger</h2>
+                <div class="row">
+                    <div class="col-md-4 mb-4">
+                        <div class="card h-100 border-0 shadow-sm">
+                            <div class="card-body text-center p-4">
+                                <div class="mb-3">
+                                    <i class="fas fa-bolt fa-3x text-gradient"></i>
+                                </div>
+                                <h4 class="card-title mb-3">AI Powered</h4>
+                                <p class="card-text">Generate content instantly with DeepSeek AI integration</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-4">
+                        <div class="card h-100 border-0 shadow-sm">
+                            <div class="card-body text-center p-4">
+                                <div class="mb-3">
+                                    <i class="fas fa-search fa-3x text-gradient"></i>
+                                </div>
+                                <h4 class="card-title mb-3">SEO Optimized</h4>
+                                <p class="card-text">Automatic SEO meta tags and schema markup</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-4">
+                        <div class="card h-100 border-0 shadow-sm">
+                            <div class="card-body text-center p-4">
+                                <div class="mb-3">
+                                    <i class="fas fa-database fa-3x text-gradient"></i>
+                                </div>
+                                <h4 class="card-title mb-3">No Database</h4>
+                                <p class="card-text">Static HTML generation with persistent content</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <hr class="bg-light">
-            <div class="text-center">
-                <p>&copy; 2024 AI Blogger Pro. All rights reserved.</p>
-            </div>
-        </div>
-    </footer>
 
-    <!-- Scripts -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="assets/js/main.js"></script>
-    <script src="assets/js/seo-manager.js"></script>
-</body>
-                                                                           </html>
+            <!-- Latest Articles -->
+            <div class="py-5">
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <h2>Latest Articles</h2>
+                    <button class="btn btn-primary" onclick="showSection('blog')">
+                        View All <i class="fas fa-arrow-right ms-1"></i>
+                    </button>
+                </div>
+                <div class="row" id="latestArticles">
+                    <!-- Articles will be loaded here -->
+                </div>
+            </div>
+        </section>
+
+        <!-- AI Writer Section -->
+        <section id="ai-writer" class="container-fluid d-none animate-fade-in">
+            <div class="py-5">
+                <h1 class="mb-4">AI Content Generator</h1>
+                
+                <!-- API Key Setup -->
+                <div class="card mb-4">
+                    <div class="card-header bg-primary text-white">
+                        <h5 class="mb-0"><i class="fas fa-key me-2"></i>DeepSeek API Setup</h5>
+                    </div>
+                    <div class="card-
