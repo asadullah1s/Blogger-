@@ -1,7 +1,11 @@
-
 [build]
   publish = "."
   functions = "netlify/functions"
+  command = "npm install"
+
+[build.environment]
+  # Remove GEMINI_API_KEY from here - set it in Netlify dashboard instead
+  NODE_VERSION = "18"
 
 [[redirects]]
   from = "/*"
@@ -14,3 +18,4 @@
     Access-Control-Allow-Origin = "*"
     X-Frame-Options = "DENY"
     X-XSS-Protection = "1; mode=block"
+    Cache-Control = "public, max-age=3600"
