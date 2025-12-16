@@ -1,4 +1,4 @@
-    // netlify/functions/generateDesigns.js
+p    // netlify/functions/generateDesigns.js
 exports.handler = async (event, context) => {
   // Handle CORS for browser requests
   if (event.httpMethod === 'OPTIONS') {
@@ -26,125 +26,33 @@ exports.handler = async (event, context) => {
     // Simulate AI processing delay
     await new Promise(resolve => setTimeout(resolve, 2000));
 
-    // Generate mock designs (replace with actual Gemini API call when key is available)
-    const designs = generateMockDesigns(gender, age);
 
-    return {
-      statusCode: 200,
-      headers: {
-        'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': '*'
-      },
-      body: JSON.stringify({ 
-        success: true, 
-        designs: designs,
-        note: 'Using mock data. Add your GEMINI_API_KEY to Netlify environment variables for real AI generation.'
-      })
-    };
 
-  } catch (error) {
-    console.error('Function error:', error);
-    return {
-      statusCode: 500,
-      headers: { 
-        'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': '*'
-      },
-      body: JSON.stringify({ 
-        success: false, 
-        error: error.message
-      })
-    };
-  }
-};
+      // For real Gemini API integration (after setting environment variable)
+const apiKey = process.env.GEMINI_API_KEY;
 
-// Enhanced mock data for demonstration
-function generateMockDesigns(gender, age) {
-  const ageGroup = age < 25 ? 'Youth' : age < 40 ? 'Contemporary' : 'Elegant';
-  
-  const baseDesigns = [
-    {
-      name: `Shahi Zardozi ${gender === 'male' ? 'Sherwani' : 'Lehenga'}`,
-      features: [
-        `Colors: Ruby Red & Gold`,
-        `Fabric: Premium Velvet`,
-        `Embroidery: Heavy Zardozi`,
-        `Occasion: Wedding`,
-        `Age Group: ${ageGroup}`,
-        `Signature: Scalloped Dupatta`,
-        `Pakistani Luxury Style`
-      ],
-      image: generateSampleImage(1)
-    },
-    {
-      name: `Gul-e-Noor Lawn Collection`,
-      features: [
-        `Colors: Mint & Ivory`,
-        `Fabric: Premium Lawn`,
-        `Embroidery: Resham Floral`,
-        `Occasion: Summer Festive`,
-        `Age Group: ${ageGroup}`,
-        `Signature: Painted Chikan`,
-        `Traditional Embroidery`
-      ],
-      image: generateSampleImage(2)
-    },
-    {
-      name: `${gender === 'male' ? 'Nawabi' : 'Noorani'} Chiffon Ensemble`,
-      features: [
-        `Colors: Blush Pink & Silver`,
-        `Fabric: Chiffon`,
-        `Embroidery: Sequins & Pearls`,
-        `Occasion: Formal Event`,
-        `Age Group: ${ageGroup}`,
-        `Signature: Layered Border`,
-        `Modern Pakistani Cut`
-      ],
-      image: generateSampleImage(3)
-    },
-    {
-      name: `Khaddar Luxury ${gender === 'male' ? 'Suit' : 'Kurta'}`,
-      features: [
-        `Colors: Indigo & Copper`,
-        `Fabric: Handwoven Khaddar`,
-        `Embroidery: Gotta Patti`,
-        `Occasion: Winter Festive`,
-        `Age Group: ${ageGroup}`,
-        `Signature: Angrakha Style`,
-        `Artisanal Craftsmanship`
-      ],
-      image: generateSampleImage(4)
-    },
-    {
-      name: `Jamawar Couture`,
-      features: [
-        `Colors: Emerald & Gold`,
-        `Fabric: Jamawar`,
-        `Embroidery: Kundan Stone`,
-        `Occasion: ${gender === 'male' ? 'Groom Wear' : 'Bridal Function'}`,
-        `Age Group: ${ageGroup}`,
-        `Signature: Asymmetric Closure`,
-        `Royal Pakistani Design`
-      ],
-      image: generateSampleImage(5)
-    },
-    {
-      name: `Phulkari Festival Wear`,
-      features: [
-        `Colors: Sunshine Yellow`,
-        `Fabric: Cotton Silk`,
-        `Embroidery: Phulkari`,
-        `Occasion: Eid Celebration`,
-        `Age Group: ${ageGroup}`,
-        `Signature: Mirror Work`,
-        `Cultural Heritage Design`
-      ],
-      image: generateSampleImage(6)
-    }
-  ];
-
-  return baseDesigns;
+if (apiKey && apiKey !=='AIzaSyBdzKh0rnwKGeDqDcdrfY1a-RCrEl4ndKA') {
+  // Real Gemini API call
+  const designs = await callRealGeminiAPI(apiKey, gender, age, image);
+  return {
+    statusCode: 200,
+    headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' },
+    body: JSON.stringify({ success: true, designs: designs })
+  };
+} else {
+  // Mock data fallback
+  const designs = generateMockDesigns(gender, age);
+  return {
+    statusCode: 200,
+    headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' },
+    body: JSON.stringify({ 
+      success: true, 
+      designs: designs,
+      note: 'Using mock data. Set GEMINI_API_KEY in Netlify environment variables for real AI generation.'
+    })
+  };
 }
+    
 
 // Generate sample base64 images (simple colored rectangles for demo)
 function generateSampleImage(index) {
