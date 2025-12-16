@@ -3,919 +3,1129 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LUXURY ELITE | Premium Experience</title>
+    <title>Zari | Luxury Pakistani Fashion Studio</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Google Fonts for luxury typography -->
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    <!-- Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* Base Reset & Fonts */
+        :root {
+            --emerald: #0b5345;
+            --maroon: #641e16;
+            --black: #1c1c1c;
+            --gold: #d4af37;
+            --ivory: #fdf5e6;
+            --light-gold: #f7ef8a;
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
-        
+
         body {
-            background: #0b0b0b;
-            color: #f5f5f5;
-            min-height: 100vh;
+            font-family: 'Inter', sans-serif;
+            background-color: #0a0a0a;
+            color: var(--ivory);
             overflow-x: hidden;
             background-image: 
-                radial-gradient(circle at 20% 30%, rgba(212, 175, 55, 0.03) 0%, transparent 20%),
-                radial-gradient(circle at 80% 70%, rgba(229, 228, 226, 0.03) 0%, transparent 20%);
+                radial-gradient(circle at 10% 20%, rgba(11, 83, 69, 0.15) 0%, transparent 20%),
+                radial-gradient(circle at 90% 80%, rgba(100, 30, 22, 0.1) 0%, transparent 20%);
         }
-        
-        /* Luxury Typography */
-        h1, h2, h3 {
-            font-family: 'Times New Roman', Times, serif;
-            font-weight: 300;
-            letter-spacing: 2px;
+
+        h1, h2, h3, h4, h5 {
+            font-family: 'Cinzel', serif;
+            font-weight: 700;
+            letter-spacing: 1px;
         }
-        
-        /* Main Container */
-        .container {
-            width: 100%;
+
+        .section-container {
             min-height: 100vh;
             display: flex;
-            flex-direction: column;
             align-items: center;
             justify-content: center;
             padding: 20px;
             position: relative;
+            overflow: hidden;
         }
-        
-        /* Luxury Header */
-        .luxury-header {
-            text-align: center;
-            margin-bottom: 40px;
-            position: relative;
-            z-index: 2;
-        }
-        
-        .luxury-header h1 {
-            font-size: 3.5rem;
-            background: linear-gradient(90deg, #d4af37, #f5e6b0, #d4af37);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            margin-bottom: 10px;
-            text-transform: uppercase;
-            letter-spacing: 5px;
-            position: relative;
-            display: inline-block;
-        }
-        
-        .luxury-header h1:after {
-            content: '';
-            position: absolute;
-            width: 100%;
-            height: 2px;
-            background: linear-gradient(90deg, transparent, #d4af37, transparent);
-            bottom: -10px;
-            left: 0;
-        }
-        
-        .luxury-header p {
-            font-size: 1.2rem;
-            color: #cfcfcf;
-            max-width: 600px;
-            margin: 0 auto;
-            line-height: 1.6;
-        }
-        
-        /* Form Section */
-        .form-section {
-            width: 100%;
-            max-width: 800px;
-            background: rgba(15, 15, 15, 0.8);
+
+        .luxury-card {
+            background: rgba(28, 28, 28, 0.85);
             backdrop-filter: blur(10px);
             border-radius: 20px;
             padding: 40px;
             border: 1px solid rgba(212, 175, 55, 0.2);
-            box-shadow: 
-                0 10px 30px rgba(0, 0, 0, 0.5),
-                0 0 60px rgba(212, 175, 55, 0.1),
-                inset 0 0 20px rgba(212, 175, 55, 0.05);
-            position: relative;
-            z-index: 2;
-            margin-bottom: 40px;
-            transition: all 0.8s cubic-bezier(0.19, 1, 0.22, 1);
-        }
-        
-        .form-section.hidden {
-            opacity: 0;
-            transform: translateY(-50px);
-            pointer-events: none;
-        }
-        
-        /* Form Elements */
-        .form-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 25px;
-            margin-bottom: 30px;
-        }
-        
-        .form-group {
-            position: relative;
-        }
-        
-        .form-group.full-width {
-            grid-column: span 2;
-        }
-        
-        .form-group label {
-            position: absolute;
-            top: 20px;
-            left: 15px;
-            color: rgba(255, 255, 255, 0.7);
-            pointer-events: none;
-            transition: 0.3s ease;
-            font-size: 16px;
-        }
-        
-        .form-group input, .form-group select {
-            width: 100%;
-            padding: 20px 15px 10px;
-            background: rgba(30, 30, 30, 0.7);
-            border: 1px solid rgba(212, 175, 55, 0.3);
-            border-radius: 10px;
-            color: #fff;
-            font-size: 16px;
-            transition: all 0.3s ease;
-        }
-        
-        .form-group select {
-            appearance: none;
-            cursor: pointer;
-        }
-        
-        .form-group input:focus, .form-group select:focus {
-            outline: none;
-            border-color: #d4af37;
-            box-shadow: 0 0 15px rgba(212, 175, 55, 0.3);
-        }
-        
-        .form-group input:focus + label,
-        .form-group input:not(:placeholder-shown) + label,
-        .form-group select:focus + label,
-        .form-group select:not(:placeholder-shown) + label {
-            top: 8px;
-            font-size: 12px;
-            color: #d4af37;
-        }
-        
-        /* Submit Button */
-        .submit-btn {
-            background: linear-gradient(135deg, #d4af37 0%, #f5e6b0 50%, #d4af37 100%);
-            color: #0b0b0b;
-            border: none;
-            padding: 18px 40px;
-            font-size: 18px;
-            font-weight: 600;
-            border-radius: 10px;
-            cursor: pointer;
-            display: block;
-            margin: 40px auto 0;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
             position: relative;
             overflow: hidden;
-            transition: all 0.4s ease;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            width: 100%;
-            max-width: 400px;
+            z-index: 2;
         }
-        
-        .submit-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(212, 175, 55, 0.4);
-        }
-        
-        .submit-btn:active {
-            transform: translateY(0);
-        }
-        
-        .submit-btn:before {
+
+        .luxury-card::before {
             content: '';
             position: absolute;
             top: 0;
-            left: -100%;
+            left: 0;
             width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-            transition: 0.5s;
+            height: 4px;
+            background: linear-gradient(90deg, var(--gold), var(--maroon), var(--emerald));
         }
-        
-        .submit-btn:hover:before {
-            left: 100%;
+
+        .gold-accent {
+            color: var(--gold);
+            text-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
         }
-        
-        /* Tickets Section */
-        .tickets-section {
-            width: 100%;
-            max-width: 1200px;
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.8s cubic-bezier(0.19, 1, 0.22, 1);
-            position: relative;
-            z-index: 1;
-            display: none;
-        }
-        
-        .tickets-section.visible {
-            opacity: 1;
-            transform: translateY(0);
-            display: block;
-        }
-        
-        .tickets-section h2 {
-            text-align: center;
-            font-size: 2.5rem;
-            margin-bottom: 40px;
-            background: linear-gradient(90deg, #d4af37, #e5e4e2, #d4af37);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-        }
-        
-        /* Ticket Cards Grid */
-        .tickets-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-            margin-bottom: 50px;
-        }
-        
-        .ticket-card {
-            background: rgba(20, 20, 20, 0.8);
-            border-radius: 15px;
-            padding: 30px 25px;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.4s ease;
-            position: relative;
-            overflow: hidden;
-            border: 1px solid transparent;
-            backdrop-filter: blur(10px);
-        }
-        
-        .ticket-card:hover {
-            transform: translateY(-10px);
-            border-color: rgba(212, 175, 55, 0.5);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5), 0 0 30px rgba(212, 175, 55, 0.2);
-        }
-        
-        .ticket-card.bronze {
-            border-top: 4px solid #cd7f32;
-        }
-        
-        .ticket-card.silver {
-            border-top: 4px solid #c0c0c0;
-        }
-        
-        .ticket-card.gold {
-            border-top: 4px solid #d4af37;
-        }
-        
-        .ticket-card.diamond {
-            border-top: 4px solid #b9f2ff;
-        }
-        
-        .ticket-icon {
-            font-size: 3rem;
-            margin-bottom: 20px;
-        }
-        
-        .bronze .ticket-icon {
-            color: #cd7f32;
-        }
-        
-        .silver .ticket-icon {
-            color: #c0c0c0;
-        }
-        
-        .gold .ticket-icon {
-            color: #d4af37;
-        }
-        
-        .diamond .ticket-icon {
-            color: #b9f2ff;
-            text-shadow: 0 0 10px rgba(185, 242, 255, 0.5);
-        }
-        
-        .ticket-card h3 {
-            font-size: 1.8rem;
-            margin-bottom: 15px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
-        
-        .ticket-card .price {
-            font-size: 1.5rem;
-            margin-bottom: 10px;
-            color: #d4af37;
-            font-weight: 600;
-        }
-        
-        .ticket-card .prize {
-            font-size: 1.3rem;
-            color: #cfcfcf;
-            margin-bottom: 20px;
-        }
-        
-        /* Generated Ticket */
-        .ticket-display {
-            background: linear-gradient(135deg, rgba(20, 20, 20, 0.9), rgba(40, 40, 40, 0.9));
-            border-radius: 20px;
-            padding: 40px;
-            margin: 40px auto;
-            max-width: 700px;
+
+        .gold-border {
             border: 1px solid rgba(212, 175, 55, 0.3);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
-            display: none;
-            position: relative;
-            overflow: hidden;
         }
-        
-        .ticket-display.visible {
-            display: block;
-            animation: fadeIn 0.8s forwards;
+
+        .fabric-bg {
+            background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23d4af37' fill-opacity='0.03' fill-rule='evenodd'/%3E%3C/svg%3E");
         }
-        
-        .ticket-display:before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(212, 175, 55, 0.05) 0%, transparent 70%);
-            z-index: -1;
+
+        /* Step 1 - Gender & Age Selection */
+        #step1 {
+            background: linear-gradient(135deg, rgba(11, 83, 69, 0.2) 0%, rgba(28, 28, 28, 0.9) 100%);
         }
-        
-        .ticket-header {
-            text-align: center;
-            margin-bottom: 30px;
-            border-bottom: 1px solid rgba(212, 175, 55, 0.3);
-            padding-bottom: 20px;
-        }
-        
-        .ticket-header h2 {
-            font-size: 2.2rem;
-            background: linear-gradient(90deg, #d4af37, #f5e6b0);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-        }
-        
-        .ticket-details {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 20px;
-            margin-bottom: 30px;
-        }
-        
-        .ticket-detail {
-            padding: 15px;
-            background: rgba(30, 30, 30, 0.7);
-            border-radius: 10px;
-            border-left: 4px solid #d4af37;
-        }
-        
-        .ticket-detail .label {
-            font-size: 14px;
-            color: #d4af37;
-            margin-bottom: 5px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-        
-        .ticket-detail .value {
-            font-size: 18px;
-            font-weight: 500;
-        }
-        
-        .ticket-number {
-            text-align: center;
-            font-size: 1.8rem;
-            padding: 20px;
-            background: rgba(212, 175, 55, 0.1);
-            border-radius: 10px;
-            margin: 20px 0;
-            letter-spacing: 3px;
-            font-weight: 600;
-            color: #f5e6b0;
-            border: 1px dashed rgba(212, 175, 55, 0.5);
-        }
-        
-        /* WhatsApp Button */
-        .whatsapp-btn {
-            display: block;
-            background: linear-gradient(135deg, #25D366, #128C7E);
-            color: white;
-            text-decoration: none;
-            padding: 18px 30px;
-            font-size: 18px;
-            font-weight: 600;
-            border-radius: 10px;
-            text-align: center;
-            margin: 30px auto 0;
-            max-width: 300px;
-            position: relative;
-            overflow: hidden;
+
+        .gender-btn {
+            background: rgba(28, 28, 28, 0.7);
+            border: 2px solid rgba(212, 175, 55, 0.3);
+            color: var(--ivory);
+            padding: 25px;
+            font-size: 1.2rem;
+            border-radius: 15px;
             transition: all 0.4s ease;
-            animation: pulse 2s infinite;
+            height: 150px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
         }
-        
-        .whatsapp-btn:hover {
+
+        .gender-btn:hover {
+            transform: translateY(-5px);
+            border-color: var(--gold);
+            box-shadow: 0 10px 20px rgba(212, 175, 55, 0.2);
+        }
+
+        .gender-btn.selected {
+            background: rgba(212, 175, 55, 0.1);
+            border-color: var(--gold);
+            box-shadow: 0 0 25px rgba(212, 175, 55, 0.3);
+        }
+
+        .gender-btn i {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            color: var(--gold);
+        }
+
+        .age-slider-container {
+            margin: 40px 0;
+        }
+
+        .age-slider {
+            -webkit-appearance: none;
+            width: 100%;
+            height: 8px;
+            background: rgba(212, 175, 55, 0.2);
+            border-radius: 5px;
+            outline: none;
+        }
+
+        .age-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            background: var(--gold);
+            cursor: pointer;
+            box-shadow: 0 0 10px rgba(212, 175, 55, 0.8);
+        }
+
+        .age-label {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+            font-size: 0.9rem;
+            color: rgba(253, 245, 230, 0.7);
+        }
+
+        .next-btn {
+            background: linear-gradient(90deg, var(--emerald), var(--maroon));
+            color: var(--ivory);
+            border: none;
+            padding: 15px 40px;
+            font-size: 1.1rem;
+            border-radius: 50px;
+            letter-spacing: 1px;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .next-btn:hover {
             transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(37, 211, 102, 0.4);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
         }
-        
-        .whatsapp-btn i {
-            margin-right: 10px;
-            font-size: 20px;
+
+        .next-btn:disabled {
+            background: rgba(100, 30, 22, 0.5);
+            color: rgba(253, 245, 230, 0.5);
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
         }
-        
-        /* Status Messages */
-        .status-message {
-            background: rgba(30, 30, 30, 0.9);
-            border-radius: 10px;
-            padding: 15px 20px;
-            margin: 20px auto;
-            max-width: 600px;
-            text-align: center;
-            border-left: 4px solid #25D366;
+
+        /* Step 2 - Image Upload */
+        #step2 {
+            background: linear-gradient(135deg, rgba(100, 30, 22, 0.2) 0%, rgba(28, 28, 28, 0.9) 100%);
             display: none;
         }
-        
-        .status-message.visible {
-            display: block;
-            animation: fadeIn 0.5s forwards;
+
+        .upload-area {
+            border: 3px dashed rgba(212, 175, 55, 0.5);
+            border-radius: 20px;
+            padding: 60px 30px;
+            text-align: center;
+            transition: all 0.3s ease;
+            background: rgba(11, 83, 69, 0.05);
+            cursor: pointer;
+            margin: 30px 0;
         }
-        
-        .status-message i {
-            color: #25D366;
-            margin-right: 10px;
+
+        .upload-area:hover {
+            border-color: var(--gold);
+            background: rgba(11, 83, 69, 0.1);
         }
-        
-        /* Background Elements */
-        .bg-elements {
-            position: fixed;
+
+        .upload-icon {
+            font-size: 4rem;
+            color: var(--gold);
+            margin-bottom: 20px;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .image-preview {
+            max-width: 100%;
+            max-height: 300px;
+            border-radius: 10px;
+            margin-top: 20px;
+            display: none;
+            border: 2px solid rgba(212, 175, 55, 0.3);
+        }
+
+        /* Step 3 - Design Generation */
+        #step3 {
+            background: linear-gradient(135deg, rgba(28, 28, 28, 0.9) 0%, rgba(11, 83, 69, 0.2) 100%);
+            display: none;
+        }
+
+        .design-card {
+            background: rgba(28, 28, 28, 0.8);
+            border-radius: 15px;
+            overflow: hidden;
+            transition: all 0.5s ease;
+            border: 1px solid rgba(212, 175, 55, 0.1);
+            height: 100%;
+        }
+
+        .design-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--gold);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .design-img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            transition: transform 0.8s ease;
+        }
+
+        .design-card:hover .design-img {
+            transform: scale(1.05);
+        }
+
+        .design-overlay {
+            position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            pointer-events: none;
-            z-index: 0;
+            background: rgba(11, 83, 69, 0.85);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.4s ease;
         }
-        
-        .bg-element {
-            position: absolute;
-            border-radius: 50%;
-            background: radial-gradient(circle, rgba(212, 175, 55, 0.05) 0%, transparent 70%);
+
+        .design-card:hover .design-overlay {
+            opacity: 1;
         }
-        
-        /* Hidden WhatsApp Iframe */
-        #whatsappFrame {
-            display: none;
-            width: 0;
-            height: 0;
+
+        .view-details-btn {
+            background: var(--gold);
+            color: var(--black);
             border: none;
-            position: absolute;
-            top: -1000px;
-            left: -1000px;
+            padding: 12px 25px;
+            border-radius: 50px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
         }
-        
-        /* Animations */
-        @keyframes fadeIn {
+
+        .view-details-btn:hover {
+            background: var(--light-gold);
+            transform: scale(1.05);
+        }
+
+        .design-info {
+            padding: 20px;
+        }
+
+        .design-name {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            color: var(--gold);
+        }
+
+        /* Design Details Panel */
+        #designDetails {
+            display: none;
+            margin-top: 40px;
+            animation: slideDown 0.8s ease;
+        }
+
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .detail-image {
+            border-radius: 10px;
+            border: 2px solid rgba(212, 175, 55, 0.3);
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+        }
+
+        .mini-gallery img {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .mini-gallery img:hover, .mini-gallery img.active {
+            border-color: var(--gold);
+            transform: scale(1.1);
+        }
+
+        .detail-item {
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.1);
+        }
+
+        .detail-label {
+            color: var(--gold);
+            font-weight: 600;
+            display: inline-block;
+            width: 150px;
+        }
+
+        /* Navigation dots */
+        .nav-dots {
+            position: fixed;
+            right: 30px;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 100;
+        }
+
+        .nav-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(212, 175, 55, 0.3);
+            margin: 15px 0;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .nav-dot.active {
+            background: var(--gold);
+            transform: scale(1.3);
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .luxury-card {
+                padding: 25px;
+            }
+            
+            .gender-btn {
+                height: 120px;
+                padding: 15px;
+                margin-bottom: 15px;
+            }
+            
+            .design-img {
+                height: 200px;
+            }
+            
+            .nav-dots {
+                display: none;
+            }
+            
+            .detail-image {
+                height: 300px;
+            }
+        }
+
+        /* Loading animation */
+        .loader {
+            display: none;
+            text-align: center;
+            margin: 30px 0;
+        }
+
+        .spinner {
+            border: 5px solid rgba(212, 175, 55, 0.2);
+            border-top: 5px solid var(--gold);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Step transition animations */
+        .step-transition-out {
+            animation: fadeOutUp 0.8s ease forwards;
+        }
+
+        .step-transition-in {
+            animation: fadeInUp 0.8s ease forwards;
+        }
+
+        @keyframes fadeOutUp {
+            from { opacity: 1; transform: translateY(0); }
+            to { opacity: 0; transform: translateY(-30px); display: none; }
+        }
+
+        @keyframes fadeInUp {
             from { opacity: 0; transform: translateY(30px); }
             to { opacity: 1; transform: translateY(0); }
         }
-        
-        @keyframes pulse {
-            0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.4); }
-            70% { box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+
+        /* Logo styling */
+        .brand-logo {
+            font-family: 'Cinzel', serif;
+            font-size: 2.5rem;
+            color: var(--gold);
+            text-align: center;
+            margin-bottom: 20px;
+            position: relative;
+            display: inline-block;
         }
-        
-        @keyframes shine {
-            0% { background-position: -100px; }
-            100% { background-position: 200px; }
-        }
-        
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .form-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .form-group.full-width {
-                grid-column: span 1;
-            }
-            
-            .luxury-header h1 {
-                font-size: 2.5rem;
-            }
-            
-            .form-section {
-                padding: 30px 20px;
-            }
-            
-            .tickets-grid {
-                grid-template-columns: 1fr;
-                max-width: 400px;
-                margin-left: auto;
-                margin-right: auto;
-            }
-            
-            .ticket-details {
-                grid-template-columns: 1fr;
-            }
-        }
-        
-        @media (max-width: 480px) {
-            .luxury-header h1 {
-                font-size: 2rem;
-            }
-            
-            .ticket-display {
-                padding: 25px 15px;
-            }
+
+        .brand-logo::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 10%;
+            width: 80%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
         }
     </style>
 </head>
 <body>
-    <div class="bg-elements" id="bgElements"></div>
-    
-    <!-- Hidden WhatsApp Frame for Automatic Sending -->
-    <iframe id="whatsappFrame" sandbox="allow-scripts allow-same-origin"></iframe>
-    
-    <div class="container">
-        <!-- Luxury Header -->
-        <div class="luxury-header">
-            <h1>LUXURY ELITE</h1>
-            <p>Experience the pinnacle of exclusivity with our premium ticket offerings. Register now for a chance to win extraordinary prizes.</p>
-        </div>
-        
-        <!-- Status Messages -->
-        <div class="status-message" id="statusMessage">
-            <i class="fas fa-check-circle"></i>
-            <span id="statusText">Message sent successfully!</span>
-        </div>
-        
-        <!-- Registration Form Section -->
-        <section class="form-section" id="registrationForm">
-            <form id="luxuryForm">
-                <div class="form-grid">
-                    <div class="form-group">
-                        <input type="text" id="fullName" required placeholder=" ">
-                        <label for="fullName">Full Name</label>
-                    </div>
-                    
-                    <div class="form-group">
-                        <input type="text" id="fatherName" required placeholder=" ">
-                        <label for="fatherName">Father Name</label>
-                    </div>
-                    
-                    <div class="form-group">
-                        <input type="text" id="idNumber" required placeholder=" ">
-                        <label for="idNumber">ID / CNIC / Passport Number</label>
-                    </div>
-                    
-                    <div class="form-group">
-                        <input type="tel" id="whatsapp" required placeholder=" ">
-                        <label for="whatsapp">WhatsApp Number</label>
-                    </div>
-                    
-                    <div class="form-group">
-                        <select id="country" required>
-                            <option value="" selected disabled></option>
-                            <option value="USA">United States</option>
-                            <option value="UK">United Kingdom</option>
-                            <option value="UAE">United Arab Emirates</option>
-                            <option value="SA">Saudi Arabia</option>
-                            <option value="PK">Pakistan</option>
-                            <option value="IN">India</option>
-                            <option value="CA">Canada</option>
-                            <option value="AU">Australia</option>
-                        </select>
-                        <label for="country">Country</label>
-                    </div>
-                    
-                    <div class="form-group">
-                        <input type="text" id="city" required placeholder=" ">
-                        <label for="city">City</label>
-                    </div>
-                    
-                    <div class="form-group full-width">
-                        <input type="text" id="address" required placeholder=" ">
-                        <label for="address">Complete Address</label>
-                    </div>
-                </div>
-                
-                <button type="submit" class="submit-btn">
-                    <i class="fas fa-gem"></i> Continue to Luxury Tickets
-                </button>
-            </form>
-        </section>
-        
-        <!-- Tickets Selection Section -->
-        <section class="tickets-section" id="ticketsSection">
-            <h2>Select Your Luxury Ticket</h2>
-            
-            <div class="tickets-grid">
-                <!-- Bronze Ticket -->
-                <div class="ticket-card bronze" data-type="Bronze" data-price="$500" data-prize="$5,000">
-                    <div class="ticket-icon">
-                        <i class="fas fa-medal"></i>
-                    </div>
-                    <h3>Bronze</h3>
-                    <div class="price">Ticket: $500</div>
-                    <div class="prize">Prize: $5,000</div>
-                    <div class="ticket-features">
-                        <p>Entry-level luxury experience</p>
-                    </div>
-                </div>
-                
-                <!-- Silver Ticket -->
-                <div class="ticket-card silver" data-type="Silver" data-price="$1,000" data-prize="$10,000">
-                    <div class="ticket-icon">
-                        <i class="fas fa-medal"></i>
-                    </div>
-                    <h3>Silver</h3>
-                    <div class="price">Ticket: $1,000</div>
-                    <div class="prize">Prize: $10,000</div>
-                    <div class="ticket-features">
-                        <p>Enhanced premium benefits</p>
-                    </div>
-                </div>
-                
-                <!-- Gold Ticket -->
-                <div class="ticket-card gold" data-type="Gold" data-price="$2,000" data-prize="$20,000">
-                    <div class="ticket-icon">
-                        <i class="fas fa-trophy"></i>
-                    </div>
-                    <h3>Gold</h3>
-                    <div class="price">Ticket: $2,000</div>
-                    <div class="prize">Prize: $20,000</div>
-                    <div class="ticket-features">
-                        <p>Exclusive gold-tier privileges</p>
-                    </div>
-                </div>
-                
-                <!-- Diamond Ticket -->
-                <div class="ticket-card diamond" data-type="Diamond" data-price="$4,000" data-prize="$40,000">
-                    <div class="ticket-icon">
-                        <i class="fas fa-gem"></i>
-                    </div>
-                    <h3>Diamond</h3>
-                    <div class="price">Ticket: $4,000</div>
-                    <div class="prize">Prize: $40,000</div>
-                    <div class="ticket-features">
-                        <p>Ultimate VIP experience</p>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Generated Ticket Display -->
-            <div class="ticket-display" id="ticketDisplay">
-                <div class="ticket-header">
-                    <h2>Your Luxury Ticket</h2>
-                    <p>Present this ticket for your exclusive experience</p>
-                </div>
-                
-                <div class="ticket-details">
-                    <div class="ticket-detail">
-                        <div class="label">Full Name</div>
-                        <div class="value" id="displayName">-</div>
-                    </div>
-                    
-                    <div class="ticket-detail">
-                        <div class="label">ID Number</div>
-                        <div class="value" id="displayId">-</div>
-                    </div>
-                    
-                    <div class="ticket-detail">
-                        <div class="label">Ticket Type</div>
-                        <div class="value" id="displayType">-</div>
-                    </div>
-                    
-                    <div class="ticket-detail">
-                        <div class="label">Prize Amount</div>
-                        <div class="value" id="displayPrize">-</div>
-                    </div>
-                </div>
-                
-                <div class="ticket-number" id="ticketNumber">LUX-2025-000000</div>
-                
-                <p style="text-align: center; color: #cfcfcf; margin-top: 20px;">
-                    <i class="fas fa-check-circle" style="color: #25D366;"></i>
-                    Your ticket details have been automatically sent to our concierge via WhatsApp.
-                </p>
-            </div>
-            
-            <!-- Final WhatsApp CTA Button -->
-            <a href="https://wa.me/923158840592" class="whatsapp-btn" target="_blank" id="whatsappBtn">
-                <i class="fab fa-whatsapp"></i> Contact on WhatsApp
-            </a>
-        </section>
+    <!-- Navigation Dots -->
+    <div class="nav-dots">
+        <div class="nav-dot active" data-step="1"></div>
+        <div class="nav-dot" data-step="2"></div>
+        <div class="nav-dot" data-step="3"></div>
     </div>
 
+    <!-- Step 1: Gender & Age Selection -->
+    <section id="step1" class="section-container fabric-bg">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="luxury-card">
+                        <div class="text-center mb-5">
+                            <h1 class="brand-logo">ZARI</h1>
+                            <h2 class="gold-accent">Personalized Pakistani Fashion Studio</h2>
+                            <p class="mt-3">Designs crafted to match your age, style & culture</p>
+                        </div>
+                        
+                        <div class="mb-5">
+                            <h4 class="text-center mb-4 gold-accent">Select Your Gender</h4>
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <div class="gender-btn" data-gender="male">
+                                        <i class="fas fa-male"></i>
+                                        <span>Male</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <div class="gender-btn" data-gender="female">
+                                        <i class="fas fa-female"></i>
+                                        <span>Female</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="age-slider-container">
+                            <h4 class="text-center mb-4 gold-accent">Select Your Age</h4>
+                            <input type="range" min="18" max="60" value="25" class="age-slider" id="ageSlider">
+                            <div class="age-label">
+                                <span>18</span>
+                                <span id="selectedAge">25</span>
+                                <span>60</span>
+                            </div>
+                        </div>
+                        
+                        <div class="text-center mt-5">
+                            <button class="next-btn" id="nextToStep2" disabled>
+                                Next <i class="fas fa-arrow-right ms-2"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Step 2: Clothes Image Upload -->
+    <section id="step2" class="section-container fabric-bg">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="luxury-card">
+                        <div class="text-center mb-4">
+                            <h2 class="gold-accent">Upload Your Outfit</h2>
+                            <p class="mt-3">Shalwar Kameez, Kurta, Saree, Lehenga, Sherwani, etc.</p>
+                        </div>
+                        
+                        <div id="uploadArea" class="upload-area">
+                            <div class="upload-icon">
+                                <i class="fas fa-cloud-upload-alt"></i>
+                            </div>
+                            <h4 class="gold-accent mb-3">Drag & Drop Your Image Here</h4>
+                            <p class="mb-4">or click to browse files (JPG, PNG format)</p>
+                            <input type="file" id="imageUpload" accept="image/*" style="display: none;">
+                            <button class="btn next-btn" id="browseBtn">
+                                <i class="fas fa-folder-open me-2"></i> Browse Files
+                            </button>
+                        </div>
+                        
+                        <div class="text-center">
+                            <img id="imagePreview" class="image-preview" alt="Uploaded outfit">
+                        </div>
+                        
+                        <div class="loader" id="uploadLoader">
+                            <div class="spinner"></div>
+                            <p>Processing your image...</p>
+                        </div>
+                        
+                        <div class="text-center mt-5">
+                            <button class="next-btn" id="nextToStep3" disabled>
+                                Generate Designs <i class="fas fa-magic ms-2"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Step 3: Design Generation -->
+    <section id="step3" class="section-container">
+        <div class="container">
+            <div class="row mb-5">
+                <div class="col-12">
+                    <div class="luxury-card">
+                        <div class="text-center">
+                            <h2 class="gold-accent mb-3">Personalized Designs For You</h2>
+                            <p id="userInfo" class="mb-0">Based on your profile: <span id="profileInfo"></span></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row" id="designsContainer">
+                <!-- Designs will be dynamically inserted here -->
+            </div>
+            
+            <!-- Design Details Panel -->
+            <div id="designDetails" class="luxury-card mt-4">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <img id="detailMainImage" class="detail-image" src="" alt="Design detail">
+                        <div class="mini-gallery d-flex justify-content-center mt-3">
+                            <!-- Mini gallery images will be inserted here -->
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <h3 id="detailName" class="gold-accent mb-4"></h3>
+                        
+                        <div class="detail-item">
+                            <span class="detail-label">Color:</span>
+                            <span id="detailColor"></span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Fabric:</span>
+                            <span id="detailFabric"></span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Embroidery:</span>
+                            <span id="detailEmbroidery"></span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Occasion:</span>
+                            <span id="detailOccasion"></span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Cultural Region:</span>
+                            <span id="detailRegion"></span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Age Suitability:</span>
+                            <span id="detailAge"></span>
+                        </div>
+                        
+                        <div class="mt-5">
+                            <button class="btn next-btn me-3">
+                                <i class="fas fa-heart me-2"></i> Save Design
+                            </button>
+                            <button id="closeDetails" class="btn next-btn" style="background: rgba(100, 30, 22, 0.7);">
+                                <i class="fas fa-times me-2"></i> Close
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Bootstrap JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    
     <script>
-        // Create dynamic background elements
-        function createBackgroundElements() {
-            const bgContainer = document.getElementById('bgElements');
-            const elementCount = 15;
-            
-            for (let i = 0; i < elementCount; i++) {
-                const element = document.createElement('div');
-                element.classList.add('bg-element');
-                
-                // Random size and position
-                const size = Math.random() * 300 + 50;
-                const posX = Math.random() * 100;
-                const posY = Math.random() * 100;
-                
-                element.style.width = `${size}px`;
-                element.style.height = `${size}px`;
-                element.style.left = `${posX}%`;
-                element.style.top = `${posY}%`;
-                
-                // Random opacity
-                element.style.opacity = Math.random() * 0.05 + 0.02;
-                
-                bgContainer.appendChild(element);
-            }
-        }
-        
-        // Show status message
-        function showStatus(message) {
-            const statusEl = document.getElementById('statusMessage');
-            document.getElementById('statusText').textContent = message;
-            statusEl.classList.add('visible');
-            
-            setTimeout(() => {
-                statusEl.classList.remove('visible');
-            }, 3000);
-        }
-        
-        // Send WhatsApp message automatically (hidden iframe method)
-        function sendWhatsAppMessage(message) {
-            // Encode message for WhatsApp URL
-            const encodedMessage = encodeURIComponent(message);
-            
-            // Create WhatsApp URL
-            const whatsappUrl = `https://wa.me/923158840592?text=${encodedMessage}`;
-            
-            // Use hidden iframe to send message automatically
-            const iframe = document.getElementById('whatsappFrame');
-            
-            // Set iframe source to WhatsApp URL
-            iframe.src = whatsappUrl;
-            
-            // Show status message
-            showStatus("Message sent successfully! Automatically redirected to tickets...");
-            
-            // For mobile devices, we also try to open the app directly
-            if (/Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-                // Try to open WhatsApp app directly
-                window.location.href = `whatsapp://send?phone=923158840592&text=${encodedMessage}`;
-            }
-        }
-        
-        // Form submission handler
-        document.getElementById('luxuryForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            // Collect form data
-            const formData = {
-                fullName: document.getElementById('fullName').value,
-                fatherName: document.getElementById('fatherName').value,
-                idNumber: document.getElementById('idNumber').value,
-                whatsapp: document.getElementById('whatsapp').value,
-                country: document.getElementById('country').value,
-                city: document.getElementById('city').value,
-                address: document.getElementById('address').value
-            };
-            
-            // Validate all fields are filled
-            for (const key in formData) {
-                if (!formData[key]) {
-                    showStatus('Please fill all fields before continuing.');
-                    return;
-                }
-            }
-            
-            // Format WhatsApp message
-            const message = `🎟️ New Luxury Ticket Registration\n\n` +
-                          `Name: ${formData.fullName}\n` +
-                          `Father Name: ${formData.fatherName}\n` +
-                          `ID Number: ${formData.idNumber}\n` +
-                          `WhatsApp: ${formData.whatsapp}\n` +
-                          `Country: ${formData.country}\n` +
-                          `City: ${formData.city}\n` +
-                          `Address: ${formData.address}`;
-            
-            // Send WhatsApp message automatically
-            sendWhatsAppMessage(message);
-            
-            // Store form data for later use
-            localStorage.setItem('luxuryUserData', JSON.stringify(formData));
-            
-            // Transition to tickets section after a short delay
-            setTimeout(() => {
-                document.getElementById('registrationForm').classList.add('hidden');
-                document.getElementById('ticketsSection').classList.add('visible');
-                
-                // Smooth scroll to tickets section
-                document.getElementById('ticketsSection').scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'center'
-                });
-            }, 1500);
-        });
-        
-        // Ticket selection handler
-        const ticketCards = document.querySelectorAll('.ticket-card');
-        ticketCards.forEach(card => {
-            card.addEventListener('click', function() {
-                const ticketType = this.getAttribute('data-type');
-                const ticketPrice = this.getAttribute('data-price');
-                const ticketPrize = this.getAttribute('data-prize');
-                
-                // Get stored user data
-                const userData = JSON.parse(localStorage.getItem('luxuryUserData'));
-                
-                // Generate unique ticket number
-                const ticketNumber = `LUX-2025-${Math.floor(100000 + Math.random() * 900000)}`;
-                
-                // Update ticket display
-                document.getElementById('displayName').textContent = userData.fullName;
-                document.getElementById('displayId').textContent = userData.idNumber;
-                document.getElementById('displayType').textContent = ticketType;
-                document.getElementById('displayPrize').textContent = ticketPrize;
-                document.getElementById('ticketNumber').textContent = ticketNumber;
-                
-                // Show ticket display
-                document.getElementById('ticketDisplay').classList.add('visible');
-                
-                // Format WhatsApp confirmation message
-                const confirmMessage = `🎫 Luxury Ticket Generated\n\n` +
-                                     `Name: ${userData.fullName}\n` +
-                                     `ID Number: ${userData.idNumber}\n` +
-                                     `Ticket Type: ${ticketType}\n` +
-                                     `Prize Amount: ${ticketPrize}\n` +
-                                     `Ticket Number: ${ticketNumber}`;
-                
-                // Send ticket confirmation automatically
-                sendWhatsAppMessage(confirmMessage);
-                
-                // Update WhatsApp button with ticket confirmation message
-                const encodedConfirmMessage = encodeURIComponent(confirmMessage);
-                const whatsappBtn = document.getElementById('whatsappBtn');
-                whatsappBtn.href = `https://wa.me/923158840592?text=${encodedConfirmMessage}`;
-                
-                // Scroll to ticket display
-                document.getElementById('ticketDisplay').scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'center'
-                });
-            });
-        });
-        
-        // Initialize background elements on page load
-        window.addEventListener('DOMContentLoaded', function() {
-            createBackgroundElements();
-            
-            // Add some luxury styling to form inputs on focus
-            const formInputs = document.querySelectorAll('input, select');
-            formInputs.forEach(input => {
-                input.addEventListener('focus', function() {
-                    this.parentElement.classList.add('focused');
-                });
-                
-                input.addEventListener('blur', function() {
-                    if (!this.value) {
-                        this.parentElement.classList.remove('focused');
+        // Application state
+        const appState = {
+            gender: null,
+            age: 25,
+            uploadedImage: null,
+            designs: []
+        };
+
+        // Pakistani fashion designs database
+        const designsDatabase = {
+            male: {
+                young: [
+                    {
+                        id: 1,
+                        name: "Embroidered Silk Kurta",
+                        color: "Emerald Green & Gold",
+                        fabric: "Pure Silk",
+                        embroidery: "Zari & Zardozi",
+                        occasion: "Eid & Wedding",
+                        region: "Punjab",
+                        ageSuitability: "18-30",
+                        image: "https://images.unsplash.com/photo-1595777457583-95e059d581b8?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80"
+                    },
+                    {
+                        id: 2,
+                        name: "Linen Summer Kurta",
+                        color: "Ivory & Maroon",
+                        fabric: "Premium Linen",
+                        embroidery: "Minimal Chikankari",
+                        occasion: "Casual & Daily Wear",
+                        region: "Sindh",
+                        ageSuitability: "18-35",
+                        image: "https://images.unsplash.com/photo-1584917865442-de89df76afd3?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80"
+                    },
+                    {
+                        id: 3,
+                        name: "Formal Sherwani",
+                        color: "Matte Black & Gold",
+                        fabric: "Brocade Silk",
+                        embroidery: "Heavy Zardozi",
+                        occasion: "Wedding & Formal",
+                        region: "Punjab",
+                        ageSuitability: "20-40",
+                        image: "https://images.unsplash.com/photo-1563389234809-5b0d5e8b8e6f?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80"
+                    },
+                    {
+                        id: 4,
+                        name: "Waistcoat Kurta Set",
+                        color: "Royal Maroon",
+                        fabric: "Velvet & Silk",
+                        embroidery: "Resham & Sequence",
+                        occasion: "Party & Festive",
+                        region: "KPK",
+                        ageSuitability: "18-30",
+                        image: "https://images.unsplash.com/photo-157790609642b-f8ce5b282d5c?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80"
                     }
+                ],
+                mature: [
+                    {
+                        id: 5,
+                        name: "Classic Silk Kurta",
+                        color: "Navy Blue & Silver",
+                        fabric: "Kashmiri Silk",
+                        embroidery: "Sozni Embroidery",
+                        occasion: "Formal & Business",
+                        region: "Kashmir",
+                        ageSuitability: "35-60",
+                        image: "https://images.unsplash.com/photo-1595777457583-95e059d581b8?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=60"
+                    },
+                    {
+                        id: 6,
+                        name: "Traditional Pathani Suit",
+                        color: "Beige & Brown",
+                        fabric: "Cotton & Linen",
+                        embroidery: "Minimal Embroidery",
+                        occasion: "Daily & Casual",
+                        region: "KPK",
+                        ageSuitability: "30-60",
+                        image: "https://images.unsplash.com/photo-1563389234809-5b0d5e8b8e6f?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=60"
+                    }
+                ]
+            },
+            female: {
+                young: [
+                    {
+                        id: 7,
+                        name: "Bridal Lehenga Choli",
+                        color: "Red & Gold",
+                        fabric: "Silk & Net",
+                        embroidery: "Heavy Zardozi & Kundan",
+                        occasion: "Wedding",
+                        region: "Punjab",
+                        ageSuitability: "18-30",
+                        image: "https://images.unsplash.com/photo-157790609642b-f8ce5b282d5c?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80"
+                    },
+                    {
+                        id: 8,
+                        name: "Party Wear Saree",
+                        color: "Emerald Green & Silver",
+                        fabric: "Chiffon",
+                        embroidery: "Sequence & Beads",
+                        occasion: "Party & Festive",
+                        region: "Sindh",
+                        ageSuitability: "18-35",
+                        image: "https://images.unsplash.com/photo-1595777457583-95e059d581b8?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80"
+                    },
+                    {
+                        id: 9,
+                        name: "Lawn Suit Set",
+                        color: "Floral Print",
+                        fabric: "Premium Lawn",
+                        embroidery: "Digital Print",
+                        occasion: "Casual & Daily",
+                        region: "Punjab",
+                        ageSuitability: "18-40",
+                        image: "https://images.unsplash.com/photo-1584917865442-de89df76afd3?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80"
+                    },
+                    {
+                        id: 10,
+                        name: "Formal Embroidered Suit",
+                        color: "Maroon & Gold",
+                        fabric: "Silk & Organza",
+                        embroidery: "Resham & Zari",
+                        occasion: "Formal & Eid",
+                        region: "Baloch",
+                        ageSuitability: "20-40",
+                        image: "https://images.unsplash.com/photo-1563389234809-5b0d5e8b8e6f?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80"
+                    }
+                ],
+                mature: [
+                    {
+                        id: 11,
+                        name: "Elegant Silk Saree",
+                        color: "Ivory & Gold",
+                        fabric: "Banarasi Silk",
+                        embroidery: "Zari Border",
+                        occasion: "Wedding & Festive",
+                        region: "Punjab",
+                        ageSuitability: "35-60",
+                        image: "https://images.unsplash.com/photo-157790609642b-f8ce5b282d5c?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=60"
+                    },
+                    {
+                        id: 12,
+                        name: "Traditional Shalwar Kameez",
+                        color: "Navy Blue & Silver",
+                        fabric: "Cotton Silk",
+                        embroidery: "Chikankari",
+                        occasion: "Casual & Daily",
+                        region: "Sindh",
+                        ageSuitability: "30-60",
+                        image: "https://images.unsplash.com/photo-1584917865442-de89df76afd3?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=60"
+                    }
+                ]
+            }
+        };
+
+        // DOM Elements
+        const step1 = document.getElementById('step1');
+        const step2 = document.getElementById('step2');
+        const step3 = document.getElementById('step3');
+        const genderButtons = document.querySelectorAll('.gender-btn');
+        const ageSlider = document.getElementById('ageSlider');
+        const selectedAge = document.getElementById('selectedAge');
+        const nextToStep2 = document.getElementById('nextToStep2');
+        const uploadArea = document.getElementById('uploadArea');
+        const imageUpload = document.getElementById('imageUpload');
+        const browseBtn = document.getElementById('browseBtn');
+        const imagePreview = document.getElementById('imagePreview');
+        const uploadLoader = document.getElementById('uploadLoader');
+        const nextToStep3 = document.getElementById('nextToStep3');
+        const designsContainer = document.getElementById('designsContainer');
+        const designDetails = document.getElementById('designDetails');
+        const profileInfo = document.getElementById('profileInfo');
+        const navDots = document.querySelectorAll('.nav-dot');
+
+        // Step 1: Gender & Age Selection
+        genderButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                // Remove selected class from all buttons
+                genderButtons.forEach(btn => btn.classList.remove('selected'));
+                
+                // Add selected class to clicked button
+                this.classList.add('selected');
+                
+                // Store selected gender
+                appState.gender = this.getAttribute('data-gender');
+                
+                // Enable next button if age is also selected
+                if (appState.age) {
+                    nextToStep2.disabled = false;
+                }
+            });
+        });
+
+        // Age slider change
+        ageSlider.addEventListener('input', function() {
+            const age = this.value;
+            selectedAge.textContent = age;
+            appState.age = parseInt(age);
+            
+            // Enable next button if gender is also selected
+            if (appState.gender) {
+                nextToStep2.disabled = false;
+            }
+        });
+
+        // Step 1 to Step 2 transition
+        nextToStep2.addEventListener('click', function() {
+            // Animate step1 out
+            step1.classList.add('step-transition-out');
+            
+            // Update navigation dots
+            updateNavDots(2);
+            
+            // After animation, hide step1 and show step2
+            setTimeout(() => {
+                step1.style.display = 'none';
+                step1.classList.remove('step-transition-out');
+                step2.style.display = 'flex';
+                step2.classList.add('step-transition-in');
+                
+                // Remove animation class after it completes
+                setTimeout(() => {
+                    step2.classList.remove('step-transition-in');
+                }, 800);
+            }, 800);
+        });
+
+        // Step 2: Image Upload
+        browseBtn.addEventListener('click', function() {
+            imageUpload.click();
+        });
+
+        uploadArea.addEventListener('click', function() {
+            imageUpload.click();
+        });
+
+        // Drag and drop functionality
+        uploadArea.addEventListener('dragover', function(e) {
+            e.preventDefault();
+            this.style.borderColor = 'var(--gold)';
+            this.style.background = 'rgba(11, 83, 69, 0.15)';
+        });
+
+        uploadArea.addEventListener('dragleave', function() {
+            this.style.borderColor = 'rgba(212, 175, 55, 0.5)';
+            this.style.background = 'rgba(11, 83, 69, 0.05)';
+        });
+
+        uploadArea.addEventListener('drop', function(e) {
+            e.preventDefault();
+            this.style.borderColor = 'rgba(212, 175, 55, 0.5)';
+            this.style.background = 'rgba(11, 83, 69, 0.05)';
+            
+            if (e.dataTransfer.files.length) {
+                handleImageUpload(e.dataTransfer.files[0]);
+            }
+        });
+
+        imageUpload.addEventListener('change', function(e) {
+            if (e.target.files.length) {
+                handleImageUpload(e.target.files[0]);
+            }
+        });
+
+        function handleImageUpload(file) {
+            // Check if file is an image
+            if (!file.type.match('image.*')) {
+                alert('Please upload an image file (JPG, PNG, etc.)');
+                return;
+            }
+            
+            // Show loader
+            uploadLoader.style.display = 'block';
+            
+            // Simulate upload processing
+            setTimeout(() => {
+                // Create a local URL for the image
+                const imageUrl = URL.createObjectURL(file);
+                
+                // Display preview
+                imagePreview.src = imageUrl;
+                imagePreview.style.display = 'block';
+                
+                // Store uploaded image
+                appState.uploadedImage = imageUrl;
+                
+                // Hide loader
+                uploadLoader.style.display = 'none';
+                
+                // Enable next button
+                nextToStep3.disabled = false;
+            }, 1500);
+        }
+
+        // Step 2 to Step 3 transition
+        nextToStep3.addEventListener('click', function() {
+            // Show loader
+            uploadLoader.style.display = 'block';
+            
+            // Simulate design generation processing
+            setTimeout(() => {
+                // Animate step2 out
+                step2.classList.add('step-transition-out');
+                
+                // Update navigation dots
+                updateNavDots(3);
+                
+                // Generate designs based on user profile
+                generateDesigns();
+                
+                // Update profile info
+                const genderText = appState.gender === 'male' ? 'Male' : 'Female';
+                profileInfo.textContent = `${genderText}, ${appState.age} years`;
+                
+                // After animation, hide step2 and show step3
+                setTimeout(() => {
+                    step2.style.display = 'none';
+                    step2.classList.remove('step-transition-out');
+                    step3.style.display = 'flex';
+                    step3.classList.add('step-transition-in');
+                    
+                    // Hide loader
+                    uploadLoader.style.display = 'none';
+                    
+                    // Remove animation class after it completes
+                    setTimeout(() => {
+                        step3.classList.remove('step-transition-in');
+                    }, 800);
+                }, 800);
+            }, 1000);
+        });
+
+        // Generate designs based on user profile
+        function generateDesigns() {
+            // Clear previous designs
+            designsContainer.innerHTML = '';
+            
+            // Determine age group
+            const ageGroup = appState.age <= 35 ? 'young' : 'mature';
+            
+            // Get designs for user's gender and age group
+            const designs = designsDatabase[appState.gender][ageGroup];
+            
+            // Store designs in app state
+            appState.designs = designs;
+            
+            // Create design cards
+            designs.forEach(design => {
+                const col = document.createElement('div');
+                col.className = 'col-lg-4 col-md-6 mb-4';
+                
+                col.innerHTML = `
+                    <div class="design-card" data-id="${design.id}">
+                        <div class="position-relative overflow-hidden">
+                            <img src="${design.image}" class="design-img" alt="${design.name}">
+                            <div class="design-overlay">
+                                <button class="view-details-btn" data-id="${design.id}">
+                                    View Details
+                                </button>
+                            </div>
+                        </div>
+                        <div class="design-info">
+                            <h5 class="design-name">${design.name}</h5>
+                            <p class="mb-1"><small>${design.occasion} • ${design.region}</small></p>
+                            <p class="mb-0"><small>${design.fabric}</small></p>
+                        </div>
+                    </div>
+                `;
+                
+                designsContainer.appendChild(col);
+            });
+            
+            // Add event listeners to view details buttons
+            document.querySelectorAll('.view-details-btn').forEach(button => {
+                button.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    const designId = parseInt(this.getAttribute('data-id'));
+                    showDesignDetails(designId);
                 });
             });
             
-            // Auto-fill sample data for testing (remove in production)
-            if (window.location.href.includes('localhost') || window.location.href.includes('127.0.0.1')) {
-                document.getElementById('fullName').value = 'John Smith';
-                document.getElementById('fatherName').value = 'Robert Smith';
-                document.getElementById('idNumber').value = 'ABC123456';
-                document.getElementById('whatsapp').value = '+1234567890';
-                document.getElementById('country').value = 'USA';
-                document.getElementById('city').value = 'New York';
-                document.getElementById('address').value = '123 Luxury Avenue, Manhattan';
+            // Add event listeners to design cards
+            document.querySelectorAll('.design-card').forEach(card => {
+                card.addEventListener('click', function() {
+                    const designId = parseInt(this.getAttribute('data-id'));
+                    showDesignDetails(designId);
+                });
+            });
+        }
+
+        // Show design details
+        function showDesignDetails(designId) {
+            // Find the design
+            const design = appState.designs.find(d => d.id === designId);
+            
+            if (!design) return;
+            
+            // Update details panel
+            document.getElementById('detailName').textContent = design.name;
+            document.getElementById('detailColor').textContent = design.color;
+            document.getElementById('detailFabric').textContent = design.fabric;
+            document.getElementById('detailEmbroidery').textContent = design.embroidery;
+            document.getElementById('detailOccasion').textContent = design.occasion;
+            document.getElementById('detailRegion').textContent = design.region;
+            document.getElementById('detailAge').textContent = design.ageSuitability;
+            document.getElementById('detailMainImage').src = design.image;
+            document.getElementById('detailMainImage').alt = design.name;
+            
+            // Create mini gallery (simulated with same image for demo)
+            const miniGallery = document.querySelector('.mini-gallery');
+            miniGallery.innerHTML = '';
+            
+            // Create 3 mini images (using same image for demo)
+            for (let i = 0; i < 3; i++) {
+                const img = document.createElement('img');
+                img.src = design.image;
+                img.alt = `${design.name} view ${i+1}`;
+                img.className = i === 0 ? 'active me-2' : 'me-2';
+                
+                img.addEventListener('click', function() {
+                    // Update main image
+                    document.getElementById('detailMainImage').src = this.src;
+                    
+                    // Update active state
+                    document.querySelectorAll('.mini-gallery img').forEach(img => {
+                        img.classList.remove('active');
+                    });
+                    this.classList.add('active');
+                });
+                
+                miniGallery.appendChild(img);
             }
+            
+            // Show details panel with animation
+            designDetails.style.display = 'block';
+            
+            // Scroll to details panel
+            designDetails.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Close design details
+        document.getElementById('closeDetails').addEventListener('click', function() {
+            designDetails.style.display = 'none';
         });
-        
-        // Listen for iframe load to handle WhatsApp redirect
-        document.getElementById('whatsappFrame').addEventListener('load', function() {
-            console.log('WhatsApp message frame loaded');
+
+        // Update navigation dots
+        function updateNavDots(activeStep) {
+            navDots.forEach(dot => {
+                dot.classList.remove('active');
+                if (parseInt(dot.getAttribute('data-step')) === activeStep) {
+                    dot.classList.add('active');
+                }
+            });
+        }
+
+        // Navigation dots click
+        navDots.forEach(dot => {
+            dot.addEventListener('click', function() {
+                const step = parseInt(this.getAttribute('data-step'));
+                
+                // Hide all steps
+                step1.style.display = 'none';
+                step2.style.display = 'none';
+                step3.style.display = 'none';
+                
+                // Show selected step
+                if (step === 1) {
+                    step1.style.display = 'flex';
+                } else if (step === 2) {
+                    step2.style.display = 'flex';
+                } else if (step === 3) {
+                    // Regenerate designs if going to step 3
+                    if (appState.gender && appState.age) {
+                        generateDesigns();
+                        const genderText = appState.gender === 'male' ? 'Male' : 'Female';
+                        profileInfo.textContent = `${genderText}, ${appState.age} years`;
+                    }
+                    step3.style.display = 'flex';
+                }
+                
+                // Update active dot
+                updateNavDots(step);
+            });
+        });
+
+        // Initialize the app
+        document.addEventListener('DOMContentLoaded', function() {
+            // Set initial age display
+            selectedAge.textContent = ageSlider.value;
         });
     </script>
 </body>
