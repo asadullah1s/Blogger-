@@ -3,1376 +3,533 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Zari | Luxury Pakistani Fashion AI Stylist</title>
-    
-    <!-- Bootstrap 5 CDN -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-    
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-    
+    <title>ZARI | AI Pakistani Couture Designer</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
     <style>
         :root {
-            --color-black: #0a0a0a;
-            --color-emerald: #0d5c3e;
-            --color-maroon: #7a1c3f;
-            --color-ivory: #f8f5f0;
-            --color-gold: #b89d5a;
-            --color-light-gold: #d4b87a;
-            --color-dark-gold: #8c6e3a;
-            --color-gray: #2a2a2a;
+            --luxury-pink: #E91E63;
+            --rose-gold: #e0b49d;
+            --deep-blush: #F8C8DC;
+            --luxury-gold: #D4AF37;
+            --soft-shadow: rgba(233, 30, 99, 0.15);
+            --dark-bg: #0f0b15;
         }
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
         body {
-            font-family: 'Inter', sans-serif;
-            background-color: var(--color-black);
-            color: var(--color-ivory);
-            overflow-x: hidden;
+            font-family: 'Playfair Display', serif;
+            background: linear-gradient(135deg, #0f0b15 0%, #1a1625 100%);
+            color: #f0e6d6;
             min-height: 100vh;
-            background-image: 
-                radial-gradient(circle at 10% 20%, rgba(13, 92, 62, 0.15) 0%, transparent 20%),
-                radial-gradient(circle at 90% 80%, rgba(122, 28, 63, 0.1) 0%, transparent 20%);
+            overflow-x: hidden;
         }
-        
-        h1, h2, h3, h4, h5, h6 {
-            font-family: 'Playfair Display', serif;
-            font-weight: 600;
-            letter-spacing: 0.5px;
+        /* Luxury Card & Glassmorphism */
+        .luxury-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+            box-shadow: 0 20px 40px var(--soft-shadow), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+            padding: 2.5rem;
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
-        
-        .container-fluid {
-            max-width: 1400px;
+        .luxury-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 30px 60px var(--soft-shadow);
         }
-        
-        /* Luxury brand styling */
-        .luxury-brand {
-            font-family: 'Playfair Display', serif;
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: var(--color-ivory);
-            text-align: center;
-            margin-bottom: 1.5rem;
-            letter-spacing: 1.5px;
-            position: relative;
-            padding-bottom: 15px;
-        }
-        
-        .luxury-brand:after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 100px;
-            height: 2px;
-            background: linear-gradient(90deg, transparent, var(--color-gold), transparent);
-        }
-        
-        .luxury-subtitle {
-            font-size: 1.1rem;
-            text-align: center;
-            color: rgba(248, 245, 240, 0.7);
-            margin-bottom: 3rem;
-            font-weight: 300;
-            letter-spacing: 1px;
-        }
-        
-        /* Screen transitions */
-        .screen {
+        /* Step Transitions */
+        .step {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
-            min-height: 100vh;
-            padding: 2rem 1rem 4rem;
-            transition: all 0.8s cubic-bezier(0.77, 0, 0.175, 1);
-            opacity: 1;
-            visibility: visible;
-            transform: translateY(0);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-        
-        .screen.hidden {
             opacity: 0;
-            visibility: hidden;
-            transform: translateY(20px);
+            transform: translateX(50px);
             pointer-events: none;
-        }
-        
-        /* Step 1 - Gender & Age Selection */
-        .gender-selection-container {
-            max-width: 900px;
-            margin: 0 auto;
-        }
-        
-        .gender-card {
-            background: rgba(42, 42, 42, 0.7);
-            border: 1px solid rgba(184, 157, 90, 0.2);
-            border-radius: 16px;
-            padding: 2.5rem 2rem;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.4s ease;
-            height: 100%;
-            backdrop-filter: blur(10px);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-        }
-        
-        .gender-card:hover {
-            transform: translateY(-10px);
-            border-color: var(--color-gold);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(184, 157, 90, 0.3);
-        }
-        
-        .gender-card.selected {
-            border-color: var(--color-gold);
-            background: rgba(184, 157, 90, 0.1);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3), 0 0 0 2px rgba(184, 157, 90, 0.5);
-        }
-        
-        .gender-icon {
-            font-size: 4rem;
-            color: var(--color-gold);
-            margin-bottom: 1.5rem;
-        }
-        
-        .gender-name {
-            font-size: 1.8rem;
-            margin-bottom: 0.5rem;
-            color: var(--color-ivory);
-        }
-        
-        .gender-description {
-            color: rgba(248, 245, 240, 0.6);
-            font-size: 0.95rem;
-            line-height: 1.5;
-        }
-        
-        /* Age slider styling */
-        .age-selection-container {
-            max-width: 600px;
-            margin: 3rem auto;
-            padding: 2rem;
-            background: rgba(42, 42, 42, 0.7);
-            border-radius: 16px;
-            border: 1px solid rgba(184, 157, 90, 0.2);
-            backdrop-filter: blur(10px);
-        }
-        
-        .age-display {
-            font-size: 3.5rem;
-            color: var(--color-gold);
-            text-align: center;
-            margin-bottom: 0.5rem;
-            font-weight: 300;
-            letter-spacing: 2px;
-        }
-        
-        .age-label {
-            text-align: center;
-            color: rgba(248, 245, 240, 0.7);
-            margin-bottom: 1.5rem;
-            font-size: 1.1rem;
-            letter-spacing: 1px;
-        }
-        
-        .custom-slider {
-            -webkit-appearance: none;
-            width: 100%;
-            height: 6px;
-            background: rgba(248, 245, 240, 0.1);
-            border-radius: 3px;
-            outline: none;
-        }
-        
-        .custom-slider::-webkit-slider-thumb {
-            -webkit-appearance: none;
-            width: 28px;
-            height: 28px;
-            border-radius: 50%;
-            background: var(--color-gold);
-            cursor: pointer;
-            box-shadow: 0 0 15px rgba(184, 157, 90, 0.5);
-            border: 3px solid var(--color-ivory);
-        }
-        
-        .custom-slider::-moz-range-thumb {
-            width: 28px;
-            height: 28px;
-            border-radius: 50%;
-            background: var(--color-gold);
-            cursor: pointer;
-            box-shadow: 0 0 15px rgba(184, 157, 90, 0.5);
-            border: 3px solid var(--color-ivory);
-        }
-        
-        /* Next button styling */
-        .luxury-btn {
-            background: transparent;
-            border: 1px solid var(--color-gold);
-            color: var(--color-gold);
-            padding: 1rem 3rem;
-            border-radius: 50px;
-            font-size: 1.1rem;
-            font-weight: 500;
-            letter-spacing: 1px;
-            transition: all 0.4s ease;
-            position: relative;
-            overflow: hidden;
+            transition: opacity 0.7s ease, transform 0.7s ease;
             z-index: 1;
-            margin-top: 2rem;
         }
-        
-        .luxury-btn:before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(184, 157, 90, 0.2), transparent);
-            transition: all 0.6s ease;
-            z-index: -1;
-        }
-        
-        .luxury-btn:hover:before {
-            left: 100%;
-        }
-        
-        .luxury-btn:hover {
-            box-shadow: 0 10px 25px rgba(184, 157, 90, 0.3);
-            transform: translateY(-3px);
-        }
-        
-        .luxury-btn:disabled {
-            opacity: 0.5;
-            border-color: rgba(184, 157, 90, 0.5);
-            color: rgba(184, 157, 90, 0.5);
-            cursor: not-allowed;
-            transform: none;
-            box-shadow: none;
-        }
-        
-        .luxury-btn:disabled:hover:before {
-            left: -100%;
-        }
-        
-        .luxury-btn-primary {
-            background: var(--color-gold);
-            color: var(--color-black);
-            border: none;
-        }
-        
-        .luxury-btn-primary:hover {
-            background: var(--color-light-gold);
-            color: var(--color-black);
-        }
-        
-        /* Step 2 - Image Upload Screen */
-        .upload-container {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-        
-        .upload-box {
-            border: 2px dashed var(--color-gold);
-            border-radius: 20px;
-            padding: 4rem 2rem;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.4s ease;
-            background: rgba(42, 42, 42, 0.3);
-            margin-bottom: 3rem;
+        .step.active {
+            opacity: 1;
+            transform: translateX(0);
+            pointer-events: all;
             position: relative;
-            overflow: hidden;
-        }
-        
-        .upload-box:hover {
-            border-color: var(--color-light-gold);
-            background: rgba(42, 42, 42, 0.5);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
-        }
-        
-        .upload-box.pulse {
-            animation: pulse-gold 2s infinite;
-        }
-        
-        @keyframes pulse-gold {
-            0% { box-shadow: 0 0 0 0 rgba(184, 157, 90, 0.4); }
-            70% { box-shadow: 0 0 0 15px rgba(184, 157, 90, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(184, 157, 90, 0); }
-        }
-        
-        .upload-icon {
-            font-size: 4rem;
-            color: var(--color-gold);
-            margin-bottom: 1.5rem;
-        }
-        
-        .upload-text {
-            font-size: 1.3rem;
-            margin-bottom: 0.5rem;
-            color: var(--color-ivory);
-        }
-        
-        .upload-subtext {
-            color: rgba(248, 245, 240, 0.6);
-            font-size: 0.95rem;
-        }
-        
-        .preview-container {
-            max-width: 500px;
-            margin: 0 auto 3rem;
-            display: none;
-        }
-        
-        .preview-image-frame {
-            border-radius: 16px;
-            overflow: hidden;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
-            border: 1px solid rgba(184, 157, 90, 0.3);
-            position: relative;
-        }
-        
-        .preview-image-frame:before {
-            content: '';
-            position: absolute;
-            top: 10px;
-            left: 10px;
-            right: 10px;
-            bottom: 10px;
-            border: 1px solid rgba(184, 157, 90, 0.2);
-            border-radius: 10px;
-            pointer-events: none;
             z-index: 2;
         }
-        
-        .preview-image {
-            width: 100%;
-            height: 300px;
-            object-fit: cover;
-            display: block;
-        }
-        
-        /* Step 3 - Design Results Screen */
-        .designs-container {
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-        
-        .section-heading {
-            text-align: center;
-            margin-bottom: 3rem;
+        /* Luxury Buttons */
+        .btn-luxury {
+            background: linear-gradient(135deg, var(--luxury-pink), var(--rose-gold));
+            border: none;
+            color: white;
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
             position: relative;
-            padding-bottom: 20px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 20px rgba(233, 30, 99, 0.3);
         }
-        
-        .section-heading:after {
+        .btn-luxury:hover {
+            transform: scale(1.05);
+            box-shadow: 0 15px 30px rgba(233, 30, 99, 0.4);
+            color: white;
+        }
+        .btn-luxury:after {
             content: '';
             position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 150px;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, var(--color-gold), transparent);
+            top: -50%;
+            left: -60%;
+            width: 20%;
+            height: 200%;
+            background: rgba(255, 255, 255, 0.3);
+            transform: rotate(30deg);
+            transition: all 0.5s ease;
         }
-        
-        .design-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 2rem;
-            margin-bottom: 4rem;
+        .btn-luxury:hover:after {
+            left: 140%;
         }
-        
-        .design-card {
-            background: rgba(42, 42, 42, 0.7);
-            border-radius: 16px;
-            overflow: hidden;
+        .btn-gender {
+            width: 180px;
+            height: 180px;
+            border-radius: 24px;
+            border: 2px solid transparent;
+            background: rgba(255, 255, 255, 0.05);
+            font-size: 5rem;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .btn-gender:hover, .btn-gender.selected {
+            border-color: var(--luxury-gold);
+            background: rgba(212, 175, 55, 0.1);
+            transform: scale(1.08);
+            box-shadow: 0 15px 35px rgba(212, 175, 55, 0.25);
+        }
+        /* Upload Area */
+        .upload-area {
+            border: 3px dashed var(--rose-gold);
+            border-radius: 24px;
+            padding: 4rem 2rem;
+            background: rgba(224, 180, 157, 0.03);
             cursor: pointer;
             transition: all 0.4s ease;
-            border: 1px solid rgba(184, 157, 90, 0.1);
-            position: relative;
-            height: 100%;
-            backdrop-filter: blur(10px);
         }
-        
-        .design-card:hover {
-            transform: translateY(-10px);
-            border-color: var(--color-gold);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        .upload-area.dragover {
+            background: rgba(224, 180, 157, 0.1);
+            border-color: var(--luxury-pink);
         }
-        
-        .design-image-container {
-            height: 320px;
+        /* Design Grid Cards */
+        .design-card {
+            border-radius: 20px;
             overflow: hidden;
-            position: relative;
-        }
-        
-        .design-image {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.8s ease;
-        }
-        
-        .design-card:hover .design-image {
-            transform: scale(1.05);
-        }
-        
-        .design-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(to bottom, transparent 60%, rgba(184, 157, 90, 0.2));
-            opacity: 0;
-            transition: opacity 0.4s ease;
-        }
-        
-        .design-card:hover .design-overlay {
-            opacity: 1;
-        }
-        
-        .design-info {
-            padding: 1.5rem;
-        }
-        
-        .design-name {
-            font-size: 1.3rem;
-            margin-bottom: 0.5rem;
-            color: var(--color-ivory);
-        }
-        
-        .design-occasion {
-            color: var(--color-gold);
-            font-size: 0.9rem;
-            letter-spacing: 1px;
-        }
-        
-        /* Step 4 - Design Detail Panel */
-        .detail-panel {
-            position: fixed;
-            top: 0;
-            right: -100%;
-            width: 100%;
-            max-width: 500px;
-            height: 100vh;
-            background: rgba(10, 10, 10, 0.95);
-            backdrop-filter: blur(15px);
-            z-index: 1000;
-            padding: 2rem;
-            overflow-y: auto;
-            transition: right 0.6s cubic-bezier(0.77, 0, 0.175, 1);
-            border-left: 1px solid rgba(184, 157, 90, 0.2);
-        }
-        
-        .detail-panel.active {
-            right: 0;
-        }
-        
-        .close-detail {
-            position: absolute;
-            top: 1.5rem;
-            right: 1.5rem;
-            color: var(--color-gold);
-            font-size: 1.5rem;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            transition: all 0.4s ease;
             cursor: pointer;
-            transition: all 0.3s ease;
-            z-index: 1001;
         }
-        
-        .close-detail:hover {
-            transform: rotate(90deg);
-            color: var(--color-light-gold);
+        .design-card:hover {
+            transform: translateY(-12px);
+            border-color: var(--luxury-pink);
+            box-shadow: 0 25px 50px rgba(233, 30, 99, 0.25);
         }
-        
-        .detail-main-image {
+        .design-card img {
             width: 100%;
-            height: 400px;
+            height: 280px;
             object-fit: cover;
-            border-radius: 12px;
-            margin-bottom: 2rem;
-            border: 1px solid rgba(184, 157, 90, 0.3);
+            transition: transform 0.7s ease;
         }
-        
-        .detail-section {
-            margin-bottom: 2rem;
-            padding-bottom: 1.5rem;
-            border-bottom: 1px solid rgba(184, 157, 90, 0.1);
+        .design-card:hover img {
+            transform: scale(1.08);
         }
-        
-        .detail-title {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            color: var(--color-gold);
-        }
-        
-        .color-palette {
-            display: flex;
-            gap: 10px;
-            margin-top: 10px;
-        }
-        
-        .color-chip {
-            width: 40px;
-            height: 40px;
+        /* Luxury Loader */
+        .luxury-loader {
+            width: 100px;
+            height: 100px;
+            border: 4px solid transparent;
+            border-top: 4px solid var(--luxury-gold);
             border-radius: 50%;
-            border: 2px solid rgba(248, 245, 240, 0.2);
+            animation: spin 1.5s linear infinite;
+            position: relative;
+            margin: 2rem auto;
         }
-        
-        .detail-item {
-            margin-bottom: 0.8rem;
-            display: flex;
-        }
-        
-        .detail-label {
-            font-weight: 600;
-            color: var(--color-gold);
-            min-width: 150px;
-        }
-        
-        .detail-value {
-            color: rgba(248, 245, 240, 0.9);
-        }
-        
-        /* Loading overlay */
-        .loading-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(10, 10, 10, 0.9);
-            z-index: 2000;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            transition: all 0.6s ease;
-            opacity: 0;
-            visibility: hidden;
-        }
-        
-        .loading-overlay.active {
-            opacity: 1;
-            visibility: visible;
-        }
-        
-        .loading-spinner {
-            width: 80px;
-            height: 80px;
+        .luxury-loader:after {
+            content: '';
+            position: absolute;
+            top: -8px;
+            left: -8px;
+            right: -8px;
+            bottom: -8px;
             border: 3px solid transparent;
-            border-top-color: var(--color-gold);
+            border-bottom: 3px solid var(--luxury-pink);
             border-radius: 50%;
-            animation: spin 1s linear infinite;
-            margin-bottom: 2rem;
+            animation: spinReverse 1s linear infinite;
         }
-        
         @keyframes spin {
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
-        
-        .loading-text {
-            font-size: 1.3rem;
-            color: var(--color-ivory);
-            text-align: center;
-            letter-spacing: 1px;
+        @keyframes spinReverse {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(-360deg); }
         }
-        
-        /* Responsive adjustments */
-        @media (max-width: 992px) {
-            .design-grid {
-                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            }
-        }
-        
+        /* Responsive */
         @media (max-width: 768px) {
-            .luxury-brand {
-                font-size: 2rem;
+            .btn-gender {
+                width: 140px;
+                height: 140px;
+                font-size: 4rem;
             }
-            
-            .gender-card {
-                padding: 1.5rem 1rem;
+            .luxury-card {
+                padding: 1.5rem;
             }
-            
-            .gender-icon {
-                font-size: 3rem;
-            }
-            
-            .design-grid {
-                grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-                gap: 1.5rem;
-            }
-            
-            .detail-panel {
-                max-width: 100%;
-            }
-        }
-        
-        @media (max-width: 576px) {
-            .screen {
-                padding: 1.5rem 1rem 3rem;
-            }
-            
-            .design-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .luxury-btn {
-                padding: 0.8rem 2rem;
-                font-size: 1rem;
-            }
-        }
-        
-        /* Pakistani cultural patterns */
-        .pakistani-pattern {
-            position: fixed;
-            opacity: 0.03;
-            pointer-events: none;
-            z-index: -1;
-        }
-        
-        .pattern-1 {
-            top: 10%;
-            left: 5%;
-            font-size: 15rem;
-            color: var(--color-gold);
-            transform: rotate(15deg);
-        }
-        
-        .pattern-2 {
-            bottom: 10%;
-            right: 5%;
-            font-size: 12rem;
-            color: var(--color-maroon);
-            transform: rotate(-10deg);
-        }
-        
-        /* Back button */
-        .back-button {
-            position: absolute;
-            top: 2rem;
-            left: 2rem;
-            color: var(--color-gold);
-            cursor: pointer;
-            font-size: 1.2rem;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            z-index: 10;
-        }
-        
-        .back-button:hover {
-            color: var(--color-light-gold);
-            transform: translateX(-5px);
         }
     </style>
 </head>
-<body>
-    <!-- Pakistani cultural patterns (decorative) -->
-    <div class="pakistani-pattern pattern-1">
-        <i class="fas fa-star-and-crescent"></i>
-    </div>
-    <div class="pakistani-pattern pattern-2">
-        <i class="fas fa-palette"></i>
-    </div>
-    
-    <!-- Loading Overlay -->
-    <div class="loading-overlay" id="loadingOverlay">
-        <div class="loading-spinner"></div>
-        <div class="loading-text">Generating luxury Pakistani designs with AI...</div>
-    </div>
-    
-    <!-- Screen 1: Gender & Age Selection -->
-    <div class="screen" id="screen1">
-        <div class="container-fluid">
-            <div class="back-button" id="backToStart" style="display: none;">
-                <i class="fas fa-arrow-left"></i> Back
-            </div>
-            
-            <h1 class="luxury-brand">ZARI</h1>
-            <p class="luxury-subtitle">Luxury Pakistani Fashion AI Stylist</p>
-            
-            <div class="text-center mb-5">
-                <h2 class="mb-3">Discover Your Perfect Pakistani Style</h2>
-                <p class="text-light" style="opacity: 0.7; max-width: 600px; margin: 0 auto;">
-                    Select your gender and age for personalized cultural fashion recommendations
-                </p>
-            </div>
-            
-            <!-- Gender Selection -->
-            <div class="gender-selection-container">
-                <div class="row g-4 mb-5">
-                    <div class="col-md-6">
-                        <div class="gender-card" data-gender="male">
-                            <div class="gender-icon">
-                                <i class="fas fa-person"></i>
-                            </div>
-                            <h3 class="gender-name">Male</h3>
-                            <p class="gender-description">
-                                Traditional Kurta, Shalwar Kameez, Waistcoat, and Sherwani elements with modern luxury detailing.
-                            </p>
-                        </div>
+<body class="d-flex flex-column min-vh-100">
+    <!-- Main Container -->
+    <div class="container-fluid flex-grow-1 d-flex align-items-center py-4">
+        <div class="row w-100 justify-content-center">
+            <div class="col-12 col-md-10 col-lg-8 col-xl-6">
+                <!-- Brand Header -->
+                <div class="text-center mb-5" data-mdb-animation-init data-mdb-animation="fade-in-down" data-mdb-animation-start="onLoad">
+                    <h1 class="display-4 fw-bold" style="color: var(--luxury-gold);">ZARI</h1>
+                    <p class="lead" style="color: var(--deep-blush);">AI-Powered Luxury Pakistani Couture</p>
+                    <div class="d-flex justify-content-center align-items-center">
+                        <div style="height: 2px; width: 80px; background: linear-gradient(to right, transparent, var(--luxury-gold), transparent);"></div>
+                        <i class="fas fa-gem mx-3" style="color: var(--luxury-gold);"></i>
+                        <div style="height: 2px; width: 80px; background: linear-gradient(to right, transparent, var(--luxury-gold), transparent);"></div>
                     </div>
-                    <div class="col-md-6">
-                        <div class="gender-card" data-gender="female">
-                            <div class="gender-icon">
-                                <i class="fas fa-person-dress"></i>
+                </div>
+
+                <!-- Step 1: Gender & Age -->
+                <div id="step1" class="step active">
+                    <div class="luxury-card">
+                        <h3 class="text-center mb-4" style="color: var(--rose-gold);"><i class="fas fa-user-circle me-2"></i>Select Your Profile</h3>
+                        <div class="text-center mb-5">
+                            <p class="mb-4">Begin your personalized couture journey. Your selections guide our AI to create age and gender-appropriate designs.</p>
+                            <div class="d-flex justify-content-center gap-4 flex-wrap mb-5">
+                                <button class="btn btn-gender d-flex flex-column align-items-center justify-content-center" data-gender="male">
+                                    <i class="fas fa-person"></i>
+                                    <span class="mt-2 fs-5">Male</span>
+                                </button>
+                                <button class="btn btn-gender d-flex flex-column align-items-center justify-content-center" data-gender="female">
+                                    <i class="fas fa-person-dress"></i>
+                                    <span class="mt-2 fs-5">Female</span>
+                                </button>
                             </div>
-                            <h3 class="gender-name">Female</h3>
-                            <p class="gender-description">
-                                Elegant Shalwar Kameez, Dupatta styles, Abaya modern cuts, and intricate embroidery variations.
-                            </p>
+                            <div class="row justify-content-center">
+                                <div class="col-md-6">
+                                    <label for="ageInput" class="form-label fs-5" style="color: var(--deep-blush);"><i class="fas fa-birthday-cake me-2"></i>Age</label>
+                                    <select class="form-control form-control-lg luxury-input" id="ageInput" style="background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.1); color: white; border-radius: 12px;">
+                                        <option value="" disabled selected>Select your age</option>
+                                        <!-- Options generated by JS -->
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="text-center">
+                            <button id="nextToStep2" class="btn btn-luxury btn-lg" disabled>
+                                Next <i class="fas fa-arrow-right ms-2"></i>
+                            </button>
                         </div>
                     </div>
                 </div>
-                
-                <!-- Age Selection -->
-                <div class="age-selection-container">
-                    <div class="age-display" id="ageDisplay">25</div>
-                    <div class="age-label">SELECT YOUR AGE</div>
-                    <input type="range" class="custom-slider" id="ageSlider" min="18" max="65" value="25">
-                    <div class="d-flex justify-content-between mt-2">
-                        <span>18</span>
-                        <span>65</span>
+
+                <!-- Step 2: Image Upload -->
+                <div id="step2" class="step">
+                    <div class="luxury-card">
+                        <h3 class="text-center mb-4" style="color: var(--rose-gold);"><i class="fas fa-cloud-upload-alt me-2"></i>Upload Your Garment</h3>
+                        <p class="text-center mb-4">Provide the base outfit. Our AI will use its exact structure, silhouette, and fabric as the foundation for luxury Pakistani redesigns.</p>
+                        <div class="upload-area text-center" id="dropArea">
+                            <i class="fas fa-file-image mb-3" style="font-size: 4rem; color: var(--deep-blush);"></i>
+                            <h4>Drag & Drop Your Image</h4>
+                            <p class="mb-3">or click to browse. JPG, PNG, WEBP supported.</p>
+                            <input type="file" id="imageUpload" accept="image/*" class="d-none">
+                            <button class="btn btn-luxury mt-2" onclick="document.getElementById('imageUpload').click();">
+                                <i class="fas fa-camera me-2"></i> Choose File
+                            </button>
+                            <div class="mt-4" id="previewContainer"></div>
+                        </div>
+                        <div class="d-flex justify-content-between mt-5">
+                            <button id="backToStep1" class="btn btn-outline-light" style="border-radius: 50px;">
+                                <i class="fas fa-arrow-left me-2"></i> Back
+                            </button>
+                            <button id="nextToStep3" class="btn btn-luxury" disabled>
+                                Generate Designs <i class="fas fa-magic ms-2"></i>
+                            </button>
+                        </div>
                     </div>
                 </div>
-                
-                <!-- Next Button -->
-                <div class="text-center">
-                    <button class="luxury-btn luxury-btn-primary" id="nextStep1" disabled>
-                        Continue to Style Upload <i class="fas fa-arrow-right ms-2"></i>
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    <!-- Screen 2: Image Upload -->
-    <div class="screen hidden" id="screen2">
-        <div class="container-fluid">
-            <div class="back-button" id="backToGender">
-                <i class="fas fa-arrow-left"></i> Back
-            </div>
-            
-            <h1 class="luxury-brand">ZARI</h1>
-            <p class="luxury-subtitle">Luxury Pakistani Fashion AI Stylist</p>
-            
-            <div class="upload-container">
-                <div class="text-center mb-5">
-                    <h2 class="mb-3">Upload Your Outfit</h2>
-                    <p class="text-light" style="opacity: 0.7; max-width: 600px; margin: 0 auto;">
-                        Upload an image of your clothing to receive AI-enhanced Pakistani fashion designs based on your garment
-                    </p>
-                </div>
-                
-                <!-- Upload Box -->
-                <div class="upload-box pulse" id="uploadBox">
-                    <div class="upload-icon">
-                        <i class="fas fa-cloud-upload-alt"></i>
-                    </div>
-                    <h3 class="upload-text">Drag & Drop or Click to Upload</h3>
-                    <p class="upload-subtext">JPG or PNG files up to 5MB</p>
-                    <input type="file" id="imageUpload" accept=".jpg,.jpeg,.png" style="display: none;">
-                </div>
-                
-                <!-- Preview Container -->
-                <div class="preview-container" id="previewContainer">
-                    <h4 class="text-center mb-3">Your Uploaded Garment</h4>
-                    <div class="preview-image-frame">
-                        <img src="" alt="Uploaded clothing" class="preview-image" id="previewImage">
+
+                <!-- Step 3: AI Generation & Results -->
+                <div id="step3" class="step">
+                    <div class="luxury-card">
+                        <!-- Generation Loader -->
+                        <div id="generationLoader" class="text-center">
+                            <div class="luxury-loader"></div>
+                            <h4 class="mt-4" style="color: var(--rose-gold);">Designing Your Couture</h4>
+                            <p class="mb-0">Our AI is crafting unique luxury Pakistani variations of your outfit. This may take 20-30 seconds.</p>
+                            <p class="small text-muted mt-2"><i class="fas fa-info-circle me-1"></i>Keeping silhouette, fabric, and structure intact. Modifying embroidery, colors, and patterns.</p>
+                        </div>
+                        <!-- Results Display -->
+                        <div id="resultsContainer" class="d-none">
+                            <h3 class="text-center mb-4" style="color: var(--luxury-gold);"><i class="fas fa-star me-2"></i>Your AI-Generated Collection</h3>
+                            <p class="text-center mb-5">Each design is a unique luxury Pakistani interpretation of your original garment.</p>
+                            <div class="row g-4" id="designsGrid">
+                                <!-- Design cards will be inserted here by JavaScript -->
+                            </div>
+                            <div class="text-center mt-5">
+                                <button id="startOver" class="btn btn-luxury">
+                                    <i class="fas fa-redo me-2"></i> Create New Design
+                                </button>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                
-                <!-- Next Button -->
-                <div class="text-center">
-                    <button class="luxury-btn luxury-btn-primary" id="nextStep2" disabled>
-                        Generate AI Designs <i class="fas fa-magic ms-2"></i>
-                    </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Design Detail Modal -->
+    <div class="modal fade" id="designModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content luxury-card border-0">
+                <div class="modal-header border-0 pb-0">
+                    <h5 class="modal-title" id="designModalTitle" style="color: var(--luxury-gold);"></h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <img id="modalDesignImage" src="" alt="Design" class="img-fluid rounded">
+                        </div>
+                        <div class="col-md-6">
+                            <p><strong><i class="fas fa-palette me-2" style="color: var(--luxury-pink);"></i>Color Palette:</strong> <span id="modalColors"></span></p>
+                            <p><strong><i class="fas fa-tshirt me-2" style="color: var(--luxury-pink);"></i>Fabric:</strong> <span id="modalFabric"></span></p>
+                            <p><strong><i class="fas fa-hands me-2" style="color: var(--luxury-pink);"></i>Embroidery:</strong> <span id="modalEmbroidery"></span></p>
+                            <p><strong><i class="fas fa-calendar-alt me-2" style="color: var(--luxury-pink);"></i>Occasion:</strong> <span id="modalOccasion"></span></p>
+                            <hr>
+                            <h6><i class="fas fa-search-plus me-2"></i>Design Highlights</h6>
+                            <ul id="modalFeatures" class="small">
+                                <!-- Features added by JS -->
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-    
-    <!-- Screen 3: Design Results -->
-    <div class="screen hidden" id="screen3">
-        <div class="container-fluid">
-            <div class="back-button" id="backToUpload">
-                <i class="fas fa-arrow-left"></i> Back
-            </div>
-            
-            <h1 class="luxury-brand">ZARI</h1>
-            <p class="luxury-subtitle">Luxury Pakistani Fashion AI Stylist</p>
-            
-            <div class="designs-container">
-                <div class="section-heading">
-                    <h2>AI-Generated Pakistani Fashion Designs</h2>
-                    <p class="mt-2" style="opacity: 0.7;">
-                        Based on your uploaded garment, gender (<span id="selectedGenderDisplay">Male</span>), and age (<span id="selectedAgeDisplay">25</span>)
-                    </p>
-                </div>
-                
-                <!-- Design Grid -->
-                <div class="design-grid" id="designGrid">
-                    <!-- Designs will be dynamically added here -->
-                </div>
-                
-                <!-- Prompt Info -->
-                <div class="age-selection-container mt-5">
-                    <h4 class="text-center mb-3">AI Generation Prompt</h4>
-                    <p class="text-center" id="aiPromptText" style="opacity: 0.8; font-style: italic;">
-                        <!-- AI prompt will be displayed here -->
-                    </p>
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    <!-- Design Detail Panel -->
-    <div class="detail-panel" id="detailPanel">
-        <div class="close-detail" id="closeDetail">
-            <i class="fas fa-times"></i>
-        </div>
-        
-        <div id="detailContent">
-            <!-- Detail content will be dynamically added here -->
-        </div>
-    </div>
-    
-    <!-- JavaScript -->
+
+    <!-- Bootstrap & JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        // Application state
+        // State Management
         const appState = {
             gender: null,
-            age: 25,
-            uploadedImage: null,
-            uploadedImageUrl: null,
-            designs: [],
-            currentDesignDetail: null
+            age: null,
+            image: null,
+            imageBase64: null,
+            designs: []
         };
-        
+
         // DOM Elements
-        const screen1 = document.getElementById('screen1');
-        const screen2 = document.getElementById('screen2');
-        const screen3 = document.getElementById('screen3');
-        const loadingOverlay = document.getElementById('loadingOverlay');
-        
-        // Gender selection
-        const genderCards = document.querySelectorAll('.gender-card');
-        const nextStep1Btn = document.getElementById('nextStep1');
-        
-        // Age selection
-        const ageSlider = document.getElementById('ageSlider');
-        const ageDisplay = document.getElementById('ageDisplay');
-        
-        // Image upload
-        const uploadBox = document.getElementById('uploadBox');
-        const imageUpload = document.getElementById('imageUpload');
+        const step1 = document.getElementById('step1');
+        const step2 = document.getElementById('step2');
+        const step3 = document.getElementById('step3');
+        const nextToStep2 = document.getElementById('nextToStep2');
+        const backToStep1 = document.getElementById('backToStep1');
+        const nextToStep3 = document.getElementById('nextToStep3');
+        const startOver = document.getElementById('startOver');
+        const ageSelect = document.getElementById('ageInput');
+        const uploadInput = document.getElementById('imageUpload');
+        const dropArea = document.getElementById('dropArea');
         const previewContainer = document.getElementById('previewContainer');
-        const previewImage = document.getElementById('previewImage');
-        const nextStep2Btn = document.getElementById('nextStep2');
-        
-        // Design results
-        const designGrid = document.getElementById('designGrid');
-        const selectedGenderDisplay = document.getElementById('selectedGenderDisplay');
-        const selectedAgeDisplay = document.getElementById('selectedAgeDisplay');
-        const aiPromptText = document.getElementById('aiPromptText');
-        
-        // Detail panel
-        const detailPanel = document.getElementById('detailPanel');
-        const closeDetailBtn = document.getElementById('closeDetail');
-        const detailContent = document.getElementById('detailContent');
-        
-        // Back buttons
-        const backToGenderBtn = document.getElementById('backToGender');
-        const backToUploadBtn = document.getElementById('backToUpload');
-        const backToStartBtn = document.getElementById('backToStart');
-        
-        // Initialize the application
-        document.addEventListener('DOMContentLoaded', function() {
-            setupEventListeners();
-            generateSampleDesigns(); // Generate sample designs for demonstration
+        const generationLoader = document.getElementById('generationLoader');
+        const resultsContainer = document.getElementById('resultsContainer');
+        const designsGrid = document.getElementById('designsGrid');
+
+        // Initialize Age Dropdown
+        for (let i = 16; i <= 70; i++) {
+            const option = document.createElement('option');
+            option.value = i;
+            option.textContent = i + ' years';
+            ageSelect.appendChild(option);
+        }
+
+        // Step 1: Gender Selection
+        document.querySelectorAll('.btn-gender').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.btn-gender').forEach(b => b.classList.remove('selected'));
+                this.classList.add('selected');
+                appState.gender = this.getAttribute('data-gender');
+                validateStep1();
+            });
         });
-        
-        function setupEventListeners() {
-            // Gender card selection
-            genderCards.forEach(card => {
-                card.addEventListener('click', function() {
-                    // Remove selected class from all cards
-                    genderCards.forEach(c => c.classList.remove('selected'));
-                    
-                    // Add selected class to clicked card
-                    this.classList.add('selected');
-                    
-                    // Update app state
-                    appState.gender = this.getAttribute('data-gender');
-                    
-                    // Enable next button if age is already selected
-                    if (appState.age >= 18) {
-                        nextStep1Btn.disabled = false;
-                    }
+
+        // Step 1: Age Selection
+        ageSelect.addEventListener('change', function() {
+            appState.age = this.value;
+            validateStep1();
+        });
+
+        function validateStep1() {
+            nextToStep2.disabled = !(appState.gender && appState.age);
+        }
+
+        // Step 1 -> Step 2 Transition
+        nextToStep2.addEventListener('click', function() {
+            step1.classList.remove('active');
+            step2.classList.add('active');
+        });
+
+        // Step 2 -> Step 1 Transition
+        backToStep1.addEventListener('click', function() {
+            step2.classList.remove('active');
+            step1.classList.add('active');
+        });
+
+        // Step 2: File Upload Handling
+        uploadInput.addEventListener('change', handleFileSelect);
+        dropArea.addEventListener('dragover', handleDragOver);
+        dropArea.addEventListener('drop', handleDrop);
+
+        function handleDragOver(e) {
+            e.preventDefault();
+            dropArea.classList.add('dragover');
+        }
+
+        function handleDrop(e) {
+            e.preventDefault();
+            dropArea.classList.remove('dragover');
+            const files = e.dataTransfer.files;
+            if (files.length && files[0].type.startsWith('image/')) {
+                uploadInput.files = files;
+                handleFileSelect({ target: uploadInput });
+            }
+        }
+
+        function handleFileSelect(e) {
+            const file = e.target.files[0];
+            if (!file || !file.type.startsWith('image/')) {
+                alert('Please select a valid image file (JPG, PNG, WEBP).');
+                return;
+            }
+            appState.image = file;
+            previewContainer.innerHTML = `
+                <div class="d-flex align-items-center justify-content-center p-3" style="background: rgba(255,255,255,0.05); border-radius: 16px;">
+                    <img src="${URL.createObjectURL(file)}" alt="Preview" style="max-height: 120px; border-radius: 12px; margin-right: 15px;">
+                    <div class="text-start">
+                        <h6 class="mb-1">${file.name}</h6>
+                        <p class="small mb-0" style="color: var(--deep-blush);">${(file.size / 1024 / 1024).toFixed(2)} MB • Ready for AI transformation</p>
+                    </div>
+                </div>`;
+            nextToStep3.disabled = false;
+            // Convert to Base64 for backend
+            const reader = new FileReader();
+            reader.onload = function(event) {
+                appState.imageBase64 = event.target.result.split(',')[1];
+            };
+            reader.readAsDataURL(file);
+        }
+
+        // Step 2 -> Step 3 Transition & AI Generation
+        nextToStep3.addEventListener('click', async function() {
+            step2.classList.remove('active');
+            step3.classList.add('active');
+            generationLoader.classList.remove('d-none');
+            resultsContainer.classList.add('d-none');
+
+            try {
+                const formData = new FormData();
+                formData.append('gender', appState.gender);
+                formData.append('age', appState.age);
+                formData.append('image', appState.imageBase64);
+
+                const response = await fetch('/.netlify/functions/generateDesigns', {
+                    method: 'POST',
+                    body: JSON.stringify({
+                        gender: appState.gender,
+                        age: appState.age,
+                        image: appState.imageBase64
+                    }),
+                    headers: { 'Content-Type': 'application/json' }
                 });
-            });
-            
-            // Age slider
-            ageSlider.addEventListener('input', function() {
-                appState.age = parseInt(this.value);
-                ageDisplay.textContent = appState.age;
-                
-                // Enable next button if gender is already selected
-                if (appState.gender) {
-                    nextStep1Btn.disabled = false;
-                }
-            });
-            
-            // Next button - Step 1
-            nextStep1Btn.addEventListener('click', function() {
-                // Update displays
-                selectedGenderDisplay.textContent = appState.gender === 'male' ? 'Male' : 'Female';
-                selectedAgeDisplay.textContent = appState.age;
-                
-                // Transition to screen 2
-                transitionScreens(screen1, screen2);
-            });
-            
-            // Back button - Step 2 to Step 1
-            backToGenderBtn.addEventListener('click', function() {
-                transitionScreens(screen2, screen1);
-            });
-            
-            // Image upload
-            uploadBox.addEventListener('click', function() {
-                imageUpload.click();
-            });
-            
-            imageUpload.addEventListener('change', function(e) {
-                if (e.target.files && e.target.files[0]) {
-                    const file = e.target.files[0];
-                    
-                    // Check file type
-                    if (!file.type.match('image/jpeg') && !file.type.match('image/png')) {
-                        alert('Please upload a JPG or PNG image file.');
-                        return;
-                    }
-                    
-                    // Check file size (5MB limit)
-                    if (file.size > 5 * 1024 * 1024) {
-                        alert('File size must be less than 5MB.');
-                        return;
-                    }
-                    
-                    // Create a local URL for the image
-                    const reader = new FileReader();
-                    reader.onload = function(event) {
-                        appState.uploadedImageUrl = event.target.result;
-                        previewImage.src = appState.uploadedImageUrl;
-                        previewContainer.style.display = 'block';
-                        nextStep2Btn.disabled = false;
-                        
-                        // Stop the pulse animation
-                        uploadBox.classList.remove('pulse');
-                    };
-                    reader.readAsDataURL(file);
-                    
-                    appState.uploadedImage = file;
-                }
-            });
-            
-            // Drag and drop for image upload
-            uploadBox.addEventListener('dragover', function(e) {
-                e.preventDefault();
-                uploadBox.style.borderColor = 'var(--color-light-gold)';
-                uploadBox.style.background = 'rgba(42, 42, 42, 0.7)';
-            });
-            
-            uploadBox.addEventListener('dragleave', function() {
-                uploadBox.style.borderColor = 'var(--color-gold)';
-                uploadBox.style.background = 'rgba(42, 42, 42, 0.3)';
-            });
-            
-            uploadBox.addEventListener('drop', function(e) {
-                e.preventDefault();
-                uploadBox.style.borderColor = 'var(--color-gold)';
-                uploadBox.style.background = 'rgba(42, 42, 42, 0.3)';
-                
-                if (e.dataTransfer.files && e.dataTransfer.files[0]) {
-                    const file = e.dataTransfer.files[0];
-                    
-                    // Check file type
-                    if (!file.type.match('image/jpeg') && !file.type.match('image/png')) {
-                        alert('Please upload a JPG or PNG image file.');
-                        return;
-                    }
-                    
-                    // Check file size (5MB limit)
-                    if (file.size > 5 * 1024 * 1024) {
-                        alert('File size must be less than 5MB.');
-                        return;
-                    }
-                    
-                    // Create a local URL for the image
-                    const reader = new FileReader();
-                    reader.onload = function(event) {
-                        appState.uploadedImageUrl = event.target.result;
-                        previewImage.src = appState.uploadedImageUrl;
-                        previewContainer.style.display = 'block';
-                        nextStep2Btn.disabled = false;
-                        
-                        // Stop the pulse animation
-                        uploadBox.classList.remove('pulse');
-                    };
-                    reader.readAsDataURL(file);
-                    
-                    appState.uploadedImage = file;
-                }
-            });
-            
-            // Next button - Step 2
-            nextStep2Btn.addEventListener('click', function() {
-                // Show loading overlay
-                loadingOverlay.classList.add('active');
-                
-                // Generate AI prompt
-                const aiPrompt = generateAIPrompt();
-                aiPromptText.textContent = aiPrompt;
-                
-                // Simulate AI processing delay
-                setTimeout(function() {
-                    // Hide loading overlay
-                    loadingOverlay.classList.remove('active');
-                    
-                    // Transition to screen 3
-                    transitionScreens(screen2, screen3);
-                    
-                    // Display designs
-                    displayDesigns();
-                }, 2500);
-            });
-            
-            // Back button - Step 3 to Step 2
-            backToUploadBtn.addEventListener('click', function() {
-                transitionScreens(screen3, screen2);
-            });
-            
-            // Close detail panel
-            closeDetailBtn.addEventListener('click', function() {
-                detailPanel.classList.remove('active');
-            });
-            
-            // Show back to start button on screens 2 and 3
-            [backToGenderBtn, backToUploadBtn].forEach(btn => {
-                btn.addEventListener('mouseenter', function() {
-                    backToStartBtn.style.display = 'flex';
-                });
-                
-                btn.addEventListener('mouseleave', function() {
-                    backToStartBtn.style.display = 'none';
-                });
-            });
-            
-            // Back to start button
-            backToStartBtn.addEventListener('click', function() {
-                if (!screen1.classList.contains('hidden')) return;
-                
-                if (!screen2.classList.contains('hidden')) {
-                    transitionScreens(screen2, screen1);
-                } else if (!screen3.classList.contains('hidden')) {
-                    transitionScreens(screen3, screen1);
-                }
-                
-                backToStartBtn.style.display = 'none';
-            });
-        }
-        
-        // Screen transition function
-        function transitionScreens(fromScreen, toScreen) {
-            fromScreen.classList.add('hidden');
-            setTimeout(() => {
-                toScreen.classList.remove('hidden');
-            }, 50);
-        }
-        
-        // Generate AI prompt based on user input
-        function generateAIPrompt() {
-            const genderText = appState.gender === 'male' ? 'Male' : 'Female';
-            const ageGroup = appState.age < 30 ? 'young adult' : 
-                            appState.age < 45 ? 'adult' : 
-                            appState.age < 60 ? 'mature' : 'senior';
-            
-            const garmentType = appState.gender === 'male' ? 
-                'traditional Pakistani kurta or shalwar kameez' : 
-                'traditional Pakistani shalwar kameez or abaya';
-            
-            return `Using the uploaded clothing image as the exact base reference, generate 6-8 UNIQUE Pakistani fashion design variations. Maintain identical structure, fit, and fabric. Only enhance embroidery, color harmony, texture, and detailing. Target: ${genderText}, Age: ${appState.age} (${ageGroup}). Cultural authenticity: Pakistan. Luxury fashion studio lighting, neutral background. Garment type: ${garmentType}.`;
-        }
-        
-        // Generate sample designs for demonstration
-        function generateSampleDesigns() {
-            const maleDesigns = [
-                {
-                    id: 1,
-                    name: "Royal Embroidered Kurta",
-                    occasion: "Wedding & Festive",
-                    colors: ["#0d5c3e", "#b89d5a", "#0a0a0a", "#7a1c3f"],
-                    fabric: "Pure Silk",
-                    embroidery: "Zardozi & Resham",
-                    stitching: "French seams, hand-stitched detailing",
-                    description: "A luxurious silk kurta with intricate zardozi embroidery, perfect for grand occasions.",
-                    details: ["Neckline: Mandarin collar with gold thread detailing", "Sleeves: Full-length with subtle paisley patterns", "Embroidery: Heavy zardozi work on front and cuffs"]
-                },
-                {
-                    id: 2,
-                    name: "Contemporary Shalwar Kameez",
-                    occasion: "Formal & Evening",
-                    colors: ["#2a2a2a", "#b89d5a", "#f8f5f0", "#5d4037"],
-                    fabric: "Chiffon over Silk",
-                    embroidery: "Minimalist thread work",
-                    stitching: "Precision tailored, slim fit",
-                    description: "Modern interpretation of traditional shalwar kameez with minimalist embroidery.",
-                    details: ["Cut: Contemporary straight fit", "Neckline: Simple V-neck with subtle piping", "Detailing: Geometric patterns along side seams"]
-                },
-                {
-                    id: 3,
-                    name: "Waistcoat & Kurta Set",
-                    occasion: "Formal Events",
-                    colors: ["#0a0a0a", "#b89d5a", "#7a1c3f", "#ffffff"],
-                    fabric: "Brocade & Velvet",
-                    embroidery: "Heavy metallic thread embroidery",
-                    stitching: "Structured tailoring, lined interior",
-                    description: "A regal combination of velvet waistcoat over brocade kurta for formal events.",
-                    details: ["Waistcoat: Structured velvet with metallic buttons", "Kurta: Light brocade with subtle patterns", "Combination: Can be worn separately"]
-                },
-                {
-                    id: 4,
-                    name: "Casual Luxury Kurta",
-                    occasion: "Casual & Day Events",
-                    colors: ["#f8f5f0", "#0d5c3e", "#b89d5a", "#5d4037"],
-                    fabric: "Cotton Silk",
-                    embroidery: "Chikan & shadow work",
-                    stitching: "Relaxed fit, comfortable drape",
-                    description: "Breathable cotton silk kurta with traditional chikan embroidery for daily luxury.",
-                    details: ["Fit: Relaxed straight cut", "Embroidery: White-on-white chikan work", "Comfort: Designed for all-day wear"]
-                },
-                {
-                    id: 5,
-                    name: "Sherwani-inspired Kurta",
-                    occasion: "Wedding & Formal",
-                    colors: ["#7a1c3f", "#b89d5a", "#0a0a0a", "#f8f5f0"],
-                    fabric: "Heavy Silk",
-                    embroidery: "Zardozi, stone, and sequin work",
-                    stitching: "Structured sherwani-style construction",
-                    description: "A kurta with sherwani-inspired elements for wedding functions.",
-                    details: ["Style: Asymmetrical closure with ornate buttons", "Embroidery: Full front panel with intricate patterns", "Silhouette: Structured fit with slight flare"]
-                },
-                {
-                    id: 6,
-                    name: "Modern Pathani Kurta",
-                    occasion: "Cultural & Festive",
-                    colors: ["#0d5c3e", "#0a0a0a", "#b89d5a", "#5d4037"],
-                    fabric: "Linen Cotton",
-                    embroidery: "Kashmiri embroidery",
-                    stitching: "Traditional pathani cut with modern tailoring",
-                    description: "A fusion of traditional pathani cut with contemporary design elements.",
-                    details: ["Neckline: High mandarin collar", "Sleeves: Full with subtle taper", "Embroidery: Kashmiri motifs on chest and cuffs"]
-                }
-            ];
-            
-            const femaleDesigns = [
-                {
-                    id: 7,
-                    name: "Embroidered Shalwar Kameez",
-                    occasion: "Wedding & Festive",
-                    colors: ["#7a1c3f", "#b89d5a", "#f8f5f0", "#0d5c3e"],
-                    fabric: "Organza & Silk",
-                    embroidery: "Heavy dabka and stone work",
-                    stitching: "Fitted kameez with flowy dupatta",
-                    description: "A luxurious organza shalwar kameez set with extensive embroidery for grand events.",
-                    details: ["Kameez: Fitted silhouette with heavy embroidery", "Dupatta: Organza with contrast border", "Embroidery: Full front and sleeve detailing"]
-                },
-                {
-                    id: 8,
-                    name: "Contemporary Abaya Dress",
-                    occasion: "Formal & Evening",
-                    colors: ["#0a0a0a", "#b89d5a", "#7a1c3f", "#f8f5f0"],
-                    fabric: "Crepe & Chiffon",
-                    embroidery: "Minimal metallic thread accents",
-                    stitching: "Flowing silhouette, modest cut",
-                    description: "Modern abaya-style dress with subtle Pakistani embroidery elements.",
-                    details: ["Silhouette: Flowing A-line cut", "Neckline: High neck with delicate embroidery", "Sleeves: Bell sleeves with sheer chiffon"]
-                },
-                {
-                    id: 9,
-                    name: "Anarkali Style Gown",
-                    occasion: "Formal Events",
-                    colors: ["#0d5c3e", "#b89d5a", "#f8f5f0", "#5d4037"],
-                    fabric: "Georgette & Velvet",
-                    embroidery: "Zardozi and pearl work",
-                    stitching: "Fitted bodice, flared skirt",
-                    description: "Anarkali-inspired gown with intricate zardozi work for formal gatherings.",
-                    details: ["Bodice: Fitted velvet with heavy embroidery", "Skirt: Flared georgette with layered effect", "Dupatta: Matching organza with border work"]
-                },
-                {
-                    id: 10,
-                    name: "Casual Lawn Kameez",
-                    occasion: "Casual & Day Events",
-                    colors: ["#f8f5f0", "#0d5c3e", "#7a1c3f", "#b89d5a"],
-                    fabric: "Premium Lawn",
-                    embroidery: "Chikan and aari work",
-                    stitching: "Comfortable straight cut",
-                    description: "Breathable lawn kameez with delicate chikan embroidery for everyday luxury.",
-                    details: ["Fabric: High-quality breathable lawn", "Embroidery: Delicate chikan work on neckline and cuffs", "Comfort: Designed for Pakistani climate"]
-                },
-                {
-                    id: 11,
-                    name: "Bridal Lehenga Style",
-                    occasion: "Wedding & Festive",
-                    colors: ["#7a1c3f", "#b89d5a", "#0a0a0a", "#f8f5f0"],
-                    fabric: "Silk & Net",
-                    embroidery: "Heavy zardozi, stone, and sequin",
-                    stitching: "Fitted silhouette with flared skirt",
-                    description: "Bridal-inspired lehenga style with heavy embroidery for special occasions.",
-                    details: ["Blouse: Heavily embroidered with intricate patterns", "Skirt: Flared with layered embellishments", "Dupatta: Sheer net with detailed border"]
-                },
-                {
-                    id: 12,
-                    name: "Modern Kurti with Palazzo",
-                    occasion: "Casual Luxury",
-                    colors: ["#2a2a2a", "#b89d5a", "#f8f5f0", "#0d5c3e"],
-                    fabric: "Cotton & Silk Blend",
-                    embroidery: "Digital print with thread accents",
-                    stitching: "Contemporary straight cut",
-                    description: "Modern kurti with palazzo pants for a contemporary Pakistani look.",
-                    details: ["Kurti: Knee-length with asymmetric hem", "Palazzo: Flowy wide-leg pants", "Design: Digital print with traditional motifs"]
-                }
-            ];
-            
-            appState.designs = appState.gender === 'male' ? maleDesigns : femaleDesigns;
-        }
-        
-        // Display designs in the grid
+
+                if (!response.ok) throw new Error(`Server error: ${response.status}`);
+                const result = await response.json();
+                appState.designs = result.designs;
+                displayDesigns();
+
+            } catch (error) {
+                console.error('Generation failed:', error);
+                generationLoader.innerHTML = `
+                    <div class="text-center">
+                        <i class="fas fa-exclamation-triangle fa-3x mb-3" style="color: #ff6b6b;"></i>
+                        <h4>Generation Failed</h4>
+                        <p>${error.message}. Please try again.</p>
+                        <button class="btn btn-luxury mt-2" onclick="location.reload()">
+                            <i class="fas fa-redo me-2"></i> Restart
+                        </button>
+                    </div>`;
+            }
+        });
+
+        // Display Generated Designs
         function displayDesigns() {
-            // Clear the grid
-            designGrid.innerHTML = '';
-            
-            // Add designs to grid
-            appState.designs.forEach(design => {
-                const designCard = document.createElement('div');
-                designCard.className = 'design-card';
-                designCard.setAttribute('data-id', design.id);
-                
-                // Get appropriate image based on gender and design
-                const imageNumber = design.id;
-                const imageUrl = `https://images.unsplash.com/photo-${imageNumber >= 7 ? '1595777457583-95e059d581b8' : '1534528741771-53994a69daeb'}?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80`;
-                
-                designCard.innerHTML = `
-                    <div class="design-image-container">
-                        <img src="${imageUrl}" alt="${design.name}" class="design-image">
-                        <div class="design-overlay"></div>
-                    </div>
-                    <div class="design-info">
-                        <h4 class="design-name">${design.name}</h4>
-                        <p class="design-occasion">${design.occasion}</p>
-                    </div>
-                `;
-                
-                // Add click event to show detail
-                designCard.addEventListener('click', function() {
-                    showDesignDetail(design);
-                });
-                
-                designGrid.appendChild(designCard);
+            generationLoader.classList.add('d-none');
+            resultsContainer.classList.remove('d-none');
+            designsGrid.innerHTML = '';
+
+            appState.designs.forEach((design, index) => {
+                const col = document.createElement('div');
+                col.className = 'col-12 col-md-6 col-lg-4';
+                col.innerHTML = `
+                    <div class="design-card h-100" data-index="${index}">
+                        <img src="data:image/png;base64,${design.image}" alt="${design.name}" class="design-image">
+                        <div class="p-3">
+                            <h6 class="mb-2">${design.name}</h6>
+                            <div class="d-flex flex-wrap gap-1 mb-2">
+                                ${design.features.slice(0, 3).map(f => `<span class="badge" style="background: rgba(233, 30, 99, 0.15); color: var(--deep-blush);">${f}</span>`).join('')}
+                            </div>
+                            <button class="btn btn-sm w-100" style="background: rgba(212, 175, 55, 0.1); color: var(--luxury-gold);" data-bs-toggle="modal" data-bs-target="#designModal" onclick="showDesignDetails(${index})">
+                                View Details <i class="fas fa-chevron-right ms-1"></i>
+                            </button>
+                        </div>
+                    </div>`;
+                designsGrid.appendChild(col);
             });
         }
-        
-        // Show design detail panel
-        function showDesignDetail(design) {
-            appState.currentDesignDetail = design;
-            
-            // Generate color chips HTML
-            let colorChipsHTML = '';
-            design.colors.forEach(color => {
-                colorChipsHTML += `<div class="color-chip" style="background-color: ${color};"></div>`;
-            });
-            
-            // Generate details HTML
-            let detailsHTML = '';
-            design.details.forEach(detail => {
-                detailsHTML += `<p class="detail-item"><span class="detail-label">•</span><span class="detail-value">${detail}</span></p>`;
-            });
-            
-            // Get appropriate image based on gender and design
-            const imageNumber = design.id;
-            const imageUrl = `https://images.unsplash.com/photo-${imageNumber >= 7 ? '1595777457583-95e059d581b8' : '1534528741771-53994a69daeb'}?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80`;
-            
-            // Populate detail content
-            detailContent.innerHTML = `
-                <img src="${imageUrl}" alt="${design.name}" class="detail-main-image">
-                
-                <div class="detail-section">
-                    <h3 class="detail-title">${design.name}</h3>
-                    <p style="opacity: 0.9; line-height: 1.6;">${design.description}</p>
-                </div>
-                
-                <div class="detail-section">
-                    <h4 class="detail-title">Design Details</h4>
-                    ${detailsHTML}
-                </div>
-                
-                <div class="detail-section">
-                    <h4 class="detail-title">Color Palette</h4>
-                    <div class="color-palette">
-                        ${colorChipsHTML}
-                    </div>
-                </div>
-                
-                <div class="detail-section">
-                    <h4 class="detail-title">Specifications</h4>
-                    <p class="detail-item">
-                        <span class="detail-label">Fabric:</span>
-                        <span class="detail-value">${design.fabric}</span>
-                    </p>
-                    <p class="detail-item">
-                        <span class="detail-label">Embroidery:</span>
-                        <span class="detail-value">${design.embroidery}</span>
-                    </p>
-                    <p class="detail-item">
-                        <span class="detail-label">Stitching:</span>
-                        <span class="detail-value">${design.stitching}</span>
-                    </p>
-                    <p class="detail-item">
-                        <span class="detail-label">Occasion:</span>
-                        <span class="detail-value">${design.occasion}</span>
-                    </p>
-                </div>
-                
-                <div class="text-center mt-4">
-                    <button class="luxury-btn" style="width: 100%;">
-                        <i class="fas fa-heart me-2"></i> Save to Favorites
-                    </button>
-                </div>
-            `;
-            
-            // Show the detail panel
-            detailPanel.classList.add('active');
-        }
+
+        // Design Details Modal
+        window.showDesignDetails = function(index) {
+            const design = appState.designs[index];
+            document.getElementById('designModalTitle').textContent = design.name;
+            document.getElementById('modalDesignImage').src = `data:image/png;base64,${design.image}`;
+            document.getElementById('modalColors').textContent = design.features.find(f => f.includes('Colors')) || 'Rose Gold, Blush, Ivory';
+            document.getElementById('modalFabric').textContent = design.features.find(f => f.includes('Fabric')) || 'Premium Lawn';
+            document.getElementById('modalEmbroidery').textContent = design.features.find(f => f.includes('Embroidery')) || 'Zardozi & Resham';
+            document.getElementById('modalOccasion').textContent = design.features.find(f => f.includes('Occasion')) || 'Wedding & Formal';
+            const featuresList = document.getElementById('modalFeatures');
+            featuresList.innerHTML = design.features.map(f => `<li>${f}</li>`).join('');
+        };
+
+        // Start Over
+        startOver.addEventListener('click', function() {
+            appState.gender = null;
+            appState.age = null;
+            appState.image = null;
+            appState.imageBase64 = null;
+            appState.designs = [];
+            document.querySelectorAll('.btn-gender').forEach(b => b.classList.remove('selected'));
+            ageSelect.value = '';
+            previewContainer.innerHTML = '';
+            nextToStep3.disabled = true;
+            step3.classList.remove('active');
+            step1.classList.add('active');
+            validateStep1();
+        });
     </script>
 </body>
-    </html>
+</html>
+                                                                                                                                                         </html>
