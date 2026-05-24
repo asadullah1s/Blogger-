@@ -2,11 +2,13 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>Zakiya Sher | 15 Incharge Toba Tek Singh | PSCA Command Dashboard</title>
-    <!-- Google Fonts + Font Awesome 6 -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Zakia Sher | PCO - Punjab Safe Cities Authority</title>
+    <!-- Google Fonts & Font Awesome -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Leaflet CSS for Map -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <style>
         * {
             margin: 0;
@@ -16,550 +18,784 @@
 
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #0B0A1A;
-            background-image: radial-gradient(circle at 10% 20%, rgba(45, 36, 140, 0.3) 0%, #03020A 100%);
+            background-color: #000000;
             color: #FFFFFF;
-            overflow-x: hidden;
             scroll-behavior: smooth;
+            overflow-x: hidden;
         }
 
-        /* PSCA strict color palette */
+        /* PSCA COLOR SYSTEM */
         :root {
-            --psca-blue: #2D248C;
-            --psca-red: #EF2B2D;
-            --psca-white: #FFFFFF;
-            --psca-black: #000000;
-            --psca-green: #2E4A24;
+            --deep-blue: #2D248C;
+            --bright-red: #EF2B2D;
+            --pure-white: #FFFFFF;
+            --black: #000000;
+            --dark-green: #2E4A24;
         }
 
-        /* security grid pattern overlay */
-        .security-grid {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: 
-                linear-gradient(var(--psca-blue) 1px, transparent 1px),
-                linear-gradient(90deg, var(--psca-blue) 1px, transparent 1px);
-            background-size: 40px 40px;
-            opacity: 0.08;
-            pointer-events: none;
-            z-index: 0;
-        }
-
-        /* shield pattern overlay (subtle) */
-        .shield-pattern {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" opacity="0.03"><path fill="%23EF2B2D" d="M50,5 L92,20 L92,45 C92,70 75,90 50,95 C25,90 8,70 8,45 L8,20 L50,5z"/><circle cx="50" cy="45" r="12" fill="%23ffffff"/></svg>');
-            background-repeat: repeat;
-            background-size: 60px;
-            pointer-events: none;
-            z-index: 0;
-        }
-
-        /* main container relative */
-        .site-container {
-            position: relative;
-            z-index: 2;
-        }
-
-        /* glassmorphism base */
+        /* Global Glassmorphism & Utility */
         .glass-card {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(255,255,255,0.1);
-            border-radius: 28px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+            background: rgba(45, 36, 140, 0.2);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 24px;
         }
 
-        /* navbar */
-        .navbar {
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            background: rgba(0, 0, 0, 0.65);
-            backdrop-filter: blur(16px);
-            border-bottom: 1px solid rgba(239,43,45,0.3);
-            transition: all 0.2s;
-        }
-
-        .nav-link {
-            font-weight: 600;
-            transition: 0.25s;
-            position: relative;
-            color: var(--psca-white);
-            margin: 0 0.25rem;
-            padding: 0.5rem 0;
-        }
-
-        .nav-link:hover {
-            color: var(--psca-red);
-        }
-
-        .nav-link:hover::after {
-            content: '';
-            position: absolute;
-            bottom: -4px;
-            left: 0;
-            width: 100%;
-            height: 2px;
-            background: var(--psca-red);
-        }
-
-        .nav-link.active {
-            color: var(--psca-red);
-            text-shadow: 0 0 6px rgba(239,43,45,0.5);
-        }
-
-        .nav-link.active::after {
-            content: '';
-            position: absolute;
-            bottom: -4px;
-            left: 0;
-            width: 100%;
-            height: 2px;
-            background: var(--psca-red);
-            box-shadow: 0 0 6px var(--psca-red);
-        }
-
-        /* buttons red/blue */
-        .btn-primary-red {
-            background: var(--psca-red);
-            border: none;
-            padding: 12px 28px;
+        .section-title {
+            font-size: 2.2rem;
             font-weight: 700;
-            border-radius: 40px;
-            transition: 0.2s;
+            margin-bottom: 2rem;
+            position: relative;
+            display: inline-block;
+            letter-spacing: -0.5px;
+        }
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: -12px;
+            left: 0;
+            width: 70px;
+            height: 3px;
+            background: var(--bright-red);
+            border-radius: 3px;
+        }
+
+        /* Buttons */
+        .btn-primary-red {
+            background: var(--bright-red);
+            border: none;
             color: white;
-            box-shadow: 0 4px 12px rgba(239,43,45,0.3);
+            padding: 12px 28px;
+            border-radius: 40px;
+            font-weight: 600;
+            transition: 0.2s;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(239, 43, 45, 0.3);
         }
         .btn-primary-red:hover {
-            background: #c51e20;
+            background: #c41e20;
             transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(239,43,45,0.5);
+            box-shadow: 0 8px 20px rgba(239, 43, 45, 0.4);
         }
-        .btn-outline {
+        .btn-outline-blue {
             background: transparent;
-            border: 1.5px solid var(--psca-white);
+            border: 2px solid var(--deep-blue);
+            color: var(--deep-blue);
             padding: 10px 26px;
             border-radius: 40px;
             font-weight: 600;
             transition: 0.2s;
+            cursor: pointer;
+        }
+        .btn-outline-blue:hover {
+            background: var(--deep-blue);
+            color: white;
+            border-color: var(--deep-blue);
+        }
+
+        /* Navbar */
+        .navbar {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(45, 36, 140, 0.6);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 800;
+            font-size: 1.4rem;
+            color: var(--pure-white);
+        }
+        .logo i {
+            color: var(--bright-red);
+            font-size: 1.8rem;
+        }
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+        .nav-links a {
+            color: var(--pure-white);
+            text-decoration: none;
+            font-weight: 500;
+            transition: 0.2s;
+            padding-bottom: 6px;
+            border-bottom: 2px solid transparent;
+        }
+        .nav-links a:hover {
+            border-bottom-color: var(--bright-red);
+            color: var(--bright-red);
+        }
+        .nav-links a.active {
+            border-bottom-color: var(--deep-blue);
+            text-shadow: 0 0 6px rgba(45, 36, 140, 0.8);
+        }
+        /* Mobile nav */
+        .menu-icon {
+            display: none;
+            font-size: 1.8rem;
+            cursor: pointer;
             color: white;
         }
-        .btn-outline:hover {
-            background: rgba(255,255,255,0.1);
-            border-color: var(--psca-red);
-            color: var(--psca-red);
+        @media (max-width: 850px) {
+            .nav-links {
+                display: none;
+                width: 100%;
+                flex-direction: column;
+                text-align: center;
+                padding: 1rem 0;
+                gap: 1rem;
+            }
+            .nav-links.show {
+                display: flex;
+            }
+            .menu-icon {
+                display: block;
+            }
+            .navbar {
+                padding: 1rem;
+            }
         }
 
-        /* hero image frame */
-        .hero-img-frame {
-            border-radius: 30px;
-            border: 4px solid var(--psca-red);
-            box-shadow: 0 0 30px rgba(239,43,45,0.5), 0 25px 35px -10px rgba(0,0,0,0.5);
-            transition: 0.3s;
-            background: var(--psca-blue);
+        /* Hero Section */
+        .hero {
+            position: relative;
+            min-height: 90vh;
+            display: flex;
+            align-items: center;
+            background: radial-gradient(circle at 20% 30%, var(--deep-blue) 0%, #0a072b 100%);
             overflow: hidden;
+            padding: 3rem 2rem;
         }
-        .hero-img-frame:hover {
-            box-shadow: 0 0 45px var(--psca-red), 0 20px 25px -8px black;
+        .grid-overlay {
+            position: absolute;
+            top:0;
+            left:0;
+            width:100%;
+            height:100%;
+            background-image: 
+                linear-gradient(rgba(239,43,45,0.08) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(239,43,45,0.08) 1px, transparent 1px);
+            background-size: 40px 40px;
+            pointer-events: none;
+        }
+        .particles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 30% 40%, rgba(255,255,255,0.02) 1px, transparent 1px);
+            background-size: 32px 32px;
+            animation: floatParticles 20s linear infinite;
+        }
+        @keyframes floatParticles {
+            0% { background-position: 0 0; }
+            100% { background-position: 60px 60px; }
+        }
+        .hero-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            width: 100%;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            align-items: center;
+            justify-content: space-between;
+            position: relative;
+            z-index: 2;
+        }
+        .hero-left {
+            flex: 1;
+        }
+        .hero-left h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+        }
+        .badge-title {
+            color: var(--bright-red);
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+        .typing-text {
+            font-size: 1.5rem;
+            border-right: 2px solid var(--bright-red);
+            white-space: nowrap;
+            overflow: hidden;
+            width: 0;
+            animation: typing 3s steps(40, end) forwards, blink 0.7s step-end infinite;
+            margin: 1rem 0;
+        }
+        @keyframes typing {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+        @keyframes blink {
+            50% { border-color: transparent; }
+        }
+        .hero-contact-info {
+            margin: 1.2rem 0;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            font-size: 0.9rem;
+        }
+        .hero-right {
+            flex: 0.8;
+            display: flex;
+            justify-content: center;
+        }
+        .portrait-frame {
+            width: 320px;
+            height: 340px;
+            background: #0f0c2c;
+            border-radius: 32px;
+            box-shadow: 0 0 24px rgba(45, 36, 140, 0.6), 0 0 0 4px var(--bright-red);
+            overflow: hidden;
+            transition: all 0.3s;
+        }
+        .portrait-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: grayscale(10%);
+        }
+        @media (max-width: 768px) {
+            .hero-left h1 { font-size: 2.2rem; }
+            .typing-text { font-size: 1rem; white-space: normal; border-right: none; animation: none; width: auto; }
+            .hero-right { flex: 1; margin-top: 1rem; }
+            .portrait-frame { width: 240px; height: 260px; }
         }
 
-        /* timeline */
+        /* Counter Cards */
+        .counter-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            justify-content: center;
+        }
+        .counter-card {
+            background: rgba(255,255,255,0.05);
+            backdrop-filter: blur(6px);
+            border-radius: 28px;
+            padding: 1.5rem;
+            flex: 1;
+            min-width: 160px;
+            text-align: center;
+            border: 1px solid rgba(45,36,140,0.4);
+        }
+        .counter-number {
+            font-size: 2.8rem;
+            font-weight: 800;
+            color: var(--bright-red);
+        }
+
+        /* Responsibilities Grid */
+        .resp-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.8rem;
+        }
+        .resp-card {
+            background: white;
+            color: black;
+            border-radius: 20px;
+            padding: 1.6rem;
+            transition: all 0.2s;
+            border-left: 4px solid var(--bright-red);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+        }
+        .resp-card i {
+            font-size: 2rem;
+            color: var(--deep-blue);
+            margin-bottom: 1rem;
+        }
+
+        /* Timeline */
         .timeline {
             position: relative;
-            padding-left: 2rem;
+            max-width: 1000px;
+            margin: 2rem auto;
         }
         .timeline::before {
             content: '';
             position: absolute;
-            left: 0.8rem;
-            top: 0;
-            height: 100%;
             width: 3px;
-            background: var(--psca-blue);
-            box-shadow: 0 0 6px var(--psca-red);
-        }
-        .timeline-node {
-            position: relative;
-            margin-bottom: 2.5rem;
-        }
-        .timeline-node::before {
-            content: '';
-            position: absolute;
-            left: -1.85rem;
-            top: 0.7rem;
-            width: 16px;
-            height: 16px;
-            border-radius: 50%;
-            background: var(--psca-red);
-            box-shadow: 0 0 12px var(--psca-red);
-            border: 2px solid white;
-            z-index: 2;
-        }
-
-        /* circular progress */
-        .progress-circle {
-            position: relative;
-            width: 120px;
-            height: 120px;
-        }
-        .circle-bg {
-            fill: none;
-            stroke: rgba(255,255,255,0.2);
-            stroke-width: 8;
-        }
-        .circle-progress {
-            fill: none;
-            stroke: var(--psca-red);
-            stroke-width: 8;
-            stroke-linecap: round;
-            transition: stroke-dashoffset 1.2s ease-in-out;
-            transform: rotate(-90deg);
-            transform-origin: 50% 50%;
-        }
-
-        /* skill text */
-        .skill-percent {
-            position: absolute;
-            top: 50%;
+            background: var(--deep-blue);
+            top: 0;
+            bottom: 0;
             left: 50%;
-            transform: translate(-50%, -50%);
-            font-weight: 800;
-            font-size: 1.6rem;
+            transform: translateX(-50%);
+        }
+        .timeline-item {
+            padding: 1rem 2rem;
+            position: relative;
+            width: 50%;
+        }
+        .timeline-item.left { left: 0; }
+        .timeline-item.right { left: 50%; }
+        .timeline-dot {
+            position: absolute;
+            right: -12px;
+            top: 20px;
+            width: 18px;
+            height: 18px;
+            background: var(--bright-red);
+            border-radius: 50%;
+            box-shadow: 0 0 0 3px rgba(239,43,45,0.4);
+        }
+        .timeline-item.right .timeline-dot {
+            left: -12px;
+        }
+        .timeline-content {
+            background: white;
+            color: black;
+            padding: 1.2rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+        @media (max-width: 768px) {
+            .timeline::before { left: 20px; }
+            .timeline-item { width: 100%; padding-left: 50px; }
+            .timeline-item.right { left: 0; }
+            .timeline-dot, .timeline-item.right .timeline-dot { left: 6px; right: auto; }
         }
 
-        /* gallery hover effect */
-        .gallery-card {
-            overflow: hidden;
-            border-radius: 24px;
-            transition: 0.3s;
-            border: 2px solid transparent;
+        /* Gallery hover */
+        .gallery-grid {
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            justify-content: center;
         }
-        .gallery-card img {
-            transition: 0.4s;
+        .gallery-item {
+            width: 300px;
+            overflow: hidden;
+            border-radius: 20px;
+            position: relative;
+            cursor: pointer;
+            transition: 0.3s;
+            border: 1px solid var(--deep-blue);
+        }
+        .gallery-item img {
             width: 100%;
             height: 220px;
             object-fit: cover;
+            transition: 0.4s;
         }
-        .gallery-card:hover {
-            border-color: var(--psca-blue);
-            box-shadow: 0 0 0 3px var(--psca-red);
+        .gallery-item:hover img {
+            transform: scale(1.08);
         }
-        .gallery-card:hover img {
-            transform: scale(1.05);
+        .gallery-item:hover {
+            border-color: var(--bright-red);
+            box-shadow: 0 0 0 2px var(--bright-red);
         }
 
-        /* testimonials slider */
-        .testimonial-slider {
+        /* Circular progress */
+        .skills-circular {
             display: flex;
-            overflow-x: auto;
-            scroll-snap-type: x mandatory;
+            flex-wrap: wrap;
+            justify-content: space-around;
             gap: 2rem;
-            padding-bottom: 1rem;
-            scrollbar-width: thin;
         }
-        .testimonial-slider::-webkit-scrollbar {
-            height: 6px;
+        .circle-card {
+            text-align: center;
+            color: white;
         }
-        .testimonial-slider::-webkit-scrollbar-track {
-            background: #1E1A3A;
+        canvas {
+            width: 130px;
+            height: 130px;
         }
-        .testimonial-slider::-webkit-scrollbar-thumb {
-            background: var(--psca-red);
+
+        /* Testimonials Slider */
+        .testimonial-slider {
+            max-width: 700px;
+            margin: auto;
+            overflow: hidden;
+            position: relative;
+        }
+        .testimonial-track {
+            display: flex;
+            transition: transform 0.4s ease;
         }
         .testimonial-card {
-            min-width: 320px;
-            flex: 0 0 auto;
-            scroll-snap-align: start;
-            background: rgba(0,0,0,0.55);
-            backdrop-filter: blur(10px);
-            border-left: 5px solid var(--psca-red);
+            min-width: 100%;
+            background: white;
+            color: black;
+            padding: 2rem;
+            border-radius: 32px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
         }
-
-        /* contact map mock */
-        .mock-map {
-            background: linear-gradient(145deg, #0e0c2a, #04031a);
-            border-radius: 24px;
-            border: 1px solid var(--psca-blue);
-            height: 200px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        /* leaf accent */
-        .leaf-accent {
-            color: var(--psca-green);
-            font-size: 0.85rem;
-            margin-right: 6px;
-        }
-
-        /* red glow effect on interactive */
-        .red-glow-hover:hover {
-            filter: drop-shadow(0 0 8px #EF2B2D);
-        }
-
-        button, .btn-primary-red, .btn-outline {
+        .slider-buttons button {
+            background: var(--deep-blue);
+            border: none;
+            color: white;
+            padding: 8px 16px;
+            margin: 1rem;
+            border-radius: 40px;
             cursor: pointer;
         }
 
-        @media (max-width: 768px) {
-            .hero-img-frame {
-                max-width: 280px;
-                margin-top: 2rem;
-            }
-            .timeline {
-                padding-left: 1.5rem;
-            }
+        /* Contact & Map */
+        .contact-form input, .contact-form textarea {
+            width: 100%;
+            padding: 12px;
+            background: rgba(255,255,255,0.1);
+            border: 1px solid var(--deep-blue);
+            border-radius: 12px;
+            color: white;
+        }
+        #map {
+            height: 260px;
+            border-radius: 20px;
+            border: 2px solid var(--deep-blue);
+        }
+
+        /* Status bar / Live Clock */
+        .status-bar {
+            background: #0a0822;
+            padding: 8px 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.8rem;
+            flex-wrap: wrap;
+            border-bottom: 1px solid var(--deep-blue);
+        }
+        .live-clock {
+            font-family: monospace;
+            font-weight: bold;
+        }
+        .notif-bell {
+            position: relative;
+            cursor: pointer;
+        }
+        .notif-bell i {
+            font-size: 1.2rem;
+            color: var(--bright-red);
+        }
+        .badge-alert {
+            background: red;
+            border-radius: 20px;
+            font-size: 0.6rem;
+            padding: 2px 6px;
+            position: absolute;
+            top: -8px;
+            right: -12px;
+        }
+        footer {
+            background: #020117;
+            padding: 2rem;
+            border-top: 1px solid var(--deep-blue);
+        }
+        .social-icons a {
+            color: white;
+            margin: 0 8px;
+            font-size: 1.2rem;
         }
     </style>
 </head>
 <body>
-    <canvas id="particleCanvas" style="position:fixed; top:0; left:0; width:100%; height:100%; pointer-events:none; z-index:1;"></canvas>
-    <div class="security-grid"></div>
-    <div class="shield-pattern"></div>
 
-    <div class="site-container">
-        <!-- STICKY NAVBAR with PSCA logo -->
-        <nav class="navbar px-4 py-3 d-flex justify-content-between align-items-center flex-wrap" style="position: sticky; top:0;">
-            <div class="d-flex align-items-center gap-3">
-                <!-- PSCA Logo (online link style & vector shield) -->
-                <div class="d-flex align-items-center gap-2">
-                    <i class="fas fa-shield-halos" style="font-size: 2rem; color: #EF2B2D;"></i>
-                    <span style="font-weight:800; letter-spacing:1px; font-size:1.5rem;">PSCA</span>
-                </div>
-                <span class="d-none d-md-block" style="font-size:0.7rem; border-left:1px solid #EF2B2D; padding-left:12px;">PUNJAB SAFE CITIES<br>AUTHORITY</span>
-            </div>
-            <div class="d-flex gap-4 mt-2 mt-sm-0">
-                <a href="#home" class="nav-link text-decoration-none" data-nav>Home</a>
-                <a href="#about" class="nav-link text-decoration-none" data-nav>About</a>
-                <a href="#responsibilities" class="nav-link text-decoration-none" data-nav>Responsibilities</a>
-                <a href="#experience" class="nav-link text-decoration-none" data-nav>Experience</a>
-                <a href="#gallery" class="nav-link text-decoration-none" data-nav>Gallery</a>
-                <a href="#contact" class="nav-link text-decoration-none" data-nav>Contact</a>
-            </div>
-        </nav>
+<!-- Status indicators + Live clock + Notification -->
+<div class="status-bar">
+    <div><i class="fas fa-shield-alt" style="color: #2E4A24;"></i> PSCA SECURE NODE • <span id="nodeStatus" style="color:#2E4A24;">● SYSTEM ONLINE</span></div>
+    <div class="live-clock" id="liveClock"></div>
+    <div class="notif-bell" id="alertBell"><i class="fas fa-bell"></i><span class="badge-alert">3</span></div>
+</div>
 
-        <!-- HERO SECTION -->
-        <section id="home" class="container py-5 mt-4">
-            <div class="row align-items-center g-5">
-                <div class="col-lg-7">
-                    <span class="badge bg-danger px-3 py-2 rounded-pill mb-3" style="background:#EF2B2D !important;">PSCA Command Unit</span>
-                    <h1 class="display-3 fw-bold" style="color:white;">ZAKIYA SHER</h1>
-                    <h3 class="mb-3" style="color:#EF2B2D;">15 Incharge – Toba Tek Singh</h3>
-                    <p class="lead fs-5" id="typing-text" style="min-height: 70px;"></p>
-                    <div class="d-flex gap-3 flex-wrap mt-4">
-                        <a href="#contact" class="btn-primary-red text-decoration-none d-inline-block">Contact Now</a>
-                        <a href="#about" class="btn-outline text-decoration-none d-inline-block">View Profile</a>
-                    </div>
-                    <div class="mt-4 d-flex flex-column gap-1">
-                        <i class="fas fa-envelope me-2"></i> Zakiasher78600@gmail.com
-                        <i class="fas fa-phone-alt me-2"></i> +92 3430164392 &nbsp;|&nbsp; 03195960458
-                        <i class="fas fa-map-marker-alt me-2"></i> PTCL Exchange, Lahore & Chak No. 458 GB, Tandlianwala
-                    </div>
-                </div>
-                <div class="col-lg-5 text-center">
-                    <div class="hero-img-frame">
-                        <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=500&h=550&fit=crop" alt="Officer Zakiya Sher" class="img-fluid" style="width:100%; display:block;">
-                    </div>
-                </div>
-            </div>
-        </section>
+<!-- Navbar -->
+<nav class="navbar">
+    <div class="logo"><i class="fas fa-video"></i> PSCA | TOBA TEK SINGH</div>
+    <div class="menu-icon" id="menuIcon"><i class="fas fa-bars"></i></div>
+    <ul class="nav-links" id="navLinks">
+        <li><a href="#home" class="active">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#responsibilities">Responsibilities</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#gallery">Gallery</a></li>
+        <li><a href="#contact">Contact</a></li>
+    </ul>
+</nav>
 
-        <!-- ABOUT SECTION with Counters + Personal Info -->
-        <section id="about" class="container py-5">
-            <div class="glass-card p-4 p-md-5">
-                <div class="row g-4">
-                    <div class="col-md-7">
-                        <h2 class="fw-bold mb-3"><i class="fas fa-user-shield me-2" style="color:#EF2B2D;"></i> About Command Officer</h2>
-                        <p>Zakiya Sher is a dedicated Police Communication Officer (PCO) responsible for handling emergency and non-emergency calls, collecting critical incident information, and dispatching appropriate response units in real time. She also brings diverse professional experience across banking, accounts, supply chain, and public service operations, demonstrating strong leadership, communication, and operational management skills. Her expertise includes emergency coordination, customer service, financial record management, inventory control, and team supervision in high-pressure environments. Committed to public safety, discipline, and service excellence under the Punjab Safe Cities Authority framework.</p>
-                        <div class="row mt-4">
-                            <div class="col-sm-6 mb-2"><i class="fas fa-user-circle me-2"></i> <strong>Father:</strong> Sher Muhammad Khan</div>
-                            <div class="col-sm-6 mb-2"><i class="fas fa-calendar-alt me-2"></i> <strong>DOB:</strong> 10 Oct 1998</div>
-                            <div class="col-sm-6 mb-2"><i class="fas fa-id-card me-2"></i> <strong>CNIC:</strong> 33106-4302572-4</div>
-                            <div class="col-sm-6 mb-2"><i class="fas fa-map-pin me-2"></i> <strong>Domicile:</strong> Faisalabad</div>
-                            <div class="col-sm-6 mb-2"><i class="fas fa-heart me-2"></i> <strong>Marital Status:</strong> Married</div>
-                            <div class="col-sm-6 mb-2"><i class="fas fa-pray me-2"></i> <strong>Religion:</strong> Islam (Sunni)</div>
-                        </div>
-                    </div>
-                    <div class="col-md-5">
-                        <div class="row text-center g-3">
-                            <div class="col-6">
-                                <div class="bg-dark bg-opacity-25 rounded-4 p-3">
-                                    <h3 class="display-6 fw-bold text-white" id="counterCalls">0</h3>
-                                    <p>Emergency Calls Handled</p>
-                                </div>
-                            </div>
-                            <div class="col-6">
-                                <div class="bg-dark bg-opacity-25 rounded-4 p-3">
-                                    <h3 class="display-6 fw-bold text-white" id="counterTeams">0</h3>
-                                    <p>Team Operations</p>
-                                </div>
-                            </div>
-                            <div class="col-6">
-                                <div class="bg-dark bg-opacity-25 rounded-4 p-3">
-                                    <h3 class="display-6 fw-bold text-white" id="counterAssist">0</h3>
-                                    <p>Public Assistance</p>
-                                </div>
-                            </div>
-                            <div class="col-6">
-                                <div class="bg-dark bg-opacity-25 rounded-4 p-3">
-                                    <h3 class="display-6 fw-bold text-white" id="counterHours">0</h3>
-                                    <p>Monitoring Hours</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+<!-- Hero -->
+<section id="home" class="hero">
+    <div class="grid-overlay"></div>
+    <div class="particles"></div>
+    <div class="hero-container">
+        <div class="hero-left">
+            <span class="badge-title"><i class="fas fa-microphone-alt"></i> POLICE COMMUNICATION OFFICER</span>
+            <h1>ZAKIA SHER</h1>
+            <p style="font-size:1.2rem; color:#ddd;">15 Incharge – Toba Tek Singh (PSCA System)</p>
+            <div class="typing-text">> Serving Public Safety with Dedication & Discipline</div>
+            <div class="hero-contact-info">
+                <span><i class="fas fa-envelope"></i> Zakiasher78600@gmail.com</span>
+                <span><i class="fas fa-phone-alt"></i> +92 3430164392</span>
             </div>
-        </section>
-
-        <!-- RESPONSIBILITIES CARDS -->
-        <section id="responsibilities" class="container py-5">
-            <h2 class="fw-bold mb-4"><i class="fas fa-tasks leaf-accent"></i> Core Command Responsibilities</h2>
-            <div class="row g-4">
-                <div class="col-md-4 col-lg-3"><div class="glass-card p-4 text-center h-100"><i class="fas fa-phone-alt fs-1 mb-3" style="color:#EF2B2D;"></i><h5>Emergency Helpline</h5><small>15 PSCA protocols</small></div></div>
-                <div class="col-md-4 col-lg-3"><div class="glass-card p-4 text-center h-100"><i class="fas fa-video fs-1 mb-3" style="color:#EF2B2D;"></i><h5>Smart Surveillance</h5><small>AI monitoring & analysis</small></div></div>
-                <div class="col-md-4 col-lg-3"><div class="glass-card p-4 text-center h-100"><i class="fas fa-bolt fs-1 mb-3" style="color:#EF2B2D;"></i><h5>Crisis Response</h5><small>Real-time deployment</small></div></div>
-                <div class="col-md-4 col-lg-3"><div class="glass-card p-4 text-center h-100"><i class="fas fa-female fs-1 mb-3" style="color:#EF2B2D;"></i><h5>Women Safety Support</h5><small>Priority protection</small></div></div>
-                <div class="col-md-4 col-lg-3"><div class="glass-card p-4 text-center h-100"><i class="fas fa-file-alt fs-1 mb-3" style="color:#EF2B2D;"></i><h5>Complaint Handling</h5><small>Timely escalation</small></div></div>
-                <div class="col-md-4 col-lg-3"><div class="glass-card p-4 text-center h-100"><i class="fas fa-users fs-1 mb-3" style="color:#EF2B2D;"></i><h5>Team Leadership</h5><small>Shift coordination</small></div></div>
+            <div style="margin-top: 1rem; display: flex; gap: 1rem; flex-wrap: wrap;">
+                <button class="btn-primary-red" id="contactNowBtn">Contact Now <i class="fas fa-arrow-right"></i></button>
+                <button class="btn-outline-blue" id="viewProfileBtn">View Profile</button>
             </div>
-        </section>
-
-        <!-- EXPERIENCE TIMELINE -->
-        <section id="experience" class="container py-5">
-            <h2 class="fw-bold mb-4"><i class="fas fa-timeline leaf-accent"></i> Professional Journey</h2>
-            <div class="glass-card p-4">
-                <div class="timeline">
-                    <div class="timeline-node"><div class="bg-white p-3 rounded-3 shadow-sm text-dark"><h4 class="text-danger">🚨 Police Communication Officer (PCO)</h4><p class="mb-1"><strong>Punjab Safe Cities Authority – Lahore</strong> | 2024–Present</p><small>Emergency communication, dispatch coordination, surveillance monitoring, public safety response.</small></div></div>
-                    <div class="timeline-node"><div class="bg-white p-3 rounded-3 shadow-sm text-dark"><h4 class="text-danger">💳 Bancassurance Sales Representative</h4><p class="mb-1"><strong>Adamjee Life Assurance – MCB Bank (2021–2023)</strong></p><small>Sales targeting, financial advisory, multi-branch performance (Kanjwani, Rehmay Shah, Dijkot, Torianwala).</small><div class="mt-2 d-flex gap-2"><i class="fab fa-adn"></i> Adamjee Life <i class="fas fa-university ms-2"></i> MCB Bank</div></div></div>
-                    <div class="timeline-node"><div class="bg-white p-3 rounded-3 shadow-sm text-dark"><h4 class="text-danger">📊 Accounts Manager</h4><p><strong>Assala Restaurant – Faisalabad (2024)</strong><br>Financial record keeping, inventory, customer service ops.</p></div></div>
-                    <div class="timeline-node"><div class="bg-white p-3 rounded-3 shadow-sm text-dark"><h4 class="text-danger">📦 Supply Chain Supervisor</h4><p><strong>Foodelicious Restaurant – Kamalia (2024)</strong><br>Stock in/out, warehouse ops, floor supervision & quality control.</p></div></div>
-                </div>
+        </div>
+        <div class="hero-right">
+            <div class="portrait-frame">
+                <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&h=400&fit=crop" alt="Officer Zakia Sher">
             </div>
-            <div class="mt-4 glass-card p-3"><h5 class="fw-bold"><i class="fas fa-graduation-cap"></i> Education</h5><p>BS Computer Science – University of Sargodha (2019)<br>Intermediate (ICS) – BISE Faisalabad (2015)<br>Matriculation – BISE Faisalabad (2013)</p></div>
-        </section>
-
-        <!-- GALLERY: Command visuals -->
-        <section id="gallery" class="container py-5">
-            <h2 class="fw-bold mb-4"><i class="fas fa-camera leaf-accent"></i> PSCA Command Gallery</h2>
-            <div class="row g-4">
-                <div class="col-md-4"><div class="gallery-card"><img src="https://images.unsplash.com/photo-1582139329536-e7284fece509?w=600" alt="Command Center"><div class="p-2 text-center">Main Control Room</div></div></div>
-                <div class="col-md-4"><div class="gallery-card"><img src="https://images.unsplash.com/photo-1581091226033-d5c48150dbaa?w=600" alt="Surveillance"><div class="p-2 text-center">Smart Surveillance Hub</div></div></div>
-                <div class="col-md-4"><div class="gallery-card"><img src="https://images.unsplash.com/photo-1517430816045-df4b7de11d1d?w=600" alt="Field Ops"><div class="p-2 text-center">Rapid Response Unit</div></div></div>
-            </div>
-        </section>
-
-        <!-- SKILLS: circular progress -->
-        <section class="container py-4">
-            <h2 class="fw-bold mb-4"><i class="fas fa-chart-line leaf-accent"></i> Operational Command Skills</h2>
-            <div class="row g-5 justify-content-center">
-                <div class="col-md-3 col-6 text-center"><div class="progress-circle mx-auto" data-percent="90"><svg width="120" height="120"><circle cx="60" cy="60" r="52" class="circle-bg"></circle><circle cx="60" cy="60" r="52" class="circle-progress" stroke="#EF2B2D"></circle></svg><div class="skill-percent">0%</div></div><p class="mt-2 fw-bold">Leadership</p></div>
-                <div class="col-md-3 col-6 text-center"><div class="progress-circle mx-auto" data-percent="95"><svg width="120" height="120"><circle cx="60" cy="60" r="52" class="circle-bg"></circle><circle cx="60" cy="60" r="52" class="circle-progress"></circle></svg><div class="skill-percent">0%</div></div><p class="mt-2 fw-bold">Communication</p></div>
-                <div class="col-md-3 col-6 text-center"><div class="progress-circle mx-auto" data-percent="88"><svg width="120" height="120"><circle cx="60" cy="60" r="52" class="circle-bg"></circle><circle cx="60" cy="60" r="52" class="circle-progress"></circle></svg><div class="skill-percent">0%</div></div><p class="mt-2 fw-bold">Crisis Management</p></div>
-                <div class="col-md-3 col-6 text-center"><div class="progress-circle mx-auto" data-percent="92"><svg width="120" height="120"><circle cx="60" cy="60" r="52" class="circle-bg"></circle><circle cx="60" cy="60" r="52" class="circle-progress"></circle></svg><div class="skill-percent">0%</div></div><p class="mt-2 fw-bold">Monitoring Ops</p></div>
-            </div>
-        </section>
-
-        <!-- TESTIMONIALS slider -->
-        <section class="container py-4">
-            <h2 class="fw-bold mb-3">📢 Field Testimonials</h2>
-            <div class="testimonial-slider d-flex">
-                <div class="testimonial-card p-4 rounded-4"><i class="fas fa-quote-left fs-2" style="color:#EF2B2D;"></i><p class="mt-2">"Exceptional coordination & real-time decision making under pressure. Zakiya ensures public safety with discipline."</p><h6 class="mt-2">— DSP Safe Cities</h6></div>
-                <div class="testimonial-card p-4 rounded-4"><i class="fas fa-quote-left fs-2" style="color:#EF2B2D;"></i><p class="mt-2">"Her experience across banking and supply chain adds strategic advantage to PSCA operations."</p><h6>— Admin Commander TT Singh</h6></div>
-                <div class="testimonial-card p-4 rounded-4"><i class="fas fa-quote-left fs-2" style="color:#EF2B2D;"></i><p class="mt-2">"Zakiya handled emergency calls with professional accuracy; true asset to 15 control room."</p><h6>— Senior PCO, Lahore</h6></div>
-            </div>
-        </section>
-
-        <!-- CONTACT with map mock & action buttons -->
-        <section id="contact" class="container py-5">
-            <div class="row g-4">
-                <div class="col-md-6">
-                    <div class="glass-card p-4">
-                        <h3><i class="fas fa-headset"></i> Direct Contact</h3>
-                        <form id="contactForm">
-                            <div class="mb-3"><input type="text" class="form-control bg-dark text-white border-0 rounded-3" placeholder="Full Name" required></div>
-                            <div class="mb-3"><input type="email" class="form-control bg-dark text-white border-0 rounded-3" placeholder="Email Address"></div>
-                            <div class="mb-3"><input type="tel" class="form-control bg-dark text-white border-0 rounded-3" placeholder="Phone"></div>
-                            <div class="mb-3"><textarea rows="3" class="form-control bg-dark text-white border-0 rounded-3" placeholder="Emergency/General Message"></textarea></div>
-                            <div class="d-flex gap-3 flex-wrap">
-                                <button class="btn-primary-red" type="button"><i class="fab fa-whatsapp"></i> WhatsApp</button>
-                                <button class="btn-primary-red" type="button"><i class="fas fa-phone-alt"></i> Call</button>
-                                <button class="btn-primary-red" type="button"><i class="fas fa-envelope"></i> Email</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="glass-card p-4">
-                        <h3><i class="fas fa-map"></i> PSCA Command Geo-Location</h3>
-                        <div class="mock-map d-flex align-items-center justify-content-center flex-column"><i class="fas fa-shield-alt fs-1" style="color:#EF2B2D;"></i><p class="mt-2">Command Grid: Toba Tek Singh | PTCL Exchange, Lahore<br>Chak No.458 GB, Tandlianwala</p><span style="background:#2D248C; padding:4px 12px; border-radius:30px;">🔒 Restricted Zone</span></div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- FOOTER -->
-        <footer class="container-fluid bg-black bg-opacity-75 mt-5 py-4" style="border-top:2px solid #EF2B2D;">
-            <div class="container d-flex flex-wrap justify-content-between align-items-center">
-                <div class="d-flex gap-3 align-items-center"><i class="fas fa-shield-halos fa-2x" style="color:#EF2B2D;"></i><span class="fw-bold">Punjab Safe Cities Authority | Command Dashboard</span></div>
-                <div class="d-flex gap-4"><a href="#home" class="text-white text-decoration-none">Home</a><a href="#about" class="text-white text-decoration-none">About</a><a href="#contact" class="text-white text-decoration-none">Contact</a></div>
-                <div><i class="fab fa-twitter me-2"></i><i class="fab fa-linkedin me-2"></i><i class="fab fa-facebook"></i></div>
-            </div>
-            <div class="text-center small mt-3">© 2025 Zakiya Sher – PSCA 15 Incharge Toba Tek Singh | Emergency Response & Public Safety Portfolio</div>
-        </footer>
+        </div>
     </div>
+</section>
 
-    <script>
-        // particle effect
-        const canvas = document.getElementById('particleCanvas');
+<!-- About + Counters -->
+<section id="about" style="padding: 5rem 2rem; background: var(--black);">
+    <div class="container" style="max-width: 1300px; margin: auto;">
+        <h2 class="section-title">Command Overview</h2>
+        <div style="display: flex; flex-wrap: wrap; gap: 2rem;">
+            <div style="flex:1.5;">
+                <p style="line-height:1.6; color:#ddd;">Zakiya Sher is a disciplined and highly trained Police Communication Officer (PCO) responsible for managing emergency and non-emergency communication, collecting critical incident data, and coordinating real-time dispatch of response units under the Punjab Safe Cities Authority framework. She has diverse professional experience in public service operations, banking sales, accounts management, and supply chain supervision, demonstrating strong leadership, operational efficiency, and crisis handling abilities. Her core strengths include emergency coordination, surveillance monitoring, customer service, financial management, and team supervision in high-pressure environments. Committed to public safety, discipline, rapid response, and operational excellence.</p>
+                <div style="margin-top: 1rem;"><i class="fas fa-map-marker-alt" style="color: var(--bright-red);"></i> PTCL Exchange, Rafique Street, Sanda Khurd, Lahore | Chak No. 458 GB, Tehsil Tandlianwala</div>
+            </div>
+        </div>
+        <div class="counter-grid" style="margin-top: 3rem;">
+            <div class="counter-card"><div class="counter-number" data-target="18420">0</div><p>Emergency Calls Handled</p></div>
+            <div class="counter-card"><div class="counter-number" data-target="48">0</div><p>Team Operations</p></div>
+            <div class="counter-card"><div class="counter-number" data-target="15680">0</div><p>Public Assistance Cases</p></div>
+            <div class="counter-card"><div class="counter-number" data-target="24760">0</div><p>Monitoring Hours</p></div>
+        </div>
+    </div>
+</section>
+
+<!-- Responsibilities Grid -->
+<section id="responsibilities" style="padding: 4rem 2rem; background: #05021a;">
+    <div class="container" style="max-width: 1300px; margin: auto;">
+        <h2 class="section-title">Core Responsibilities</h2>
+        <div class="resp-grid">
+            <div class="resp-card"><i class="fas fa-phone-alt"></i><h3>Emergency Helpline Management</h3><p>15 & 15 PSCA emergency dispatch</p></div>
+            <div class="resp-card"><i class="fas fa-video"></i><h3>Smart Surveillance Monitoring</h3><p>Real-time CCTV analysis</p></div>
+            <div class="resp-card"><i class="fas fa-bolt"></i><h3>Crisis Response Operations</h3><p>Rapid deployment coordination</p></div>
+            <div class="resp-card"><i class="fas fa-female"></i><h3>Women Safety Support</h3><p>Priority helpline for women security</p></div>
+            <div class="resp-card"><i class="fas fa-file-alt"></i><h3>Complaint Handling System</h3><p>Digital complaint logging</p></div>
+            <div class="resp-card"><i class="fas fa-chalkboard-user"></i><h3>Team Leadership Control</h3><p>Supervising comms unit</p></div>
+        </div>
+    </div>
+</section>
+
+<!-- Experience Timeline -->
+<section id="experience" style="padding: 5rem 2rem;">
+    <div class="container" style="max-width: 1300px; margin: auto;">
+        <h2 class="section-title">Operational Timeline</h2>
+        <div class="timeline">
+            <div class="timeline-item left"><div class="timeline-dot"></div><div class="timeline-content"><h3>Police Communication Officer (PCO)</h3><p>Punjab Safe Cities Authority – Lahore | Present</p><p>Emergency call handling, surveillance monitoring, dispatch coordination, public safety operations.</p></div></div>
+            <div class="timeline-item right"><div class="timeline-dot"></div><div class="timeline-content"><h3>Bancassurance Sales Representative</h3><p>Adamjee Life – MCB Bank (2021-2023)</p><p>Sales targeting, financial advisory, branch performance.</p></div></div>
+            <div class="timeline-item left"><div class="timeline-dot"></div><div class="timeline-content"><h3>Accounts Manager</h3><p>Assala Restaurant – Faisalabad (2024)</p><p>Financial records management, inventory tracking, customer service operations.</p></div></div>
+            <div class="timeline-item right"><div class="timeline-dot"></div><div class="timeline-content"><h3>Supply Chain Supervisor</h3><p>Foodelicious – Kamalia (2024)</p><p>Stock control, warehouse operations, quality supervision.</p></div></div>
+        </div>
+    </div>
+</section>
+
+<!-- Gallery -->
+<section id="gallery" style="padding: 4rem 2rem; background: #000;">
+    <div class="container" style="max-width: 1200px; margin: auto;">
+        <h2 class="section-title">Command Center Visuals</h2>
+        <div class="gallery-grid">
+            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1581091226033-d5c48150dbaa?w=400&h=250&fit=crop" alt="Command Center"></div>
+            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1582139329536-e7284fece509?w=400&h=250&fit=crop" alt="Surveillance Room"></div>
+            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=400&h=250&fit=crop" alt="Field Operations"></div>
+        </div>
+    </div>
+</section>
+
+<!-- Skills with Circular Indicators -->
+<section style="padding: 5rem 2rem; background: #030018;">
+    <div class="container" style="max-width: 1200px; margin: auto;">
+        <h2 class="section-title">Core Competencies</h2>
+        <div class="skills-circular" id="skillsCanvasContainer">
+            <div class="circle-card"><canvas id="skill1" width="150" height="150"></canvas><h4>Leadership</h4><span>95%</span></div>
+            <div class="circle-card"><canvas id="skill2" width="150" height="150"></canvas><h4>Communication</h4><span>98%</span></div>
+            <div class="circle-card"><canvas id="skill3" width="150" height="150"></canvas><h4>Crisis Management</h4><span>92%</span></div>
+            <div class="circle-card"><canvas id="skill4" width="150" height="150"></canvas><h4>Monitoring Systems</h4><span>96%</span></div>
+        </div>
+        <div style="display: flex; flex-wrap: wrap; gap: 0.8rem; justify-content: center; margin-top: 2rem;">
+            <span style="background: #2D248C; padding: 6px 14px; border-radius: 40px;">CCTV & Surveillance</span>
+            <span style="background: #2D248C; padding: 6px 14px; border-radius: 40px;">MS Office Suite</span>
+            <span style="background: #2D248C; padding: 6px 14px; border-radius: 40px;">Data Reporting</span>
+            <span style="background: #2D248C; padding: 6px 14px; border-radius: 40px;">CRM</span>
+            <span style="background: #2E4A24; padding: 6px 14px; border-radius: 40px;">Graphic Design</span>
+        </div>
+    </div>
+</section>
+
+<!-- Testimonials Slider -->
+<section style="padding: 5rem 2rem;">
+    <div class="container" style="max-width: 800px; margin: auto; text-align: center;">
+        <h2 class="section-title">Field Testimonials</h2>
+        <div class="testimonial-slider">
+            <div class="testimonial-track" id="testimonialTrack">
+                <div class="testimonial-card"><i class="fas fa-quote-left" style="color: var(--deep-blue); font-size: 2rem;"></i><p>"Zakia's coordination during emergency is unmatched – true professional in PSCA operations."</p><h4>— DIG Operations, PSCA</h4></div>
+                <div class="testimonial-card"><i class="fas fa-quote-left" style="color: var(--deep-blue); font-size: 2rem;"></i><p>"Her surveillance monitoring reduced incident response time by 35%."</p><h4>— Command Center Lead</h4></div>
+                <div class="testimonial-card"><i class="fas fa-quote-left" style="color: var(--deep-blue); font-size: 2rem;"></i><p>"Excellent crisis handler and team motivator under high pressure."</p><h4>— SSP Toba Tek Singh</h4></div>
+            </div>
+            <div class="slider-buttons"><button id="prevSlide"><i class="fas fa-chevron-left"></i></button><button id="nextSlide"><i class="fas fa-chevron-right"></i></button></div>
+        </div>
+    </div>
+</section>
+
+<!-- Contact Section + Map -->
+<section id="contact" style="padding: 5rem 2rem; background: #020018;">
+    <div class="container" style="max-width: 1200px; margin: auto;">
+        <h2 class="section-title">Secure Contact Channel</h2>
+        <div style="display: flex; flex-wrap: wrap; gap: 2rem;">
+            <div style="flex:1;">
+                <form class="contact-form" id="contactForm">
+                    <input type="text" placeholder="Full Name" required><br><br>
+                    <input type="email" placeholder="Email Address" required><br><br>
+                    <input type="tel" placeholder="Phone"><br><br>
+                    <textarea rows="4" placeholder="Secure Message"></textarea><br><br>
+                    <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                        <button type="button" class="btn-primary-red" id="emailSendBtn"><i class="fas fa-paper-plane"></i> Email Send</button>
+                        <button type="button" class="btn-outline-blue" id="whatsappBtn"><i class="fab fa-whatsapp"></i> WhatsApp</button>
+                        <button type="button" class="btn-primary-red" id="callBtn"><i class="fas fa-phone"></i> Call Now</button>
+                    </div>
+                </form>
+            </div>
+            <div style="flex:1;">
+                <div id="map"></div>
+                <p style="margin-top: 0.7rem;"><i class="fas fa-location-dot" style="color: var(--bright-red);"></i> PTCL Exchange, Lahore (PSCA Hub)</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <div style="display: flex; justify-content: space-between; flex-wrap: wrap; gap: 1rem;">
+        <div><i class="fas fa-shield-haltered"></i> PSCA | TOBA TEK SINGH UNIT</div>
+        <div>Quick Links: <a href="#home" style="color:white;">Home</a> | <a href="#about" style="color:white;">About</a> | <a href="#contact" style="color:white;">Contact</a></div>
+        <div class="social-icons"><i class="fab fa-twitter"></i> <i class="fab fa-linkedin"></i> <i class="fab fa-github"></i></div>
+    </div>
+    <hr style="margin: 1rem 0; border-color:#2D248C;">
+    <div style="text-align: center;">© 2025 Punjab Safe Cities Authority – Official Command Interface</div>
+</footer>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+    // Live Clock
+    function updateClock() {
+        const now = new Date();
+        document.getElementById('liveClock').innerText = now.toLocaleTimeString('en-PK', { hour12: false }) + " | PKT";
+    }
+    setInterval(updateClock, 1000);
+    updateClock();
+
+    // Draw circular progress
+    function drawCircle(canvasId, percent) {
+        const canvas = document.getElementById(canvasId);
         const ctx = canvas.getContext('2d');
-        let width, height;
-        let particles = [];
-        function resizeCanvas() { width = window.innerWidth; height = window.innerHeight; canvas.width = width; canvas.height = height; }
-        window.addEventListener('resize', resizeCanvas);
-        resizeCanvas();
-        class Particle { constructor() { this.x = Math.random() * width; this.y = Math.random() * height; this.vx = (Math.random() - 0.5) * 0.4; this.vy = (Math.random() - 0.5) * 0.2; this.size = Math.random() * 2 + 1; } update() { this.x += this.vx; this.y += this.vy; if (this.x < 0) this.x = width; if (this.x > width) this.x = 0; if (this.y < 0) this.y = height; if (this.y > height) this.y = 0; } draw() { ctx.fillStyle = 'rgba(239,43,45,0.5)'; ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI*2); ctx.fill(); } }
-        for (let i=0;i<120;i++) particles.push(new Particle());
-        function animateParticles() { ctx.clearRect(0,0,width,height); particles.forEach(p => { p.update(); p.draw(); }); requestAnimationFrame(animateParticles); }
-        animateParticles();
+        let size = 150;
+        canvas.width = size; canvas.height = size;
+        let startAngle = -0.5 * Math.PI;
+        let endAngle = startAngle + (percent / 100) * 2 * Math.PI;
+        ctx.clearRect(0,0,size,size);
+        ctx.beginPath();
+        ctx.arc(size/2, size/2, 55, 0, 2*Math.PI);
+        ctx.strokeStyle = '#2D248C';
+        ctx.lineWidth = 12;
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.arc(size/2, size/2, 55, startAngle, endAngle);
+        ctx.strokeStyle = '#EF2B2D';
+        ctx.lineWidth = 12;
+        ctx.stroke();
+        ctx.fillStyle = 'white';
+        ctx.font = 'bold 22px Inter';
+        ctx.fillText(percent+"%", size/2-30, size/2+10);
+    }
+    drawCircle('skill1',95);
+    drawCircle('skill2',98);
+    drawCircle('skill3',92);
+    drawCircle('skill4',96);
 
-        // Typing effect
-        const typedText = "Serving Public Safety with Dedication & Discipline";
-        let i = 0;
-        function typeWriter() { if (i < typedText.length) { document.getElementById("typing-text").innerHTML += typedText.charAt(i); i++; setTimeout(typeWriter, 60); } }
-        typeWriter();
+    // Counter animation
+    const counters = document.querySelectorAll('.counter-number');
+    const speed = 200;
+    const animateCounters = () => {
+        counters.forEach(counter => {
+            const updateCount = () => {
+                const target = +counter.getAttribute('data-target');
+                let count = +counter.innerText;
+                let increment = target / 50;
+                if(count < target){
+                    count = Math.ceil(count + increment);
+                    counter.innerText = count;
+                    setTimeout(updateCount, 25);
+                } else counter.innerText = target;
+            };
+            updateCount();
+        });
+    };
+    window.addEventListener('load', animateCounters);
 
-        // Counters animation + circular progress init
-        const counters = [
-            { element: document.getElementById('counterCalls'), target: 28470 },
-            { element: document.getElementById('counterTeams'), target: 54 },
-            { element: document.getElementById('counterAssist'), target: 12750 },
-            { element: document.getElementById('counterHours'), target: 38900 }
-        ];
-        function animateCounters() { counters.forEach(c => { if (!c.animated && isElementInViewport(c.element)) { c.animated = true; let current = 0; const step = Math.ceil(c.target / 70); const interval = setInterval(() => { current += step; if (current >= c.target) { c.element.innerText = c.target.toLocaleString(); clearInterval(interval); } else { c.element.innerText = current.toLocaleString(); } }, 20); } }); }
-        function isElementInViewport(el) { const rect = el.getBoundingClientRect(); return rect.top < window.innerHeight-100 && rect.bottom > 0; }
+    // Testimonial Slider
+    let slideIndex = 0;
+    const track = document.getElementById('testimonialTrack');
+    const slides = document.querySelectorAll('.testimonial-card');
+    const totalSlides = slides.length;
+    document.getElementById('nextSlide').addEventListener('click', () => {
+        slideIndex = (slideIndex+1)%totalSlides;
+        track.style.transform = `translateX(-${slideIndex*100}%)`;
+    });
+    document.getElementById('prevSlide').addEventListener('click', () => {
+        slideIndex = (slideIndex-1+totalSlides)%totalSlides;
+        track.style.transform = `translateX(-${slideIndex*100}%)`;
+    });
 
-        // Circular progress animation
-        const circles = document.querySelectorAll('.progress-circle');
-        function animateCircles() { circles.forEach(circle => { if (!circle.dataset.animated && isElementInViewport(circle)) { circle.dataset.animated = 'true'; const percent = parseInt(circle.getAttribute('data-percent')); const progressCircle = circle.querySelector('.circle-progress'); const radius = 52; const circumference = 2 * Math.PI * radius; progressCircle.style.strokeDasharray = circumference; const offset = circumference - (percent / 100) * circumference; progressCircle.style.strokeDashoffset = offset; const percentDiv = circle.querySelector('.skill-percent'); let curr = 0; const stepTime = setInterval(() => { curr++; if (curr > percent) clearInterval(stepTime); else percentDiv.innerText = curr + '%'; }, 15); } }); }
+    // Navbar toggle + active scroll highlight
+    const menuIcon = document.getElementById('menuIcon');
+    const navLinks = document.getElementById('navLinks');
+    menuIcon.addEventListener('click', ()=> navLinks.classList.toggle('show'));
+    const sections = document.querySelectorAll('section');
+    window.addEventListener('scroll', () => {
+        let current = '';
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop - 100;
+            if(scrollY >= sectionTop) current = section.getAttribute('id');
+        });
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.classList.remove('active');
+            if(link.getAttribute('href') === `#${current}`) link.classList.add('active');
+        });
+    });
 
-        window.addEventListener('scroll', () => { animateCounters(); animateCircles(); });
-        animateCounters(); animateCircles();
+    // Contact interactions
+    document.getElementById('contactNowBtn').addEventListener('click', ()=> document.getElementById('contact').scrollIntoView({behavior:'smooth'}));
+    document.getElementById('viewProfileBtn').addEventListener('click',()=> document.getElementById('about').scrollIntoView({behavior:'smooth'}));
+    document.getElementById('emailSendBtn').addEventListener('click',()=> alert('Secure message sent to PSCA communication center.'));
+    document.getElementById('whatsappBtn').addEventListener('click',()=> window.open('https://wa.me/923430164392','_blank'));
+    document.getElementById('callBtn').addEventListener('click',()=> alert('Calling +92 3430164392'));
+    
+    // Leaflet Map (Dark theme)
+    const map = L.map('map').setView([31.5204, 74.3587], 13);
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OSM</a> & CartoDB',
+        subdomains: 'abcd',
+        maxZoom: 19
+    }).addTo(map);
+    L.marker([31.5204, 74.3587]).addTo(map).bindPopup('PSCA Command Hub, Lahore').openPopup();
 
-        // Nav active state & smooth scroll
-        const sections = document.querySelectorAll('section[id]');
-        window.addEventListener('scroll', () => { let current = ''; sections.forEach(section => { const sectionTop = section.offsetTop - 120; if (pageYOffset >= sectionTop) current = section.getAttribute('id'); }); document.querySelectorAll('[data-nav]').forEach(link => { link.classList.remove('active'); if (link.getAttribute('href').substring(1) === current) link.classList.add('active'); }); });
-        document.querySelectorAll('.nav-link').forEach(anchor => { anchor.addEventListener('click', function(e) { e.preventDefault(); const targetId = this.getAttribute('href'); if(targetId && targetId !== '#') { const el = document.querySelector(targetId); if(el) el.scrollIntoView({ behavior: 'smooth', block: 'start' }); } }); });
-    </script>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    // System Node random status and alert bell
+    setInterval(() => {
+        const node = document.getElementById('nodeStatus');
+        const status = Math.random() > 0.9 ? '● DEGRADED' : '● SYSTEM ONLINE';
+        node.style.color = status.includes('ONLINE') ? '#2E4A24' : '#EF2B2D';
+        node.innerText = status;
+    }, 5000);
+    document.getElementById('alertBell').addEventListener('click', () => alert('[SIMULATED] Emergency alert: Active incident coordination ongoing.'));
+</script>
 </body>
 </html>
