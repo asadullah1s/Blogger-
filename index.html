@@ -2,1196 +2,763 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Attaher Ab. | Luxury Boutique</title>
-  <!-- Bootstrap 5 & Icons -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <title>TAHERA — Pakistani Elegance Curated for Bangladesh</title>
+  <!-- SEO Meta Tags -->
+  <meta name="description" content="TAHERA luxury boutique – Pakistani elegance curated for Bangladesh. Premium wedding wear, luxury pret, party wear and Eid collections.">
+  <meta name="keywords" content="Tahera, luxury clothing, Pakistani fashion, Bangladesh, wedding wear, party wear, premium pret">
+  <link rel="canonical" href="https://tahera.pk/">
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="TAHERA – Luxury Pakistani Elegance">
+  <meta property="og:description" content="Discover the finest curated Pakistani designer wear for the modern woman. Wedding, party, and luxury pret.">
+  <meta property="og:image" content="https://images.unsplash.com/photo-1618354691373-d851c5c3a990?w=1200&h=630&fit=crop">
+  <!-- Twitter Cards -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="TAHERA – Luxury Pakistani Elegance">
+  <meta name="twitter:description" content="Curated luxury fashion for Bangladesh. Timeless, minimal, sophisticated.">
+  <!-- Bootstrap 5.3 + Icons + Google Fonts -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-  <!-- Google Fonts (Premium Look) -->
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
-    /* ============================================
-       CUSTOM STYLE.CSS
-       All premium, luxury, modern styling
-       ============================================ */
+    /* ----- GLOBAL RESET / VARIABLES (LUXURY PALETTE) ----- */
     :root {
-      /* --- Color Scheme (Detected from Facebook Logo Placeholder) --- */
-      --primary-color: #1877F2;      /* Facebook Blue */
-      --secondary-color: #1B3A5C;    /* Darker blue */
-      --accent-color: #E4A853;       /* Gold accent */
-      --bg-color: #F8F5F0;          /* Warm cream background */
-      --text-color: #1A1A1A;         /* Rich black */
-      --glass-bg: rgba(255, 255, 255, 0.15);
-      --glass-border: rgba(255, 255, 255, 0.25);
-      --shadow-soft: 0 8px 32px rgba(0, 0, 0, 0.08);
-      --shadow-hover: 0 15px 40px rgba(0, 0, 0, 0.15);
-      --transition-smooth: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      --primary-gold: #C89B3C;
+      --luxury-gold: #B8860B;
+      --light-gold: #E3C37A;
+      --ivory: #FCF9F4;
+      --cream: #F7F2EA;
+      --soft-beige: #E8D9C7;
+      --dark: #1E1E1E;
+      --white: #FFFFFF;
+      --bs-body-font-family: 'Poppins', sans-serif;
     }
-
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
     body {
-      font-family: 'Inter', sans-serif;
-      background-color: var(--bg-color);
-      color: var(--text-color);
+      background-color: var(--ivory);
+      color: var(--dark);
+      font-weight: 300;
+      cursor: default;
       overflow-x: hidden;
-      scroll-behavior: smooth;
+      font-family: 'Poppins', sans-serif;
     }
-
-    h1, h2, h3, h4, h5 {
+    h1, h2, h3, h4, h5, .playfair {
       font-family: 'Playfair Display', serif;
       font-weight: 600;
+      letter-spacing: 0.02em;
     }
-
-    /* --- Loading Screen --- */
-    #loading-screen {
+    .gold-text { color: var(--primary-gold); }
+    .gold-bg { background-color: var(--primary-gold); }
+    .dark-bg { background-color: var(--dark); }
+    .cream-bg { background-color: var(--cream); }
+    .ivory-bg { background-color: var(--ivory); }
+    .beige-bg { background-color: var(--soft-beige); }
+    .section-padding { padding: 100px 0; }
+    .section-title {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      position: relative;
+    }
+    .section-title:after {
+      content: '';
+      display: block;
+      width: 80px;
+      height: 3px;
+      background: var(--primary-gold);
+      margin: 16px auto 0;
+    }
+    .btn-luxury {
+      background: var(--primary-gold);
+      color: var(--white);
+      border: none;
+      padding: 12px 38px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      border-radius: 0;
+      transition: all 0.3s ease;
+      box-shadow: 0 6px 18px rgba(200, 155, 60, 0.25);
+      font-family: 'Poppins', sans-serif;
+    }
+    .btn-luxury:hover {
+      background: var(--luxury-gold);
+      color: var(--white);
+      transform: translateY(-3px);
+      box-shadow: 0 14px 28px rgba(184, 134, 11, 0.3);
+    }
+    .btn-outline-luxury {
+      border: 1.5px solid var(--primary-gold);
+      color: var(--primary-gold);
+      background: transparent;
+      padding: 10px 32px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      border-radius: 0;
+      transition: all 0.3s;
+    }
+    .btn-outline-luxury:hover {
+      background: var(--primary-gold);
+      color: var(--white);
+      transform: scale(1.02);
+    }
+    /* ----- CUSTOM CURSOR (desktop only) ----- */
+    @media (min-width: 1025px) {
+      .custom-cursor {
+        position: fixed;
+        width: 28px;
+        height: 28px;
+        border: 2px solid var(--primary-gold);
+        border-radius: 50%;
+        pointer-events: none;
+        z-index: 9999;
+        background: rgba(200, 155, 60, 0.08);
+        backdrop-filter: blur(2px);
+        transition: width 0.2s, height 0.2s, background 0.2s;
+        transform: translate(-50%, -50%);
+        mix-blend-mode: difference;
+      }
+      .custom-cursor.hover {
+        width: 52px;
+        height: 52px;
+        background: rgba(200, 155, 60, 0.15);
+        border-color: var(--light-gold);
+      }
+    }
+    /* ----- PAGE LOADER ----- */
+    #page-loader {
       position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: var(--bg-color);
+      inset: 0;
+      z-index: 99999;
+      background: var(--ivory);
       display: flex;
-      flex-direction: column;
       align-items: center;
       justify-content: center;
-      z-index: 9999;
-      transition: opacity 0.8s ease;
+      flex-direction: column;
+      transition: opacity 0.8s ease, visibility 0.8s;
     }
-    #loading-screen.hide {
+    #page-loader.fade-out {
       opacity: 0;
+      visibility: hidden;
       pointer-events: none;
     }
-    .loader {
-      width: 50px;
-      height: 50px;
-      border: 3px solid rgba(24, 119, 242, 0.1);
-      border-top: 3px solid var(--primary-color);
-      border-radius: 50%;
-      animation: spin 1s linear infinite;
+    .loader-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 4.5rem;
+      color: var(--primary-gold);
+      letter-spacing: 8px;
+      animation: shimmer 2.2s infinite alternate;
     }
-    @keyframes spin { to { transform: rotate(360deg); } }
-
-    /* --- Glassmorphism --- */
-    .glass {
-      background: var(--glass-bg);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border: 1px solid var(--glass-border);
-      border-radius: 20px;
+    @keyframes shimmer {
+      0% { text-shadow: 0 0 10px rgba(200,155,60,0.2); opacity: 0.8; transform: scale(1); }
+      100% { text-shadow: 0 0 40px rgba(200,155,60,0.6); opacity: 1; transform: scale(1.02); }
     }
-
-    /* --- Navbar --- */
+    .loader-bar {
+      width: 120px;
+      height: 2px;
+      background: var(--soft-beige);
+      margin-top: 30px;
+      position: relative;
+      overflow: hidden;
+    }
+    .loader-bar::after {
+      content: '';
+      position: absolute;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: var(--primary-gold);
+      animation: loadProgress 2s ease forwards;
+    }
+    @keyframes loadProgress {
+      0% { left: -100%; }
+      100% { left: 100%; }
+    }
+    /* ----- STICKY NAVBAR ----- */
     .navbar {
-      background: rgba(255, 255, 255, 0.85);
-      backdrop-filter: blur(10px);
-      box-shadow: 0 2px 20px rgba(0,0,0,0.06);
-      padding: 12px 0;
-      transition: var(--transition-smooth);
+      transition: background 0.3s, box-shadow 0.3s;
+      backdrop-filter: none;
+      padding: 18px 0;
+    }
+    .navbar.scrolled {
+      background: rgba(252, 249, 244, 0.96);
+      box-shadow: 0 8px 30px rgba(0,0,0,0.04);
+      backdrop-filter: blur(6px);
+      padding: 10px 0;
     }
     .navbar-brand {
       font-family: 'Playfair Display', serif;
-      font-weight: 700;
       font-size: 1.8rem;
-      color: var(--secondary-color) !important;
-      letter-spacing: -0.5px;
+      letter-spacing: 4px;
+      color: var(--dark) !important;
     }
-    .navbar-brand i {
-      color: var(--accent-color);
-      margin-right: 8px;
+    .navbar-brand .gold-dot {
+      color: var(--primary-gold);
+      font-size: 2.2rem;
+      line-height: 1;
     }
     .nav-link {
-      font-weight: 500;
-      color: var(--text-color) !important;
-      margin: 0 12px;
-      position: relative;
-      transition: var(--transition-smooth);
-    }
-    .nav-link::after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 0;
-      height: 2px;
-      background: var(--primary-color);
-      transition: var(--transition-smooth);
-    }
-    .nav-link:hover::after { width: 100%; }
-    .nav-link:hover { color: var(--primary-color) !important; }
-
-    .navbar .form-control {
-      border-radius: 50px;
-      border: 1px solid #e0e0e0;
-      padding-left: 20px;
+      font-weight: 400;
+      letter-spacing: 0.04em;
+      color: var(--dark) !important;
+      padding: 0 16px !important;
+      transition: color 0.2s;
       font-size: 0.9rem;
+      text-transform: uppercase;
     }
-    .navbar .form-control:focus {
-      box-shadow: none;
-      border-color: var(--primary-color);
+    .nav-link:hover, .nav-link.active {
+      color: var(--primary-gold) !important;
     }
-    .navbar .btn-outline-primary {
-      border-radius: 50px;
-      padding: 0 20px;
-      border-color: var(--primary-color);
-      color: var(--primary-color);
+    .navbar .bi-search, .navbar .bi-whatsapp {
+      font-size: 1.2rem;
+      color: var(--dark);
+      transition: 0.2s;
     }
-    .navbar .btn-outline-primary:hover {
-      background: var(--primary-color);
-      color: white;
+    .navbar .bi-whatsapp { color: #25D366; }
+    .offcanvas {
+      background: var(--ivory);
     }
-    .whatsapp-nav-btn {
-      background: #25D366;
-      color: white;
-      border-radius: 50px;
-      padding: 6px 18px;
-      border: none;
-      font-weight: 500;
-      transition: var(--transition-smooth);
-    }
-    .whatsapp-nav-btn:hover {
-      background: #128C7E;
-      color: white;
-      transform: scale(1.03);
-    }
-
-    /* --- Hero --- */
-    .hero {
-      min-height: 90vh;
-      background: linear-gradient(135deg, #fdfcfb 0%, #e2d1c3 100%);
-      display: flex;
-      align-items: center;
+    /* ----- HERO ----- */
+    .hero-section {
+      min-height: 100vh;
+      background: linear-gradient(145deg, #fcf9f4 0%, #f3ede5 100%);
       position: relative;
       overflow: hidden;
-      padding: 80px 0;
+      display: flex;
+      align-items: center;
+    }
+    .hero-section .floating-leaf {
+      position: absolute;
+      opacity: 0.08;
+      font-size: 5rem;
+      color: var(--primary-gold);
+      animation: floatLeaf 9s infinite alternate ease-in-out;
+    }
+    @keyframes floatLeaf {
+      0% { transform: translate(0, 0) rotate(0deg); }
+      100% { transform: translate(30px, -40px) rotate(15deg); }
+    }
+    .hero-gold-abstract {
+      position: absolute;
+      width: 600px;
+      height: 600px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(200,155,60,0.08) 0%, rgba(200,155,60,0.01) 70%);
+      top: -200px;
+      right: -100px;
+      z-index: 0;
     }
     .hero-content {
       position: relative;
       z-index: 2;
     }
-    .hero h1 {
-      font-size: 4.5rem;
-      font-weight: 700;
+    .hero-content h1 {
+      font-size: 4.8rem;
       line-height: 1.1;
-      color: var(--secondary-color);
+      font-weight: 700;
     }
-    .hero h1 span {
-      color: var(--primary-color);
-      position: relative;
-    }
-    .hero p {
-      font-size: 1.3rem;
-      color: #555;
-      max-width: 500px;
-      margin: 20px 0 30px;
-    }
-    .hero .btn-primary {
-      background: var(--primary-color);
-      border: none;
-      padding: 14px 40px;
-      border-radius: 50px;
+    .hero-stats span {
+      display: block;
+      font-size: 2rem;
       font-weight: 600;
-      transition: var(--transition-smooth);
-      box-shadow: 0 8px 25px rgba(24, 119, 242, 0.3);
+      color: var(--primary-gold);
     }
-    .hero .btn-primary:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 12px 35px rgba(24, 119, 242, 0.4);
+    /* ----- FEATURE STRIP ----- */
+    .feature-strip {
+      background: var(--cream);
+      border-top: 1px solid rgba(200,155,60,0.15);
+      border-bottom: 1px solid rgba(200,155,60,0.15);
+      padding: 28px 0;
     }
-    .hero .btn-outline-dark {
-      border-radius: 50px;
-      padding: 14px 40px;
-      border-width: 2px;
+    .feature-item i {
+      font-size: 2.2rem;
+      color: var(--primary-gold);
+      margin-right: 12px;
     }
-    .hero .floating-shapes {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: 1;
-      pointer-events: none;
+    /* ----- CARDS (collection, products) ----- */
+    .card-luxury {
+      border: none;
+      background: var(--white);
+      border-radius: 0;
+      transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+      box-shadow: 0 6px 24px rgba(0,0,0,0.02);
+      overflow: hidden;
     }
-    .shape {
-      position: absolute;
-      border-radius: 50%;
-      opacity: 0.15;
-      animation: float 8s infinite alternate ease-in-out;
-    }
-    .shape-1 { width: 300px; height: 300px; background: var(--primary-color); top: -50px; right: -80px; }
-    .shape-2 { width: 200px; height: 200px; background: var(--accent-color); bottom: 20px; left: -60px; animation-delay: 2s; }
-    .shape-3 { width: 150px; height: 150px; background: var(--secondary-color); top: 40%; right: 20%; animation-delay: 4s; }
-    @keyframes float {
-      0% { transform: translateY(0) rotate(0deg) scale(1); }
-      100% { transform: translateY(-30px) rotate(10deg) scale(1.05); }
-    }
-
-    /* --- Section Titles --- */
-    .section-title {
-      font-size: 2.8rem;
-      margin-bottom: 15px;
-      position: relative;
-      display: inline-block;
-    }
-    .section-title::after {
-      content: '';
-      position: absolute;
-      bottom: -8px;
-      left: 0;
-      width: 60px;
-      height: 4px;
-      background: var(--primary-color);
-      border-radius: 4px;
-    }
-    .section-subtitle {
-      color: #888;
-      font-size: 1.1rem;
-      margin-bottom: 40px;
-    }
-
-    /* --- Feature Cards --- */
-    .feature-card {
-      background: white;
-      border-radius: 20px;
-      padding: 30px 20px;
-      text-align: center;
-      box-shadow: var(--shadow-soft);
-      transition: var(--transition-smooth);
-      height: 100%;
-      border: 1px solid rgba(0,0,0,0.02);
-    }
-    .feature-card:hover {
+    .card-luxury:hover {
       transform: translateY(-10px);
-      box-shadow: var(--shadow-hover);
+      box-shadow: 0 28px 60px rgba(0,0,0,0.06);
     }
-    .feature-card i {
-      font-size: 2.8rem;
-      color: var(--primary-color);
-      margin-bottom: 20px;
-      background: rgba(24, 119, 242, 0.08);
-      padding: 20px;
-      border-radius: 50%;
-      transition: var(--transition-smooth);
-    }
-    .feature-card:hover i {
-      background: var(--primary-color);
-      color: white;
-      transform: scale(1.05);
-    }
-    .feature-card h5 {
-      font-family: 'Inter', sans-serif;
-      font-weight: 600;
-      margin-bottom: 10px;
-    }
-
-    /* --- Category Cards --- */
-    .category-card {
-      border-radius: 20px;
-      overflow: hidden;
-      position: relative;
-      cursor: pointer;
-      box-shadow: var(--shadow-soft);
-      transition: var(--transition-smooth);
-    }
-    .category-card img {
+    .card-luxury img {
+      transition: transform 0.6s ease;
       width: 100%;
-      height: 280px;
+      height: 380px;
       object-fit: cover;
-      transition: var(--transition-smooth);
     }
-    .category-card:hover img {
-      transform: scale(1.06);
+    .card-luxury:hover img {
+      transform: scale(1.04);
     }
-    .category-card .overlay {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      padding: 25px;
-      background: linear-gradient(0deg, rgba(0,0,0,0.7) 0%, transparent);
+    .card-luxury .card-body {
+      padding: 24px 20px 26px;
+    }
+    .product-badge {
+      background: var(--primary-gold);
       color: white;
-      text-align: center;
+      font-size: 0.7rem;
+      padding: 4px 14px;
+      letter-spacing: 0.06em;
     }
-    .category-card .overlay h4 {
-      font-family: 'Inter', sans-serif;
+    .product-price {
       font-weight: 600;
-      margin-bottom: 0;
-    }
-
-    /* --- Product Cards --- */
-    .product-card {
-      background: white;
-      border-radius: 20px;
-      overflow: hidden;
-      box-shadow: var(--shadow-soft);
-      transition: var(--transition-smooth);
-      height: 100%;
-      position: relative;
-      border: 1px solid rgba(0,0,0,0.02);
-    }
-    .product-card:hover {
-      transform: translateY(-8px);
-      box-shadow: var(--shadow-hover);
-    }
-    .product-card .img-wrapper {
-      position: relative;
-      overflow: hidden;
-      height: 280px;
-      background: #f5f5f5;
-    }
-    .product-card .img-wrapper img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: var(--transition-smooth);
-    }
-    .product-card:hover .img-wrapper img {
-      transform: scale(1.05);
-    }
-    .product-card .badge-top {
-      position: absolute;
-      top: 15px;
-      left: 15px;
-      background: var(--accent-color);
-      color: white;
-      padding: 5px 18px;
-      border-radius: 50px;
-      font-weight: 600;
-      font-size: 0.8rem;
-      z-index: 2;
-    }
-    .product-card .wishlist-icon {
-      position: absolute;
-      top: 15px;
-      right: 15px;
-      background: white;
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.08);
-      cursor: pointer;
-      transition: var(--transition-smooth);
-      z-index: 2;
-      border: none;
+      color: var(--dark);
       font-size: 1.2rem;
     }
-    .product-card .wishlist-icon:hover {
-      background: #ffebee;
-      color: #e74c3c;
-    }
-    .product-card .card-body {
-      padding: 22px;
-    }
-    .product-card .product-title {
-      font-weight: 600;
-      font-size: 1.1rem;
-      margin-bottom: 4px;
-    }
-    .product-card .product-code {
+    .product-code {
+      font-size: 0.75rem;
       color: #888;
-      font-size: 0.85rem;
-      letter-spacing: 0.5px;
+      letter-spacing: 0.04em;
     }
-    .product-card .product-price {
-      font-weight: 700;
-      font-size: 1.3rem;
-      color: var(--secondary-color);
-    }
-    .product-card .btn-outline-primary {
-      border-radius: 50px;
-      border-width: 2px;
-      font-weight: 500;
-      transition: var(--transition-smooth);
-    }
-    .product-card .btn-outline-primary:hover {
-      background: var(--primary-color);
-      color: white;
-    }
-
-    /* --- Modal (Product Popup) --- */
-    .modal-content {
-      border-radius: 30px;
-      border: none;
-      overflow: hidden;
-    }
-    .modal-header {
-      border-bottom: none;
-      padding: 20px 30px 0;
-    }
-    .modal-body {
-      padding: 20px 30px 30px;
-    }
-    .modal-product-image {
-      border-radius: 20px;
-      overflow: hidden;
-      height: 400px;
-      background: #f5f5f5;
-    }
-    .modal-product-image img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-    .modal .product-price-lg {
-      font-size: 2rem;
-      font-weight: 700;
-      color: var(--secondary-color);
-    }
-    .modal .btn-success {
-      background: #25D366;
-      border: none;
-      border-radius: 50px;
-      padding: 12px 35px;
-      font-weight: 600;
-      transition: var(--transition-smooth);
-    }
-    .modal .btn-success:hover {
-      background: #128C7E;
-      transform: scale(1.02);
-    }
-
-    /* --- About --- */
-    .about-section {
-      background: white;
-      padding: 80px 0;
-    }
-    .about-image {
-      border-radius: 30px;
-      overflow: hidden;
-      box-shadow: var(--shadow-soft);
-    }
-    .about-image img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      min-height: 300px;
-    }
-
-    /* --- Testimonials --- */
-    .testimonial-card {
-      background: white;
-      border-radius: 24px;
-      padding: 30px;
-      box-shadow: var(--shadow-soft);
-      margin: 15px;
-      text-align: center;
-    }
-    .testimonial-card img {
-      width: 70px;
-      height: 70px;
-      border-radius: 50%;
-      object-fit: cover;
-      margin-bottom: 15px;
-    }
-    .testimonial-card .stars {
-      color: #f1c40f;
-      letter-spacing: 2px;
-    }
-
-    /* --- Gallery --- */
-    .gallery-item {
-      border-radius: 20px;
-      overflow: hidden;
+    .wishlist-icon {
+      color: #bbb;
+      transition: 0.2s;
       cursor: pointer;
+    }
+    .wishlist-icon:hover { color: var(--primary-gold); }
+    /* category filter */
+    .filter-btn {
+      background: transparent;
+      border: none;
+      padding: 6px 22px;
+      font-weight: 400;
+      color: var(--dark);
+      border-radius: 30px;
+      transition: 0.2s;
+      letter-spacing: 0.04em;
+      font-size: 0.9rem;
+    }
+    .filter-btn.active, .filter-btn:hover {
+      background: var(--primary-gold);
+      color: white;
+      box-shadow: 0 4px 12px rgba(200,155,60,0.25);
+    }
+    /* masonry lookbook */
+    .lookbook-grid .grid-item {
+      overflow: hidden;
       position: relative;
+      cursor: pointer;
     }
-    .gallery-item img {
+    .lookbook-grid .grid-item img {
       width: 100%;
-      height: 260px;
+      height: 100%;
       object-fit: cover;
-      transition: var(--transition-smooth);
+      transition: 0.5s;
     }
-    .gallery-item:hover img {
+    .lookbook-grid .grid-item:hover img {
+      transform: scale(1.06);
+    }
+    /* review carousel */
+    .review-card {
+      background: white;
+      padding: 32px 28px;
+      border-radius: 0;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.02);
+      margin: 12px;
+      border-left: 3px solid var(--primary-gold);
+    }
+    .review-card .stars i { color: var(--primary-gold); margin-right: 2px; }
+    /* footer */
+    .footer-gold-divider {
+      width: 60px;
+      height: 2px;
+      background: var(--primary-gold);
+      margin: 20px auto;
+    }
+    /* floating buttons */
+    .floating-btn {
+      position: fixed;
+      z-index: 999;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: var(--white);
+      box-shadow: 0 6px 24px rgba(0,0,0,0.08);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      color: var(--dark);
+      transition: 0.2s;
+      border: 1px solid rgba(200,155,60,0.2);
+      cursor: pointer;
+      right: 28px;
+    }
+    .floating-btn:hover {
+      background: var(--primary-gold);
+      color: white;
       transform: scale(1.08);
     }
-
-    /* --- FAQ Accordion --- */
-    .accordion-button {
-      font-weight: 600;
-      border-radius: 12px !important;
-      padding: 18px 24px;
-    }
-    .accordion-button:not(.collapsed) {
-      background: rgba(24, 119, 242, 0.05);
-      color: var(--primary-color);
-      box-shadow: none;
-    }
-    .accordion-item {
-      border: none;
-      margin-bottom: 12px;
-      border-radius: 16px !important;
-      overflow: hidden;
-      box-shadow: var(--shadow-soft);
-    }
-
-    /* --- Contact --- */
-    .contact-info-card {
-      background: white;
-      border-radius: 20px;
-      padding: 25px;
-      box-shadow: var(--shadow-soft);
-      margin-bottom: 20px;
-      text-align: center;
-    }
-    .contact-info-card i {
-      font-size: 2rem;
-      color: var(--primary-color);
-      margin-bottom: 15px;
-    }
-    .map-placeholder {
-      border-radius: 24px;
-      overflow: hidden;
-      background: #e0e0e0;
-      height: 300px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #888;
-      font-weight: 500;
-    }
-
-    /* --- Footer --- */
-    footer {
-      background: var(--secondary-color);
-      color: rgba(255,255,255,0.8);
-      padding: 60px 0 20px;
-    }
-    footer h5 {
-      color: white;
-      font-family: 'Inter', sans-serif;
-      font-weight: 600;
-      margin-bottom: 25px;
-    }
-    footer a {
-      color: rgba(255,255,255,0.7);
-      text-decoration: none;
-      transition: var(--transition-smooth);
-    }
-    footer a:hover {
-      color: white;
-      text-decoration: underline;
-    }
-    footer .social-links a {
-      display: inline-block;
-      width: 44px;
-      height: 44px;
-      background: rgba(255,255,255,0.08);
-      border-radius: 50%;
-      text-align: center;
-      line-height: 44px;
-      margin-right: 10px;
-      transition: var(--transition-smooth);
-    }
-    footer .social-links a:hover {
-      background: var(--primary-color);
-      transform: translateY(-3px);
-    }
-    footer .border-top {
-      border-color: rgba(255,255,255,0.1) !important;
-    }
-
-    /* --- Floating Buttons --- */
-    .floating-whatsapp {
-      position: fixed;
-      bottom: 30px;
-      right: 30px;
-      z-index: 999;
-      width: 60px;
-      height: 60px;
-      background: #25D366;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: white;
-      font-size: 2rem;
-      box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
-      transition: var(--transition-smooth);
-      border: none;
-    }
-    .floating-whatsapp:hover {
-      transform: scale(1.1);
-      color: white;
-    }
-    .floating-call {
-      position: fixed;
-      bottom: 100px;
-      right: 30px;
-      z-index: 999;
-      width: 60px;
-      height: 60px;
-      background: var(--primary-color);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: white;
-      font-size: 1.8rem;
-      box-shadow: 0 4px 20px rgba(24, 119, 242, 0.4);
-      transition: var(--transition-smooth);
-      border: none;
-    }
-    .floating-call:hover {
-      transform: scale(1.1);
-      color: white;
-    }
-    .back-to-top {
-      position: fixed;
-      bottom: 170px;
-      right: 30px;
-      z-index: 999;
-      width: 50px;
-      height: 50px;
-      background: white;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: var(--shadow-soft);
-      transition: var(--transition-smooth);
-      border: none;
-      color: var(--secondary-color);
-      font-size: 1.4rem;
-      opacity: 0;
-      pointer-events: none;
-    }
-    .back-to-top.visible {
-      opacity: 1;
-      pointer-events: auto;
-    }
-    .back-to-top:hover {
-      background: var(--primary-color);
-      color: white;
-      transform: translateY(-3px);
-    }
-
-    /* --- Dark Mode (Toggle) --- */
-    body.dark-mode {
-      --bg-color: #121212;
-      --text-color: #f0f0f0;
-      background-color: var(--bg-color);
-      color: var(--text-color);
-    }
-    body.dark-mode .navbar { background: rgba(18, 18, 18, 0.9); }
-    body.dark-mode .feature-card,
-    body.dark-mode .product-card,
-    body.dark-mode .contact-info-card,
-    body.dark-mode .testimonial-card,
-    body.dark-mode .about-section { background: #1e1e1e; color: #f0f0f0; }
-    body.dark-mode .hero { background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%); }
-    body.dark-mode .hero p { color: #ccc; }
-    body.dark-mode .section-subtitle { color: #aaa; }
-    body.dark-mode .map-placeholder { background: #2a2a2a; color: #aaa; }
-    body.dark-mode .accordion-item { background: #1e1e1e; }
-    body.dark-mode .accordion-button { background: #1e1e1e; color: #f0f0f0; }
-    body.dark-mode .accordion-button:not(.collapsed) { background: rgba(24, 119, 242, 0.2); color: #f0f0f0; }
-
-    /* --- Responsive --- */
+    .floating-btn.whatsapp { bottom: 100px; background: #25D366; color: white; border: none; }
+    .floating-btn.backtotop { bottom: 160px; }
+    /* responsive */
     @media (max-width: 992px) {
-      .hero h1 { font-size: 3rem; }
-      .hero { min-height: 70vh; }
-      .section-title { font-size: 2.2rem; }
-    }
-    @media (max-width: 768px) {
-      .hero h1 { font-size: 2.5rem; }
-      .hero p { font-size: 1rem; }
-      .floating-shapes { display: none; }
-      .product-card .img-wrapper { height: 220px; }
-      .modal-product-image { height: 250px; }
-      .gallery-item img { height: 200px; }
+      .hero-content h1 { font-size: 3.2rem; }
+      .section-title { font-size: 2.4rem; }
     }
     @media (max-width: 576px) {
-      .hero { padding: 60px 0; text-align: center; }
-      .hero .btn-group { flex-direction: column; gap: 12px; }
-      .hero .btn-group .btn { width: 100%; }
+      .hero-content h1 { font-size: 2.4rem; }
     }
-
-    /* Scroll Reveal (simple) */
-    .reveal {
-      opacity: 0;
-      transform: translateY(30px);
-      transition: all 0.8s ease;
+    /* misc */
+    .accordion-button:not(.collapsed) {
+      background: var(--cream);
+      color: var(--primary-gold);
+      box-shadow: none;
     }
-    .reveal.active {
-      opacity: 1;
-      transform: translateY(0);
+    .accordion-button:focus {
+      border-color: var(--primary-gold);
+      box-shadow: 0 0 0 0.2rem rgba(200,155,60,0.2);
+    }
+    .newsletter-input {
+      border: none;
+      border-bottom: 2px solid var(--soft-beige);
+      background: transparent;
+      border-radius: 0;
+      padding: 16px 10px;
+      font-weight: 300;
+      transition: 0.2s;
+    }
+    .newsletter-input:focus {
+      border-bottom-color: var(--primary-gold);
+      box-shadow: none;
+      background: transparent;
+    }
+    .bg-luxury-pattern {
+      background-image: repeating-linear-gradient(45deg, rgba(200,155,60,0.02) 0px, rgba(200,155,60,0.02) 8px, transparent 8px, transparent 16px);
     }
   </style>
 </head>
 <body>
+  <!-- PAGE LOADER -->
+  <div id="page-loader">
+    <div class="loader-logo">TAHERA</div>
+    <div class="loader-bar"></div>
+  </div>
 
-<!-- ========== LOADING SCREEN ========== -->
-<div id="loading-screen">
-  <div class="loader"></div>
-  <p class="mt-3 fw-light" style="color: var(--secondary-color);">Attaher Ab.</p>
-</div>
+  <!-- CUSTOM CURSOR (desktop) -->
+  <div class="custom-cursor" id="customCursor"></div>
 
-<!-- ========== NAVBAR ========== -->
-<nav class="navbar navbar-expand-lg sticky-top" aria-label="Main navigation">
-  <div class="container">
-    <a class="navbar-brand" href="#">
-      <i class="bi bi-gem"></i> Attaher Ab.
-    </a>
-    <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar" aria-controls="mainNavbar" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="mainNavbar">
-      <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
-        <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
+  <!-- NAVBAR -->
+  <nav class="navbar navbar-expand-lg fixed-top" id="mainNav">
+    <div class="container">
+      <a class="navbar-brand" href="#">TAHERA<span class="gold-dot">.</span></a>
+      <button class="navbar-toggler border-0" type="button" data-bs-toggle="offcanvas" data-bs-target="#mobileMenu">
+        <i class="bi bi-list" style="font-size:1.8rem;"></i>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto align-items-lg-center">
+          <li class="nav-item"><a class="nav-link active" href="#home">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="#collections">Collections</a></li>
+          <li class="nav-item"><a class="nav-link" href="#categories">Categories</a></li>
+          <li class="nav-item"><a class="nav-link" href="#featured">Featured</a></li>
+          <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+          <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+          <li class="nav-item"><a class="nav-link" href="#"><i class="bi bi-search"></i></a></li>
+          <li class="nav-item"><a class="nav-link" href="#" id="whatsappNavBtn"><i class="bi bi-whatsapp"></i></a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <!-- Offcanvas mobile -->
+  <div class="offcanvas offcanvas-end" tabindex="-1" id="mobileMenu">
+    <div class="offcanvas-header">
+      <h5 class="offcanvas-title playfair">TAHERA</h5>
+      <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+    </div>
+    <div class="offcanvas-body">
+      <ul class="nav flex-column">
+        <li class="nav-item"><a class="nav-link active" href="#home">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="#collections">Collections</a></li>
         <li class="nav-item"><a class="nav-link" href="#categories">Categories</a></li>
-        <li class="nav-item"><a class="nav-link" href="#products">Products</a></li>
+        <li class="nav-item"><a class="nav-link" href="#featured">Featured</a></li>
         <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
         <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
       </ul>
-      <form class="d-flex me-2" role="search" id="searchForm">
-        <input class="form-control me-1" type="search" placeholder="Search products..." aria-label="Search" id="searchInput">
-        <button class="btn btn-outline-primary" type="submit"><i class="bi bi-search"></i></button>
-      </form>
-      <a href="#" class="btn btn-outline-secondary me-2" id="darkModeToggle" aria-label="Toggle dark mode">
-        <i class="bi bi-moon"></i>
-      </a>
-      <a href="#" class="btn btn-outline-secondary me-2" aria-label="Shopping cart">
-        <i class="bi bi-bag"></i>
-      </a>
-      <a href="https://wa.me/923145703357" target="_blank" class="whatsapp-nav-btn">
-        <i class="bi bi-whatsapp me-1"></i> WhatsApp
-      </a>
     </div>
   </div>
-</nav>
 
-<!-- ========== HERO SECTION ========== -->
-<section id="home" class="hero" aria-label="Hero banner">
-  <div class="floating-shapes">
-    <div class="shape shape-1"></div>
-    <div class="shape shape-2"></div>
-    <div class="shape shape-3"></div>
-  </div>
-  <div class="container">
-    <div class="row align-items-center">
-      <div class="col-lg-6 hero-content">
-        <h1>Elegance <br><span>Redefined.</span></h1>
-        <p>Discover the latest luxury collection. Where timeless style meets modern sophistication.</p>
-        <div class="btn-group flex-wrap gap-2">
-          <a href="#products" class="btn btn-primary">Shop Now</a>
-          <a href="#categories" class="btn btn-outline-dark">Explore Collection</a>
-        </div>
-      </div>
-      <div class="col-lg-6 d-none d-lg-block">
-        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='500' viewBox='0 0 600 500'%3E%3Crect width='600' height='500' fill='%23f5f0eb'/%3E%3Ctext x='80' y='250' font-family='Playfair Display' font-size='28' fill='%231B3A5C'%3ELuxury Fashion%3C/text%3E%3Ctext x='80' y='300' font-family='Inter' font-size='18' fill='%23888'%3EPremium Collection%3C/text%3E%3C/svg%3E" alt="Luxury fashion hero" class="img-fluid rounded-4 shadow-lg">
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ========== FEATURES ========== -->
-<section class="container py-5" aria-label="Features">
-  <div class="row g-4 text-center">
-    <div class="col-6 col-lg-3"><div class="feature-card"><i class="bi bi-diamond"></i><h5>Premium Quality</h5><p class="text-muted small">Finest materials</p></div></div>
-    <div class="col-6 col-lg-3"><div class="feature-card"><i class="bi bi-tag"></i><h5>Affordable Prices</h5><p class="text-muted small">Luxury within reach</p></div></div>
-    <div class="col-6 col-lg-3"><div class="feature-card"><i class="bi bi-truck"></i><h5>Fast Delivery</h5><p class="text-muted small">Worldwide shipping</p></div></div>
-    <div class="col-6 col-lg-3"><div class="feature-card"><i class="bi bi-star"></i><h5>Customer Satisfaction</h5><p class="text-muted small">Happy clients</p></div></div>
-  </div>
-</section>
-
-<!-- ========== CATEGORIES ========== -->
-<section id="categories" class="container py-5" aria-label="Categories">
-  <div class="text-center">
-    <h2 class="section-title">Shop by Category</h2>
-    <p class="section-subtitle">Explore our curated collections</p>
-  </div>
-  <div class="row g-4" id="categoryContainer">
-    <!-- Category cards will be injected by JS -->
-  </div>
-</section>
-
-<!-- ========== PRODUCTS ========== -->
-<section id="products" class="container py-5" aria-label="Products">
-  <div class="text-center">
-    <h2 class="section-title">Featured Products</h2>
-    <p class="section-subtitle">New arrivals & best sellers</p>
-  </div>
-  <div class="row g-4" id="productContainer">
-    <!-- Product cards will be injected by JS -->
-  </div>
-</section>
-
-<!-- ========== ABOUT ========== -->
-<section id="about" class="about-section" aria-label="About us">
-  <div class="container">
-    <div class="row align-items-center g-5">
-      <div class="col-lg-6">
-        <h2 class="section-title">Our Story</h2>
-        <p class="lead fw-light">Attaher Ab. – Where tradition meets contemporary elegance.</p>
-        <p>Inspired by the rich cultural heritage and modern fashion trends, our boutique offers a curated selection of premium clothing and accessories. Each piece tells a story of craftsmanship, quality, and timeless style.</p>
-        <p><strong>Mission:</strong> To empower individuals to express their unique style through luxurious, sustainable, and ethically crafted fashion.</p>
-        <p><i class="bi bi-quote"></i> Fashion is not just about clothes; it's about confidence and identity.</p>
-      </div>
-      <div class="col-lg-6">
-        <div class="about-image">
-          <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='400' viewBox='0 0 600 400'%3E%3Crect width='600' height='400' fill='%23e2d1c3'/%3E%3Ctext x='120' y='200' font-family='Playfair Display' font-size='32' fill='%231B3A5C'%3EAbout Attaher Ab.%3C/text%3E%3C/svg%3E" alt="About Attaher Ab. boutique" class="img-fluid">
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ========== TESTIMONIALS ========== -->
-<section class="container py-5" aria-label="Testimonials">
-  <div class="text-center">
-    <h2 class="section-title">What Our Clients Say</h2>
-    <p class="section-subtitle">Real feedback from our valued customers</p>
-  </div>
-  <div id="testimonialCarousel" class="carousel slide" data-bs-ride="carousel">
-    <div class="carousel-inner">
-      <div class="carousel-item active">
-        <div class="row justify-content-center">
-          <div class="col-md-8 col-lg-6"><div class="testimonial-card"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='70' height='70' viewBox='0 0 70 70'%3E%3Ccircle cx='35' cy='35' r='35' fill='%231877F2'/%3E%3Ctext x='22' y='42' font-family='Inter' font-size='28' fill='white'%3EA%3C/text%3E%3C/svg%3E" alt="Client A"><div class="stars"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i></div><p class="fst-italic">"Absolutely stunning collection! The quality is unmatched, and the service is exceptional."</p><h6 class="fw-bold">- Ayesha Khan</h6></div></div>
-        </div>
-      </div>
-      <div class="carousel-item">
-        <div class="row justify-content-center">
-          <div class="col-md-8 col-lg-6"><div class="testimonial-card"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='70' height='70' viewBox='0 0 70 70'%3E%3Ccircle cx='35' cy='35' r='35' fill='%23E4A853'/%3E%3Ctext x='22' y='42' font-family='Inter' font-size='28' fill='white'%3ES%3C/text%3E%3C/svg%3E" alt="Client S"><div class="stars"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i></div><p class="fst-italic">"I found my dream outfit here. The attention to detail is incredible. Highly recommend!"</p><h6 class="fw-bold">- Sarah Ahmed</h6></div></div>
-        </div>
-      </div>
-    </div>
-    <button class="carousel-control-prev" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="prev" aria-label="Previous testimonial">
-      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="next" aria-label="Next testimonial">
-      <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    </button>
-  </div>
-</section>
-
-<!-- ========== GALLERY ========== -->
-<section class="container py-5" aria-label="Gallery">
-  <div class="text-center">
-    <h2 class="section-title">Style Gallery</h2>
-    <p class="section-subtitle">Explore our visual inspiration</p>
-  </div>
-  <div class="row g-3">
-    <div class="col-6 col-md-3"><div class="gallery-item"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='260' viewBox='0 0 300 260'%3E%3Crect width='300' height='260' fill='%23d4c5b2'/%3E%3Ctext x='50' y='140' font-family='Inter' fill='%23555'%3EGallery 1%3C/text%3E%3C/svg%3E" alt="Gallery image 1"></div></div>
-    <div class="col-6 col-md-3"><div class="gallery-item"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='260' viewBox='0 0 300 260'%3E%3Crect width='300' height='260' fill='%23c2b5a5'/%3E%3Ctext x='50' y='140' font-family='Inter' fill='%23555'%3EGallery 2%3C/text%3E%3C/svg%3E" alt="Gallery image 2"></div></div>
-    <div class="col-6 col-md-3"><div class="gallery-item"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='260' viewBox='0 0 300 260'%3E%3Crect width='300' height='260' fill='%23b8a99a'/%3E%3Ctext x='50' y='140' font-family='Inter' fill='%23555'%3EGallery 3%3C/text%3E%3C/svg%3E" alt="Gallery image 3"></div></div>
-    <div class="col-6 col-md-3"><div class="gallery-item"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='260' viewBox='0 0 300 260'%3E%3Crect width='300' height='260' fill='%23a8998a'/%3E%3Ctext x='50' y='140' font-family='Inter' fill='%23555'%3EGallery 4%3C/text%3E%3C/svg%3E" alt="Gallery image 4"></div></div>
-  </div>
-</section>
-
-<!-- ========== WHY CHOOSE US ========== -->
-<section class="container py-5" aria-label="Why choose us">
-  <div class="text-center">
-    <h2 class="section-title">Why Choose Us</h2>
-    <p class="section-subtitle">Experience the difference</p>
-  </div>
-  <div class="row g-4">
-    <div class="col-md-4"><div class="feature-card h-100"><i class="bi bi-shield-check"></i><h5>Authentic Quality</h5><p class="text-muted">100% genuine products, carefully sourced.</p></div></div>
-    <div class="col-md-4"><div class="feature-card h-100"><i class="bi bi-clock-history"></i><h5>Timeless Style</h5><p class="text-muted">Classic designs that never go out of fashion.</p></div></div>
-    <div class="col-md-4"><div class="feature-card h-100"><i class="bi bi-heart"></i><h5>Customer First</h5><p class="text-muted">Dedicated support and hassle-free returns.</p></div></div>
-  </div>
-</section>
-
-<!-- ========== FAQ ========== -->
-<section class="container py-5" aria-label="Frequently asked questions">
-  <div class="text-center">
-    <h2 class="section-title">FAQ</h2>
-    <p class="section-subtitle">Quick answers to common questions</p>
-  </div>
-  <div class="accordion" id="faqAccordion">
-    <div class="accordion-item"><h2 class="accordion-header"><button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq1" aria-expanded="true" aria-controls="faq1">What are your delivery times?</button></h2><div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion"><div class="accordion-body">Standard delivery takes 3-5 business days. Express options available.</div></div></div>
-    <div class="accordion-item"><h2 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2" aria-expanded="false" aria-controls="faq2">Do you ship internationally?</button></h2><div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion"><div class="accordion-body">Yes, we ship worldwide. Shipping costs vary by location.</div></div></div>
-    <div class="accordion-item"><h2 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3" aria-expanded="false" aria-controls="faq3">What is your return policy?</button></h2><div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion"><div class="accordion-body">We accept returns within 14 days of delivery. Items must be unused.</div></div></div>
-  </div>
-</section>
-
-<!-- ========== CONTACT ========== -->
-<section id="contact" class="container py-5" aria-label="Contact us">
-  <div class="text-center">
-    <h2 class="section-title">Get in Touch</h2>
-    <p class="section-subtitle">We'd love to hear from you</p>
-  </div>
-  <div class="row g-4">
-    <div class="col-md-4"><div class="contact-info-card"><i class="bi bi-geo-alt"></i><h5>Visit Us</h5><p class="text-muted">123 Fashion Ave, New York, NY</p></div></div>
-    <div class="col-md-4"><div class="contact-info-card"><i class="bi bi-telephone"></i><h5>Call Us</h5><p class="text-muted">+92 314 5703357</p></div></div>
-    <div class="col-md-4"><div class="contact-info-card"><i class="bi bi-whatsapp"></i><h5>WhatsApp</h5><p class="text-muted">+92 314 5703357</p></div></div>
-    <div class="col-12"><div class="map-placeholder"><i class="bi bi-map me-2"></i> Google Map Placeholder</div></div>
-  </div>
-</section>
-
-<!-- ========== FOOTER ========== -->
-<footer aria-label="Footer">
-  <div class="container">
-    <div class="row g-4">
-      <div class="col-lg-4"><h5>Attaher Ab.</h5><p>Luxury fashion boutique. Timeless elegance, modern sophistication.</p><div class="social-links"><a href="#" aria-label="Facebook"><i class="bi bi-facebook"></i></a><a href="#" aria-label="Instagram"><i class="bi bi-instagram"></i></a><a href="#" aria-label="YouTube"><i class="bi bi-youtube"></i></a></div></div>
-      <div class="col-6 col-lg-2"><h5>Quick Links</h5><ul class="list-unstyled"><li><a href="#home">Home</a></li><li><a href="#products">Products</a></li><li><a href="#about">About</a></li><li><a href="#contact">Contact</a></li></ul></div>
-      <div class="col-6 col-lg-2"><h5>Categories</h5><ul class="list-unstyled" id="footerCategories"><li><a href="#">Women</a></li><li><a href="#">Men</a></li><li><a href="#">Accessories</a></li></ul></div>
-      <div class="col-lg-4"><h5>Newsletter</h5><p>Subscribe for exclusive offers & updates.</p><form><div class="input-group"><input type="email" class="form-control" placeholder="Your email" aria-label="Email for newsletter"><button class="btn btn-primary" type="submit">Join</button></div></form></div>
-    </div>
-    <hr class="border-top my-4">
-    <div class="text-center"><small>&copy; 2026 Attaher Ab. All rights reserved.</small></div>
-  </div>
-</footer>
-
-<!-- ========== FLOATING BUTTONS ========== -->
-<a href="https://wa.me/923145703357" target="_blank" class="floating-whatsapp" aria-label="WhatsApp"><i class="bi bi-whatsapp"></i></a>
-<a href="tel:+923145703357" class="floating-call" aria-label="Call us"><i class="bi bi-telephone-fill"></i></a>
-<button class="back-to-top" id="backToTop" aria-label="Back to top"><i class="bi bi-arrow-up"></i></button>
-
-<!-- ========== PRODUCT MODAL ========== -->
-<div class="modal fade" id="productModal" tabindex="-1" aria-labelledby="productModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg modal-dialog-centered">
-    <div class="modal-content">
-      <div class="modal-header"><h5 class="modal-title" id="productModalLabel">Product Details</h5><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
-      <div class="modal-body" id="modalBodyContent">
-        <!-- Dynamic content from JS -->
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- ========== SCRIPTS ========== -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-<script>
-  // ============================================
-  // SCRIPT.JS
-  // All JavaScript functionality
-  // ============================================
-
-  (function() {
-    'use strict';
-
-    // --- DATA (Placeholder until Facebook data is extracted) ---
-    const categories = [
-      { name: 'Women\'s Wear', image: 'data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'300\' height=\'280\' viewBox=\'0 0 300 280\'%3E%3Crect width=\'300\' height=\'280\' fill=\'%23d9c9b8\'/%3E%3Ctext x=\'60\' y=\'150\' font-family=\'Inter\' fill=\'%23333\'%3EWomen%3C/text%3E%3C/svg%3E' },
-      { name: 'Men\'s Wear', image: 'data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'300\' height=\'280\' viewBox=\'0 0 300 280\'%3E%3Crect width=\'300\' height=\'280\' fill=\'%23c4b5a5\'/%3E%3Ctext x=\'60\' y=\'150\' font-family=\'Inter\' fill=\'%23333\'%3EMen%3C/text%3E%3C/svg%3E' },
-      { name: 'Accessories', image: 'data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'300\' height=\'280\' viewBox=\'0 0 300 280\'%3E%3Crect width=\'300\' height=\'280\' fill=\'%23b0a090\'/%3E%3Ctext x=\'40\' y=\'150\' font-family=\'Inter\' fill=\'%23333\'%3EAccessories%3C/text%3E%3C/svg%3E' },
-      { name: 'Footwear', image: 'data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'300\' height=\'280\' viewBox=\'0 0 300 280\'%3E%3Crect width=\'300\' height=\'280\' fill=\'%239b8b7c\'/%3E%3Ctext x=\'60\' y=\'150\' font-family=\'Inter\' fill=\'%23333\'%3EFootwear%3C/text%3E%3C/svg%3E' }
-    ];
-
-    const products = [
-      { id: 1, title: 'Embroidered Lawn Suit', code: 'ELS-2024', price: 'PKR 4,500', category: 'Women\'s Wear', image: 'data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'400\' height=\'280\' viewBox=\'0 0 400 280\'%3E%3Crect width=\'400\' height=\'280\' fill=\'%23e8ddd0\'/%3E%3Ctext x=\'80\' y=\'150\' font-family=\'Inter\' fill=\'%23555\'%3EProduct 1%3C/text%3E%3C/svg%3E', description: 'Beautiful embroidered lawn suit for summer.', rating: 4.8, badge: 'New' },
-      { id: 2, title: 'Luxury Silk Scarf', code: 'LSS-2024', price: 'PKR 2,200', category: 'Accessories', image: 'data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'400\' height=\'280\' viewBox=\'0 0 400 280\'%3E%3Crect width=\'400\' height=\'280\' fill=\'%23d4c5b2\'/%3E%3Ctext x=\'80\' y=\'150\' font-family=\'Inter\' fill=\'%23555\'%3EProduct 2%3C/text%3E%3C/svg%3E', description: 'Pure silk scarf with gold accents.', rating: 4.9, badge: 'Sale' },
-      { id: 3, title: 'Men\'s Formal Shirt', code: 'MFS-2024', price: 'PKR 3,800', category: 'Men\'s Wear', image: 'data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'400\' height=\'280\' viewBox=\'0 0 400 280\'%3E%3Crect width=\'400\' height=\'280\' fill=\'%23c2b5a5\'/%3E%3Ctext x=\'80\' y=\'150\' font-family=\'Inter\' fill=\'%23555\'%3EProduct 3%3C/text%3E%3C/svg%3E', description: 'Premium cotton formal shirt.', rating: 4.7, badge: 'New' },
-      { id: 4, title: 'Embellished Clutch', code: 'EC-2024', price: 'PKR 3,100', category: 'Accessories', image: 'data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'400\' height=\'280\' viewBox=\'0 0 400 280\'%3E%3Crect width=\'400\' height=\'280\' fill=\'%23b8a99a\'/%3E%3Ctext x=\'80\' y=\'150\' font-family=\'Inter\' fill=\'%23555\'%3EProduct 4%3C/text%3E%3C/svg%3E', description: 'Elegant clutch for evening events.', rating: 4.6, badge: 'Sale' }
-    ];
-
-    // --- Render Categories ---
-    function renderCategories() {
-      const container = document.getElementById('categoryContainer');
-      if (!container) return;
-      container.innerHTML = categories.map(cat => `
-        <div class="col-6 col-md-3">
-          <div class="category-card" data-category="${cat.name}">
-            <img src="${cat.image}" alt="${cat.name}" loading="lazy">
-            <div class="overlay"><h4>${cat.name}</h4></div>
+  <!-- HERO -->
+  <section id="home" class="hero-section">
+    <div class="hero-gold-abstract"></div>
+    <i class="bi bi-flower1 floating-leaf" style="top:15%;left:5%;"></i>
+    <i class="bi bi-flower2 floating-leaf" style="bottom:20%;right:8%;animation-delay:1.5s;"></i>
+    <div class="container hero-content">
+      <div class="row align-items-center">
+        <div class="col-lg-6">
+          <span class="text-uppercase small gold-text" style="letter-spacing:0.2rem;">Luxury Fashion House</span>
+          <h1 class="mt-3 playfair">Pakistani Elegance <br>Curated for <span class="gold-text">Bangladesh</span></h1>
+          <p class="lead mt-4" style="font-weight:300;max-width:500px;">Timeless, minimal, sophisticated — discover the new standard of luxury pret, wedding, and party wear.</p>
+          <div class="mt-5">
+            <a href="#collections" class="btn btn-luxury me-3">Explore Collection</a>
+            <a href="#featured" class="btn btn-outline-luxury">Shop Now</a>
+          </div>
+          <div class="row mt-5 hero-stats g-4">
+            <div class="col-4"><span>1200+</span><small class="d-block text-muted">Premium Designs</small></div>
+            <div class="col-4"><span>850+</span><small class="d-block text-muted">Happy Clients</small></div>
+            <div class="col-4"><span>4.9★</span><small class="d-block text-muted">Rating</small></div>
           </div>
         </div>
-      `).join('');
+        <div class="col-lg-6 d-none d-lg-block">
+          <img src="https://images.unsplash.com/photo-1618354691373-d851c5c3a990?w=800&h=900&fit=crop" class="img-fluid shadow-lg" alt="Tahera luxury fashion" style="object-fit:cover;height:620px;width:100%;">
+        </div>
+      </div>
+    </div>
+  </section>
 
-      // Category filter click
-      document.querySelectorAll('.category-card').forEach(card => {
-        card.addEventListener('click', function() {
-          const cat = this.dataset.category;
-          filterProducts(cat);
-          // Scroll to products
-          document.getElementById('products').scrollIntoView({ behavior: 'smooth' });
-        });
-      });
-    }
+  <!-- FEATURE STRIP -->
+  <div class="feature-strip">
+    <div class="container">
+      <div class="row text-center">
+        <div class="col-md col-6 feature-item"><i class="bi bi-truck"></i> Free Delivery</div>
+        <div class="col-md col-6 feature-item"><i class="bi bi-diamond"></i> Premium Quality</div>
+        <div class="col-md col-6 feature-item"><i class="bi bi-shield-check"></i> Secure Shopping</div>
+        <div class="col-md col-6 feature-item"><i class="bi bi-gift"></i> Luxury Packaging</div>
+        <div class="col-md col-6 feature-item"><i class="bi bi-headset"></i> Best Support</div>
+      </div>
+    </div>
+  </div>
 
-    // --- Render Products ---
-    function renderProducts(productArray = products) {
-      const container = document.getElementById('productContainer');
-      if (!container) return;
-      if (productArray.length === 0) {
-        container.innerHTML = `<div class="col-12 text-center py-5"><p class="text-muted">No products found.</p></div>`;
-        return;
-      }
-      container.innerHTML = productArray.map(p => `
-        <div class="col-12 col-sm-6 col-lg-3">
-          <div class="product-card" data-id="${p.id}">
-            <div class="img-wrapper">
-              <img src="${p.image}" alt="${p.title}" loading="lazy">
-              ${p.badge ? `<span class="badge-top">${p.badge}</span>` : ''}
-              <button class="wishlist-icon" aria-label="Add to wishlist"><i class="bi bi-heart"></i></button>
-            </div>
-            <div class="card-body">
-              <h6 class="product-title">${p.title}</h6>
-              <p class="product-code">${p.code}</p>
-              <div class="d-flex justify-content-between align-items-center">
-                <span class="product-price">${p.price}</span>
-                <small><i class="bi bi-star-fill text-warning"></i> ${p.rating}</small>
-              </div>
-              <p class="text-muted small mt-1">${p.description.substring(0, 40)}...</p>
-              <button class="btn btn-outline-primary btn-sm w-100 mt-2 view-detail-btn" data-id="${p.id}">View Details</button>
-            </div>
+  <!-- ABOUT -->
+  <section id="about" class="section-padding ivory-bg">
+    <div class="container">
+      <div class="row g-5 align-items-center">
+        <div class="col-lg-6">
+          <img src="https://images.unsplash.com/photo-1567401893414-76b7b1e5a7a5?w=800&h=600&fit=crop" class="img-fluid shadow" alt="Tahera about" style="height:500px;width:100%;object-fit:cover;">
+        </div>
+        <div class="col-lg-6">
+          <span class="gold-text text-uppercase small">About Tahera</span>
+          <h2 class="playfair display-5">Where heritage meets <span class="gold-text">modern luxury</span></h2>
+          <p class="mt-4" style="font-weight:300;">TAHERA is a celebration of Pakistani craftsmanship, reimagined for the contemporary woman. Every piece tells a story of elegance, from luxurious lawns to opulent wedding ensembles. We curate for those who value timeless sophistication.</p>
+          <div class="row mt-5">
+            <div class="col-6"><strong class="gold-text">Mission</strong><p class="small">Empower women through refined design.</p></div>
+            <div class="col-6"><strong class="gold-text">Vision</strong><p class="small">Become the leading luxury fashion house in South Asia.</p></div>
           </div>
         </div>
-      `).join('');
+      </div>
+    </div>
+  </section>
 
-      // Add event listeners for View Details
-      document.querySelectorAll('.view-detail-btn').forEach(btn => {
-        btn.addEventListener('click', function() {
-          const id = parseInt(this.dataset.id);
-          const product = products.find(p => p.id === id);
-          if (product) openProductModal(product);
-        });
-      });
-    }
+  <!-- COLLECTIONS -->
+  <section id="collections" class="section-padding cream-bg">
+    <div class="container">
+      <h2 class="section-title text-center playfair">Our Collections</h2>
+      <div class="row g-4 mt-4">
+        <div class="col-md-3 col-6"><div class="card card-luxury"><img src="https://images.unsplash.com/photo-1539008835657-9e8e9680c956?w=400&h=500&fit=crop" alt="Luxury Lawn"><div class="card-body text-center"><h5 class="playfair">Luxury Lawn</h5><a href="#" class="btn btn-outline-luxury btn-sm">Explore</a></div></div></div>
+        <div class="col-md-3 col-6"><div class="card card-luxury"><img src="https://images.unsplash.com/photo-1583744946564-b52d1e3899d3?w=400&h=500&fit=crop" alt="Luxury Eid"><div class="card-body text-center"><h5 class="playfair">Luxury Eid</h5><a href="#" class="btn btn-outline-luxury btn-sm">Explore</a></div></div></div>
+        <div class="col-md-3 col-6"><div class="card card-luxury"><img src="https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=400&h=500&fit=crop" alt="Party Wear"><div class="card-body text-center"><h5 class="playfair">Party Wear</h5><a href="#" class="btn btn-outline-luxury btn-sm">Explore</a></div></div></div>
+        <div class="col-md-3 col-6"><div class="card card-luxury"><img src="https://images.unsplash.com/photo-1585487000160-6ebcfceb0d03?w=400&h=500&fit=crop" alt="Wedding"><div class="card-body text-center"><h5 class="playfair">Wedding</h5><a href="#" class="btn btn-outline-luxury btn-sm">Explore</a></div></div></div>
+      </div>
+    </div>
+  </section>
 
-    // --- Filter Products by Category ---
-    function filterProducts(category) {
-      const filtered = category === 'All' ? products : products.filter(p => p.category === category);
-      renderProducts(filtered);
-    }
+  <!-- FEATURED PRODUCTS (12) -->
+  <section id="featured" class="section-padding ivory-bg">
+    <div class="container">
+      <h2 class="section-title text-center playfair">Featured <span class="gold-text">Pieces</span></h2>
+      <div class="d-flex flex-wrap justify-content-center gap-2 mt-4" id="categoryFilter">
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="lawn">Lawn</button>
+        <button class="filter-btn" data-filter="pret">Pret</button>
+        <button class="filter-btn" data-filter="wedding">Wedding</button>
+        <button class="filter-btn" data-filter="party">Party Wear</button>
+        <button class="filter-btn" data-filter="eid">Eid</button>
+      </div>
+      <div class="row g-4 mt-3" id="productGrid"></div>
+    </div>
+  </section>
 
-    // --- Search Functionality ---
-    function searchProducts(query) {
-      const q = query.toLowerCase().trim();
-      if (q === '') { renderProducts(products); return; }
-      const results = products.filter(p =>
-        p.title.toLowerCase().includes(q) ||
-        p.code.toLowerCase().includes(q) ||
-        p.category.toLowerCase().includes(q)
-      );
-      renderProducts(results);
-    }
+  <!-- WHY CHOOSE US -->
+  <section class="section-padding beige-bg">
+    <div class="container">
+      <h2 class="section-title text-center playfair">Why Choose <span class="gold-text">Tahera</span></h2>
+      <div class="row g-4 mt-4 text-center">
+        <div class="col-md-4"><i class="bi bi-gem" style="font-size:3rem;color:var(--primary-gold);"></i><h5 class="mt-3 playfair">Premium Quality</h5><p>Finest fabrics, impeccable tailoring.</p></div>
+        <div class="col-md-4"><i class="bi bi-star" style="font-size:3rem;color:var(--primary-gold);"></i><h5 class="mt-3 playfair">Designer Collection</h5><p>Curated by international fashion houses.</p></div>
+        <div class="col-md-4"><i class="bi bi-credit-card" style="font-size:3rem;color:var(--primary-gold);"></i><h5 class="mt-3 playfair">Affordable Luxury</h5><p>Exclusivity without the exorbitant price.</p></div>
+      </div>
+    </div>
+  </section>
 
-    // --- Product Modal ---
-    function openProductModal(product) {
-      const modalBody = document.getElementById('modalBodyContent');
-      if (!modalBody) return;
-      const whatsappMsg = `Assalam-o-Alaikum,%0A%0AI want to order this product.%0AProduct Name: ${product.title}%0AProduct Code: ${product.code}%0APrice: ${product.price}%0AProduct Link: ${window.location.href}%0A%0APlease confirm availability.%0AThank you.`;
-      const whatsappUrl = `https://wa.me/923145703357?text=${whatsappMsg}`;
+  <!-- LOOKBOOK -->
+  <section class="section-padding cream-bg">
+    <div class="container">
+      <h2 class="section-title text-center playfair">Lookbook</h2>
+      <div class="row g-3 lookbook-grid mt-3">
+        <div class="col-4 col-md-3 grid-item"><img src="https://images.unsplash.com/photo-1618354691373-d851c5c3a990?w=300&h=400&fit=crop" alt="lookbook"></div>
+        <div class="col-4 col-md-3 grid-item"><img src="https://images.unsplash.com/photo-1583744946564-b52d1e3899d3?w=300&h=400&fit=crop" alt="lookbook"></div>
+        <div class="col-4 col-md-3 grid-item"><img src="https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=300&h=400&fit=crop" alt="lookbook"></div>
+        <div class="col-4 col-md-3 grid-item"><img src="https://images.unsplash.com/photo-1539008835657-9e8e9680c956?w=300&h=400&fit=crop" alt="lookbook"></div>
+        <div class="col-4 col-md-3 grid-item"><img src="https://images.unsplash.com/photo-1585487000160-6ebcfceb0d03?w=300&h=400&fit=crop" alt="lookbook"></div>
+        <div class="col-4 col-md-3 grid-item"><img src="https://images.unsplash.com/photo-1567401893414-76b7b1e5a7a5?w=300&h=400&fit=crop" alt="lookbook"></div>
+      </div>
+    </div>
+  </section>
 
-      modalBody.innerHTML = `
-        <div class="row g-4">
-          <div class="col-md-6">
-            <div class="modal-product-image"><img src="${product.image}" alt="${product.title}"></div>
-          </div>
-          <div class="col-md-6">
-            <h3>${product.title}</h3>
-            <p class="text-muted">${product.code}</p>
-            <p class="product-price-lg">${product.price}</p>
-            <p><span class="badge bg-success">In Stock</span></p>
-            <p>${product.description}</p>
-            <p><strong>Category:</strong> ${product.category}</p>
-            <p><strong>Rating:</strong> ${'⭐'.repeat(Math.round(product.rating))}</p>
-            <a href="${whatsappUrl}" target="_blank" class="btn btn-success mt-2"><i class="bi bi-whatsapp me-2"></i>BUY NOW</a>
+  <!-- CONTACT & NEWSLETTER -->
+  <section id="contact" class="section-padding ivory-bg">
+    <div class="container">
+      <div class="row g-5">
+        <div class="col-lg-6">
+          <h2 class="playfair display-6">Connect with <span class="gold-text">Tahera</span></h2>
+          <p class="mt-3">We'd love to hear from you. Reach out for styling advice, orders, or collaborations.</p>
+          <div class="mt-4"><i class="bi bi-geo-alt gold-text"></i> House 12, Road 4, Gulshan, Dhaka</div>
+          <div class="mt-2"><i class="bi bi-telephone gold-text"></i> +880 1712 345678</div>
+          <div class="mt-2"><i class="bi bi-envelope gold-text"></i> hello@tahera.pk</div>
+          <div class="mt-4 d-flex gap-3">
+            <a href="#" class="btn btn-outline-luxury btn-sm"><i class="bi bi-facebook"></i></a>
+            <a href="#" class="btn btn-outline-luxury btn-sm"><i class="bi bi-instagram"></i></a>
+            <a href="#" class="btn btn-outline-luxury btn-sm"><i class="bi bi-whatsapp"></i></a>
           </div>
         </div>
-      `;
-      new bootstrap.Modal(document.getElementById('productModal')).show();
-    }
+        <div class="col-lg-6">
+          <h5 class="playfair">Newsletter</h5>
+          <p>Subscribe for exclusive previews and private sales.</p>
+          <div class="input-group">
+            <input type="email" class="form-control newsletter-input" placeholder="Your email address">
+            <button class="btn btn-luxury">Subscribe</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-    // --- Dark Mode Toggle ---
-    function initDarkMode() {
-      const toggle = document.getElementById('darkModeToggle');
-      if (!toggle) return;
-      toggle.addEventListener('click', function(e) {
-        e.preventDefault();
-        document.body.classList.toggle('dark-mode');
-        const icon = this.querySelector('i');
-        icon.classList.toggle('bi-moon');
-        icon.classList.toggle('bi-sun');
-      });
-    }
+  <!-- FOOTER -->
+  <footer class="dark-bg text-white py-5">
+    <div class="container text-center">
+      <a class="navbar-brand text-white" href="#">TAHERA<span class="gold-dot">.</span></a>
+      <div class="footer-gold-divider mx-auto"></div>
+      <div class="row mt-4">
+        <div class="col-md-4"><a href="#" class="text-white-50 text-decoration-none">Home</a></div>
+        <div class="col-md-4"><a href="#" class="text-white-50 text-decoration-none">Collections</a></div>
+        <div class="col-md-4"><a href="#" class="text-white-50 text-decoration-none">Contact</a></div>
+      </div>
+      <div class="mt-4 small text-white-50">© 2026 TAHERA. All rights reserved. Pakistani Elegance.</div>
+    </div>
+  </footer>
 
-    // --- Back to Top ---
-    function initBackToTop() {
-      const btn = document.getElementById('backToTop');
-      if (!btn) return;
-      window.addEventListener('scroll', function() {
-        if (window.scrollY > 500) {
-          btn.classList.add('visible');
-        } else {
-          btn.classList.remove('visible');
-        }
-      });
-      btn.addEventListener('click', function() {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      });
-    }
+  <!-- FLOATING BUTTONS -->
+  <a href="https://wa.me/923145703357" target="_blank" class="floating-btn whatsapp"><i class="bi bi-whatsapp"></i></a>
+  <div class="floating-btn backtotop" id="backToTop"><i class="bi bi-chevron-up"></i></div>
 
-    // --- Scroll Reveal (simple) ---
-    function initScrollReveal() {
-      const reveals = document.querySelectorAll('.reveal');
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('active');
-          }
-        });
-      }, { threshold: 0.1 });
-      reveals.forEach(el => observer.observe(el));
-    }
-
-    // --- Loading Screen ---
-    function initLoading() {
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    (function() {
+      // ----- LOADER -----
       window.addEventListener('load', function() {
-        const loader = document.getElementById('loading-screen');
-        if (loader) loader.classList.add('hide');
-      });
-    }
-
-    // --- Initialize ---
-    document.addEventListener('DOMContentLoaded', function() {
-      renderCategories();
-      renderProducts(products);
-
-      // Search
-      const searchForm = document.getElementById('searchForm');
-      const searchInput = document.getElementById('searchInput');
-      if (searchForm) {
-        searchForm.addEventListener('submit', function(e) {
-          e.preventDefault();
-          const query = searchInput.value;
-          searchProducts(query);
-        });
-        searchInput.addEventListener('input', function() {
-          const query = this.value;
-          if (query === '') renderProducts(products);
-        });
-      }
-
-      // Global filter from categories (already set in renderCategories)
-      // Add "All" filter option maybe via a button, but category cards handle it.
-
-      initDarkMode();
-      initBackToTop();
-      initLoading();
-      initScrollReveal();
-
-      // --- Footer categories (dynamic) ---
-      const footerCatList = document.getElementById('footerCategories');
-      if (footerCatList) {
-        footerCatList.innerHTML = categories.map(c => `<li><a href="#">${c.name}</a></li>`).join('');
-      }
-
-      // --- Smooth scroll for nav links ---
-      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function(e) {
-          const href = this.getAttribute('href');
-          if (href === "#") return;
-          e.preventDefault();
-          const target = document.querySelector(href);
-          if (target) {
-            target.scrollIntoView({ behavior: 'smooth' });
-          }
-        });
+        document.getElementById('page-loader').classList.add('fade-out');
       });
 
-      console.log('Attaher Ab. Boutique loaded successfully.');
-    });
+      // ----- CUSTOM CURSOR (desktop) -----
+      const cursor = document.getElementById('customCursor');
+      if (window.innerWidth > 1024) {
+        document.addEventListener('mousemove', e => {
+          cursor.style.left = e.clientX + 'px';
+          cursor.style.top = e.clientY + 'px';
+        });
+        document.querySelectorAll('a, button, .card-luxury, .grid-item, .filter-btn').forEach(el => {
+          el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
+          el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
+        });
+      } else { cursor.style.display = 'none'; }
 
-  })();
-</script>
+      // ----- STICKY NAVBAR -----
+      const nav = document.getElementById('mainNav');
+      window.addEventListener('scroll', () => { nav.classList.toggle('scrolled', window.scrollY > 60); });
+
+      // ----- BACK TO TOP -----
+      document.getElementById('backToTop').addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+      // ----- PRODUCT DATA (12 items) -----
+      const products = [
+        { name: 'Zari Embroidered Lawn', category: 'lawn', code: 'TL-101', price: 'BDT 9,800', img: 'https://images.unsplash.com/photo-1539008835657-9e8e9680c956?w=400&h=500&fit=crop', badge: 'New' },
+        { name: 'Silk Chiffon Pret', category: 'pret', code: 'TP-204', price: 'BDT 12,500', img: 'https://images.unsplash.com/photo-1583744946564-b52d1e3899d3?w=400&h=500&fit=crop', badge: 'Best Seller' },
+        { name: 'Gold Wedding Gown', category: 'wedding', code: 'TW-312', price: 'BDT 45,000', img: 'https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=400&h=500&fit=crop', badge: 'Luxury' },
+        { name: 'Party Cape Dress', category: 'party', code: 'TPP-408', price: 'BDT 18,200', img: 'https://images.unsplash.com/photo-1585487000160-6ebcfceb0d03?w=400&h=500&fit=crop', badge: '' },
+        { name: 'Eid Luxury Lawn', category: 'eid', code: 'TE-501', price: 'BDT 11,300', img: 'https://images.unsplash.com/photo-1618354691373-d851c5c3a990?w=400&h=500&fit=crop', badge: 'Eid Special' },
+        { name: 'Embroidered Organza', category: 'pret', code: 'TP-212', price: 'BDT 14,900', img: 'https://images.unsplash.com/photo-1567401893414-76b7b1e5a7a5?w=400&h=500&fit=crop', badge: '' },
+        { name: 'Net Wedding Lehenga', category: 'wedding', code: 'TW-315', price: 'BDT 62,000', img: 'https://images.unsplash.com/photo-1585487000160-6ebcfceb0d03?w=400&h=500&fit=crop', badge: 'Premium' },
+        { name: 'Luxury Lawn Suit', category: 'lawn', code: 'TL-108', price: 'BDT 8,200', img: 'https://images.unsplash.com/photo-1539008835657-9e8e9680c956?w=400&h=500&fit=crop', badge: '' },
+        { name: 'Pearl Embellished Party', category: 'party', code: 'TPP-416', price: 'BDT 21,500', img: 'https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=400&h=500&fit=crop', badge: 'New' },
+        { name: 'Eid Silk Pret', category: 'eid', code: 'TE-509', price: 'BDT 13,400', img: 'https://images.unsplash.com/photo-1583744946564-b52d1e3899d3?w=400&h=500&fit=crop', badge: '' },
+        { name: 'Mughal Inspired Wedding', category: 'wedding', code: 'TW-321', price: 'BDT 55,000', img: 'https://images.unsplash.com/photo-1618354691373-d851c5c3a990?w=400&h=500&fit=crop', badge: 'Exclusive' },
+        { name: 'Casual Luxury Pret', category: 'pret', code: 'TP-220', price: 'BDT 10,800', img: 'https://images.unsplash.com/photo-1567401893414-76b7b1e5a7a5?w=400&h=500&fit=crop', badge: '' }
+      ];
+
+      const grid = document.getElementById('productGrid');
+      function renderProducts(filter = 'all') {
+        const filtered = filter === 'all' ? products : products.filter(p => p.category === filter);
+        grid.innerHTML = filtered.map((p, idx) => `
+          <div class="col-lg-3 col-md-4 col-sm-6 product-item" data-category="${p.category}">
+            <div class="card card-luxury h-100">
+              <div style="position:relative;overflow:hidden;">
+                <img src="${p.img}" class="card-img-top" alt="${p.name}" loading="lazy">
+                ${p.badge ? `<span class="product-badge position-absolute top-0 start-0 m-2">${p.badge}</span>` : ''}
+                <span class="position-absolute top-0 end-0 m-3 wishlist-icon"><i class="bi bi-heart"></i></span>
+              </div>
+              <div class="card-body">
+                <div class="d-flex justify-content-between"><span class="product-code">${p.code}</span><span class="text-warning">★★★★☆</span></div>
+                <h6 class="playfair mt-1">${p.name}</h6>
+                <div class="d-flex justify-content-between align-items-center mt-2">
+                  <span class="product-price">${p.price}</span>
+                  <div><button class="btn btn-sm btn-outline-luxury quick-view" data-name="${p.name}" data-code="${p.code}" data-price="${p.price}" data-img="${p.img}">Quick View</button></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        `).join('');
+        // Quick view -> modal simulation (buy now)
+        document.querySelectorAll('.quick-view').forEach(btn => {
+          btn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            const name = this.dataset.name;
+            const code = this.dataset.code;
+            const price = this.dataset.price;
+            const url = encodeURIComponent(window.location.href);
+            const msg = `Assalam-o-Alaikum,%0AI want to order this product.%0AProduct Name: ${encodeURIComponent(name)}%0AProduct Code: ${encodeURIComponent(code)}%0APrice: ${encodeURIComponent(price)}%0AProduct Link: ${url}%0APlease confirm availability.%0AThank you.`;
+            window.open(`https://wa.me/923145703357?text=${msg}`, '_blank');
+          });
+        });
+      }
+      renderProducts();
+
+      // Category filter
+      document.querySelectorAll('.filter-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+          document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+          this.classList.add('active');
+          renderProducts(this.dataset.filter);
+        });
+      });
+
+      // Navbar WhatsApp
+      document.getElementById('whatsappNavBtn').addEventListener('click', function(e) {
+        e.preventDefault();
+        window.open('https://wa.me/923145703357', '_blank');
+      });
+
+      // Floating WhatsApp
+      document.querySelector('.floating-btn.whatsapp').addEventListener('click', function(e) {
+        e.preventDefault();
+        window.open('https://wa.me/923145703357', '_blank');
+      });
+
+      // Smooth scroll for nav links (basic)
+      document.querySelectorAll('.nav-link[href^="#"]').forEach(link => {
+        link.addEventListener('click', function(e) {
+          const target = document.querySelector(this.getAttribute('href'));
+          if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth' }); }
+        });
+      });
+
+    })();
+  </script>
 </body>
 </html>
