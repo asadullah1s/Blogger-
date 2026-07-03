@@ -1,764 +1,1323 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
-  <title>TAHERA — Pakistani Elegance Curated for Bangladesh</title>
-  <!-- SEO Meta Tags -->
-  <meta name="description" content="TAHERA luxury boutique – Pakistani elegance curated for Bangladesh. Premium wedding wear, luxury pret, party wear and Eid collections.">
-  <meta name="keywords" content="Tahera, luxury clothing, Pakistani fashion, Bangladesh, wedding wear, party wear, premium pret">
-  <link rel="canonical" href="https://tahera.pk/">
-  <!-- Open Graph / Facebook -->
-  <meta property="og:type" content="website">
-  <meta property="og:title" content="TAHERA – Luxury Pakistani Elegance">
-  <meta property="og:description" content="Discover the finest curated Pakistani designer wear for the modern woman. Wedding, party, and luxury pret.">
-  <meta property="og:image" content="https://images.unsplash.com/photo-1618354691373-d851c5c3a990?w=1200&h=630&fit=crop">
-  <!-- Twitter Cards -->
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="TAHERA – Luxury Pakistani Elegance">
-  <meta name="twitter:description" content="Curated luxury fashion for Bangladesh. Timeless, minimal, sophisticated.">
-  <!-- Bootstrap 5.3 + Icons + Google Fonts -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <style>
-    /* ----- GLOBAL RESET / VARIABLES (LUXURY PALETTE) ----- */
-    :root {
-      --primary-gold: #C89B3C;
-      --luxury-gold: #B8860B;
-      --light-gold: #E3C37A;
-      --ivory: #FCF9F4;
-      --cream: #F7F2EA;
-      --soft-beige: #E8D9C7;
-      --dark: #1E1E1E;
-      --white: #FFFFFF;
-      --bs-body-font-family: 'Poppins', sans-serif;
-    }
-    body {
-      background-color: var(--ivory);
-      color: var(--dark);
-      font-weight: 300;
-      cursor: default;
-      overflow-x: hidden;
-      font-family: 'Poppins', sans-serif;
-    }
-    h1, h2, h3, h4, h5, .playfair {
-      font-family: 'Playfair Display', serif;
-      font-weight: 600;
-      letter-spacing: 0.02em;
-    }
-    .gold-text { color: var(--primary-gold); }
-    .gold-bg { background-color: var(--primary-gold); }
-    .dark-bg { background-color: var(--dark); }
-    .cream-bg { background-color: var(--cream); }
-    .ivory-bg { background-color: var(--ivory); }
-    .beige-bg { background-color: var(--soft-beige); }
-    .section-padding { padding: 100px 0; }
-    .section-title {
-      font-size: 3rem;
-      margin-bottom: 1rem;
-      position: relative;
-    }
-    .section-title:after {
-      content: '';
-      display: block;
-      width: 80px;
-      height: 3px;
-      background: var(--primary-gold);
-      margin: 16px auto 0;
-    }
-    .btn-luxury {
-      background: var(--primary-gold);
-      color: var(--white);
-      border: none;
-      padding: 12px 38px;
-      font-weight: 600;
-      letter-spacing: 0.06em;
-      border-radius: 0;
-      transition: all 0.3s ease;
-      box-shadow: 0 6px 18px rgba(200, 155, 60, 0.25);
-      font-family: 'Poppins', sans-serif;
-    }
-    .btn-luxury:hover {
-      background: var(--luxury-gold);
-      color: var(--white);
-      transform: translateY(-3px);
-      box-shadow: 0 14px 28px rgba(184, 134, 11, 0.3);
-    }
-    .btn-outline-luxury {
-      border: 1.5px solid var(--primary-gold);
-      color: var(--primary-gold);
-      background: transparent;
-      padding: 10px 32px;
-      font-weight: 600;
-      letter-spacing: 0.06em;
-      border-radius: 0;
-      transition: all 0.3s;
-    }
-    .btn-outline-luxury:hover {
-      background: var(--primary-gold);
-      color: var(--white);
-      transform: scale(1.02);
-    }
-    /* ----- CUSTOM CURSOR (desktop only) ----- */
-    @media (min-width: 1025px) {
-      .custom-cursor {
-        position: fixed;
-        width: 28px;
-        height: 28px;
-        border: 2px solid var(--primary-gold);
-        border-radius: 50%;
-        pointer-events: none;
-        z-index: 9999;
-        background: rgba(200, 155, 60, 0.08);
-        backdrop-filter: blur(2px);
-        transition: width 0.2s, height 0.2s, background 0.2s;
-        transform: translate(-50%, -50%);
-        mix-blend-mode: difference;
-      }
-      .custom-cursor.hover {
-        width: 52px;
-        height: 52px;
-        background: rgba(200, 155, 60, 0.15);
-        border-color: var(--light-gold);
-      }
-    }
-    /* ----- PAGE LOADER ----- */
-    #page-loader {
-      position: fixed;
-      inset: 0;
-      z-index: 99999;
-      background: var(--ivory);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-direction: column;
-      transition: opacity 0.8s ease, visibility 0.8s;
-    }
-    #page-loader.fade-out {
-      opacity: 0;
-      visibility: hidden;
-      pointer-events: none;
-    }
-    .loader-logo {
-      font-family: 'Playfair Display', serif;
-      font-size: 4.5rem;
-      color: var(--primary-gold);
-      letter-spacing: 8px;
-      animation: shimmer 2.2s infinite alternate;
-    }
-    @keyframes shimmer {
-      0% { text-shadow: 0 0 10px rgba(200,155,60,0.2); opacity: 0.8; transform: scale(1); }
-      100% { text-shadow: 0 0 40px rgba(200,155,60,0.6); opacity: 1; transform: scale(1.02); }
-    }
-    .loader-bar {
-      width: 120px;
-      height: 2px;
-      background: var(--soft-beige);
-      margin-top: 30px;
-      position: relative;
-      overflow: hidden;
-    }
-    .loader-bar::after {
-      content: '';
-      position: absolute;
-      left: -100%;
-      width: 100%;
-      height: 100%;
-      background: var(--primary-gold);
-      animation: loadProgress 2s ease forwards;
-    }
-    @keyframes loadProgress {
-      0% { left: -100%; }
-      100% { left: 100%; }
-    }
-    /* ----- STICKY NAVBAR ----- */
-    .navbar {
-      transition: background 0.3s, box-shadow 0.3s;
-      backdrop-filter: none;
-      padding: 18px 0;
-    }
-    .navbar.scrolled {
-      background: rgba(252, 249, 244, 0.96);
-      box-shadow: 0 8px 30px rgba(0,0,0,0.04);
-      backdrop-filter: blur(6px);
-      padding: 10px 0;
-    }
-    .navbar-brand {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.8rem;
-      letter-spacing: 4px;
-      color: var(--dark) !important;
-    }
-    .navbar-brand .gold-dot {
-      color: var(--primary-gold);
-      font-size: 2.2rem;
-      line-height: 1;
-    }
-    .nav-link {
-      font-weight: 400;
-      letter-spacing: 0.04em;
-      color: var(--dark) !important;
-      padding: 0 16px !important;
-      transition: color 0.2s;
-      font-size: 0.9rem;
-      text-transform: uppercase;
-    }
-    .nav-link:hover, .nav-link.active {
-      color: var(--primary-gold) !important;
-    }
-    .navbar .bi-search, .navbar .bi-whatsapp {
-      font-size: 1.2rem;
-      color: var(--dark);
-      transition: 0.2s;
-    }
-    .navbar .bi-whatsapp { color: #25D366; }
-    .offcanvas {
-      background: var(--ivory);
-    }
-    /* ----- HERO ----- */
-    .hero-section {
-      min-height: 100vh;
-      background: linear-gradient(145deg, #fcf9f4 0%, #f3ede5 100%);
-      position: relative;
-      overflow: hidden;
-      display: flex;
-      align-items: center;
-    }
-    .hero-section .floating-leaf {
-      position: absolute;
-      opacity: 0.08;
-      font-size: 5rem;
-      color: var(--primary-gold);
-      animation: floatLeaf 9s infinite alternate ease-in-out;
-    }
-    @keyframes floatLeaf {
-      0% { transform: translate(0, 0) rotate(0deg); }
-      100% { transform: translate(30px, -40px) rotate(15deg); }
-    }
-    .hero-gold-abstract {
-      position: absolute;
-      width: 600px;
-      height: 600px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(200,155,60,0.08) 0%, rgba(200,155,60,0.01) 70%);
-      top: -200px;
-      right: -100px;
-      z-index: 0;
-    }
-    .hero-content {
-      position: relative;
-      z-index: 2;
-    }
-    .hero-content h1 {
-      font-size: 4.8rem;
-      line-height: 1.1;
-      font-weight: 700;
-    }
-    .hero-stats span {
-      display: block;
-      font-size: 2rem;
-      font-weight: 600;
-      color: var(--primary-gold);
-    }
-    /* ----- FEATURE STRIP ----- */
-    .feature-strip {
-      background: var(--cream);
-      border-top: 1px solid rgba(200,155,60,0.15);
-      border-bottom: 1px solid rgba(200,155,60,0.15);
-      padding: 28px 0;
-    }
-    .feature-item i {
-      font-size: 2.2rem;
-      color: var(--primary-gold);
-      margin-right: 12px;
-    }
-    /* ----- CARDS (collection, products) ----- */
-    .card-luxury {
-      border: none;
-      background: var(--white);
-      border-radius: 0;
-      transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
-      box-shadow: 0 6px 24px rgba(0,0,0,0.02);
-      overflow: hidden;
-    }
-    .card-luxury:hover {
-      transform: translateY(-10px);
-      box-shadow: 0 28px 60px rgba(0,0,0,0.06);
-    }
-    .card-luxury img {
-      transition: transform 0.6s ease;
-      width: 100%;
-      height: 380px;
-      object-fit: cover;
-    }
-    .card-luxury:hover img {
-      transform: scale(1.04);
-    }
-    .card-luxury .card-body {
-      padding: 24px 20px 26px;
-    }
-    .product-badge {
-      background: var(--primary-gold);
-      color: white;
-      font-size: 0.7rem;
-      padding: 4px 14px;
-      letter-spacing: 0.06em;
-    }
-    .product-price {
-      font-weight: 600;
-      color: var(--dark);
-      font-size: 1.2rem;
-    }
-    .product-code {
-      font-size: 0.75rem;
-      color: #888;
-      letter-spacing: 0.04em;
-    }
-    .wishlist-icon {
-      color: #bbb;
-      transition: 0.2s;
-      cursor: pointer;
-    }
-    .wishlist-icon:hover { color: var(--primary-gold); }
-    /* category filter */
-    .filter-btn {
-      background: transparent;
-      border: none;
-      padding: 6px 22px;
-      font-weight: 400;
-      color: var(--dark);
-      border-radius: 30px;
-      transition: 0.2s;
-      letter-spacing: 0.04em;
-      font-size: 0.9rem;
-    }
-    .filter-btn.active, .filter-btn:hover {
-      background: var(--primary-gold);
-      color: white;
-      box-shadow: 0 4px 12px rgba(200,155,60,0.25);
-    }
-    /* masonry lookbook */
-    .lookbook-grid .grid-item {
-      overflow: hidden;
-      position: relative;
-      cursor: pointer;
-    }
-    .lookbook-grid .grid-item img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: 0.5s;
-    }
-    .lookbook-grid .grid-item:hover img {
-      transform: scale(1.06);
-    }
-    /* review carousel */
-    .review-card {
-      background: white;
-      padding: 32px 28px;
-      border-radius: 0;
-      box-shadow: 0 4px 16px rgba(0,0,0,0.02);
-      margin: 12px;
-      border-left: 3px solid var(--primary-gold);
-    }
-    .review-card .stars i { color: var(--primary-gold); margin-right: 2px; }
-    /* footer */
-    .footer-gold-divider {
-      width: 60px;
-      height: 2px;
-      background: var(--primary-gold);
-      margin: 20px auto;
-    }
-    /* floating buttons */
-    .floating-btn {
-      position: fixed;
-      z-index: 999;
-      width: 48px;
-      height: 48px;
-      border-radius: 50%;
-      background: var(--white);
-      box-shadow: 0 6px 24px rgba(0,0,0,0.08);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.4rem;
-      color: var(--dark);
-      transition: 0.2s;
-      border: 1px solid rgba(200,155,60,0.2);
-      cursor: pointer;
-      right: 28px;
-    }
-    .floating-btn:hover {
-      background: var(--primary-gold);
-      color: white;
-      transform: scale(1.08);
-    }
-    .floating-btn.whatsapp { bottom: 100px; background: #25D366; color: white; border: none; }
-    .floating-btn.backtotop { bottom: 160px; }
-    /* responsive */
-    @media (max-width: 992px) {
-      .hero-content h1 { font-size: 3.2rem; }
-      .section-title { font-size: 2.4rem; }
-    }
-    @media (max-width: 576px) {
-      .hero-content h1 { font-size: 2.4rem; }
-    }
-    /* misc */
-    .accordion-button:not(.collapsed) {
-      background: var(--cream);
-      color: var(--primary-gold);
-      box-shadow: none;
-    }
-    .accordion-button:focus {
-      border-color: var(--primary-gold);
-      box-shadow: 0 0 0 0.2rem rgba(200,155,60,0.2);
-    }
-    .newsletter-input {
-      border: none;
-      border-bottom: 2px solid var(--soft-beige);
-      background: transparent;
-      border-radius: 0;
-      padding: 16px 10px;
-      font-weight: 300;
-      transition: 0.2s;
-    }
-    .newsletter-input:focus {
-      border-bottom-color: var(--primary-gold);
-      box-shadow: none;
-      background: transparent;
-    }
-    .bg-luxury-pattern {
-      background-image: repeating-linear-gradient(45deg, rgba(200,155,60,0.02) 0px, rgba(200,155,60,0.02) 8px, transparent 8px, transparent 16px);
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>TAHERA · Luxury Boutique</title>
+    <!-- ============================================================
+    PREMIUM TYPOGRAPHY · GOOGLE FONTS
+    ============================================================ -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300&family=DM+Serif+Display:ital@0;1&family=Poppins:wght@300;400;500;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        /* ============================================================
+           ROOT VARIABLES · LUXURY PALETTE
+           ============================================================ */
+        :root {
+            --gold: #c8a47e;
+            --gold-light: #e4d5c0;
+            --gold-matte: #b8956e;
+            --ivory: #faf6f0;
+            --cream: #f4ede4;
+            --beige: #e8ddd0;
+            --black: #1a1715;
+            --black-soft: #2c2825;
+            --white: #ffffff;
+            --glass-bg: rgba(255, 255, 255, 0.18);
+            --glass-border: rgba(255, 255, 255, 0.25);
+            --shadow-lux: 0 30px 60px -20px rgba(0, 0, 0, 0.25);
+            --font-serif: 'Playfair Display', 'Cormorant Garamond', serif;
+            --font-sans: 'Poppins', 'Inter', sans-serif;
+            --transition-smooth: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        /* ============================================================
+           RESET & BASE
+           ============================================================ */
+        *,
+        *::before,
+        *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            background: var(--ivory);
+            color: var(--black);
+            overflow-x: hidden;
+            line-height: 1.5;
+            font-weight: 300;
+        }
+
+        img {
+            display: block;
+            max-width: 100%;
+            height: auto;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* ============================================================
+           LOADER · LUXURY INTRO
+           ============================================================ */
+        #loader {
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            background: var(--ivory);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 1.2s ease, visibility 1.2s ease;
+        }
+        #loader.hide {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+        .loader-logo {
+            width: 80px;
+            height: auto;
+            animation: floatGlow 2.4s infinite alternate ease-in-out;
+            filter: drop-shadow(0 10px 20px rgba(200, 164, 126, 0.2));
+        }
+        .loader-line {
+            margin-top: 32px;
+            width: 60px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+            border-radius: 4px;
+            animation: loaderPulse 1.8s infinite ease-in-out;
+        }
+        @keyframes floatGlow {
+            0% { transform: translateY(0) scale(0.98); opacity: 0.7; }
+            100% { transform: translateY(-8px) scale(1.02); opacity: 1; }
+        }
+        @keyframes loaderPulse {
+            0% { opacity: 0.2; transform: scaleX(0.6); }
+            50% { opacity: 1; transform: scaleX(1); }
+            100% { opacity: 0.2; transform: scaleX(0.6); }
+        }
+
+        /* ============================================================
+           ANNOUNCEMENT BAR
+           ============================================================ */
+        .announcement {
+            background: var(--black);
+            color: var(--gold-light);
+            text-align: center;
+            padding: 0.6rem 1rem;
+            font-size: 0.7rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            font-weight: 400;
+            border-bottom: 1px solid rgba(200, 164, 126, 0.15);
+            backdrop-filter: blur(4px);
+            position: relative;
+            z-index: 30;
+            font-family: var(--font-sans);
+        }
+        .announcement span {
+            opacity: 0.9;
+        }
+
+        /* ============================================================
+           NAVBAR · GLASS · STICKY
+           ============================================================ */
+        .navbar {
+            position: sticky;
+            top: 0;
+            z-index: 40;
+            background: rgba(250, 246, 240, 0.65);
+            backdrop-filter: blur(18px) saturate(180%);
+            -webkit-backdrop-filter: blur(18px) saturate(180%);
+            border-bottom: 1px solid rgba(200, 164, 126, 0.12);
+            transition: var(--transition-smooth);
+            padding: 0 2.5rem;
+        }
+        .navbar-inner {
+            max-width: 1440px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 78px;
+        }
+        .nav-logo {
+            width: 58px;
+            height: auto;
+            transition: var(--transition-smooth);
+        }
+        .nav-logo:hover {
+            transform: scale(1.03);
+            filter: drop-shadow(0 4px 12px rgba(200, 164, 126, 0.25));
+        }
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 2.8rem;
+            list-style: none;
+            font-family: var(--font-sans);
+            font-weight: 400;
+            font-size: 0.8rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+        .nav-links li a {
+            position: relative;
+            padding: 6px 0;
+            color: var(--black-soft);
+            transition: var(--transition-smooth);
+        }
+        .nav-links li a::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gold);
+            transition: width 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+        .nav-links li a:hover {
+            color: var(--gold-matte);
+        }
+        .nav-links li a:hover::after {
+            width: 100%;
+        }
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 1.4rem;
+        }
+        .nav-actions svg {
+            width: 20px;
+            height: 20px;
+            stroke: var(--black-soft);
+            stroke-width: 1.2;
+            fill: none;
+            transition: var(--transition-smooth);
+            cursor: pointer;
+        }
+        .nav-actions svg:hover {
+            stroke: var(--gold);
+            transform: scale(1.05);
+        }
+        .whatsapp-btn {
+            background: var(--black);
+            color: var(--ivory);
+            padding: 0.4rem 1.2rem;
+            border-radius: 40px;
+            font-size: 0.7rem;
+            font-weight: 500;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            transition: var(--transition-smooth);
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            border: 1px solid transparent;
+        }
+        .whatsapp-btn:hover {
+            background: transparent;
+            color: var(--black);
+            border-color: var(--black);
+        }
+
+        /* mobile menu toggle */
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 6px;
+            cursor: pointer;
+            padding: 6px;
+        }
+        .menu-toggle span {
+            width: 26px;
+            height: 2px;
+            background: var(--black);
+            transition: var(--transition-smooth);
+            border-radius: 4px;
+        }
+
+        /* ============================================================
+           HERO · CAMPAIGN · MAGAZINE
+           ============================================================ */
+        .hero {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            background: var(--ivory);
+            overflow: hidden;
+            padding: 0 2.5rem;
+        }
+        .hero-bg {
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 30% 50%, rgba(200, 164, 126, 0.08) 0%, transparent 70%),
+                radial-gradient(circle at 80% 20%, rgba(200, 164, 126, 0.05) 0%, transparent 50%);
+            z-index: 1;
+        }
+        .hero-grid {
+            position: relative;
+            z-index: 2;
+            max-width: 1440px;
+            margin: 0 auto;
+            width: 100%;
+            display: grid;
+            grid-template-columns: 1fr 1.1fr;
+            gap: 4rem;
+            align-items: center;
+            padding: 4rem 0;
+        }
+        .hero-text {
+            display: flex;
+            flex-direction: column;
+            gap: 1.8rem;
+        }
+        .hero-sub {
+            font-family: var(--font-serif);
+            font-size: 1rem;
+            letter-spacing: 0.25em;
+            color: var(--gold-matte);
+            text-transform: uppercase;
+            opacity: 0.7;
+            font-weight: 400;
+        }
+        .hero-title {
+            font-family: var(--font-serif);
+            font-size: clamp(3.2rem, 10vw, 6.4rem);
+            font-weight: 700;
+            line-height: 1.05;
+            letter-spacing: -0.02em;
+            color: var(--black);
+        }
+        .hero-title em {
+            font-style: italic;
+            color: var(--gold-matte);
+            font-weight: 400;
+        }
+        .hero-desc {
+            font-family: var(--font-sans);
+            font-size: 1.05rem;
+            font-weight: 300;
+            max-width: 400px;
+            color: var(--black-soft);
+            line-height: 1.7;
+            letter-spacing: 0.02em;
+        }
+        .hero-cta {
+            display: flex;
+            gap: 1.2rem;
+            align-items: center;
+            margin-top: 0.8rem;
+        }
+        .btn-lux {
+            padding: 0.9rem 2.8rem;
+            background: var(--black);
+            color: var(--ivory);
+            border: none;
+            font-family: var(--font-sans);
+            font-weight: 400;
+            font-size: 0.8rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            border-radius: 60px;
+            transition: var(--transition-smooth);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 12px 30px -10px rgba(0, 0, 0, 0.2);
+        }
+        .btn-lux::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), transparent);
+            opacity: 0;
+            transition: var(--transition-smooth);
+        }
+        .btn-lux:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.35);
+            background: var(--gold-matte);
+        }
+        .btn-lux:hover::after {
+            opacity: 1;
+        }
+        .btn-outline {
+            background: transparent;
+            color: var(--black);
+            border: 1px solid var(--black);
+            box-shadow: none;
+        }
+        .btn-outline:hover {
+            background: var(--black);
+            color: var(--ivory);
+            border-color: var(--black);
+        }
+        .hero-image {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+        .hero-image img {
+            width: 100%;
+            max-width: 520px;
+            border-radius: 8px;
+            box-shadow: var(--shadow-lux);
+            transform: perspective(1200px) rotateY(-3deg) rotateX(2deg);
+            transition: var(--transition-smooth);
+        }
+        .hero-image img:hover {
+            transform: perspective(1200px) rotateY(0) rotateX(0);
+        }
+        .floating-gold {
+            position: absolute;
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(200, 164, 126, 0.15), transparent 70%);
+            top: -20px;
+            right: -30px;
+            z-index: -1;
+            filter: blur(30px);
+            animation: floatGold 8s infinite alternate;
+        }
+        @keyframes floatGold {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(-30px, 40px) scale(1.3); }
+        }
+
+        /* ============================================================
+           SECTION COMMON · LUXURY SPACING
+           ============================================================ */
+        .section {
+            padding: 6rem 2.5rem;
+            max-width: 1440px;
+            margin: 0 auto;
+        }
+        .section-tag {
+            font-family: var(--font-serif);
+            font-size: 0.8rem;
+            letter-spacing: 0.2em;
+            color: var(--gold-matte);
+            text-transform: uppercase;
+            margin-bottom: 0.8rem;
+            font-weight: 400;
+        }
+        .section-title {
+            font-family: var(--font-serif);
+            font-size: clamp(2.4rem, 5vw, 3.8rem);
+            font-weight: 600;
+            letter-spacing: -0.01em;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+        }
+        .section-desc {
+            font-family: var(--font-sans);
+            font-weight: 300;
+            font-size: 1rem;
+            max-width: 500px;
+            color: var(--black-soft);
+            line-height: 1.8;
+        }
+
+        /* ============================================================
+           BRAND STORY · EDITORIAL
+           ============================================================ */
+        .brand-story {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            padding: 6rem 2.5rem;
+            max-width: 1440px;
+            margin: 0 auto;
+        }
+        .brand-story img {
+            border-radius: 12px;
+            box-shadow: var(--shadow-lux);
+            transition: var(--transition-smooth);
+            width: 100%;
+        }
+        .brand-story img:hover {
+            transform: scale(1.01);
+        }
+        .brand-story-content {
+            display: flex;
+            flex-direction: column;
+            gap: 1.4rem;
+        }
+
+        /* ============================================================
+           FEATURED · CUSTOM CARDS
+           ============================================================ */
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2.5rem;
+            margin-top: 2rem;
+        }
+        .product-card {
+            background: var(--white);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 12px 40px -10px rgba(0, 0, 0, 0.06);
+            transition: var(--transition-smooth);
+            position: relative;
+            group: true;
+        }
+        .product-card:hover {
+            transform: translateY(-12px);
+            box-shadow: 0 30px 60px -16px rgba(0, 0, 0, 0.15);
+        }
+        .product-card-image {
+            position: relative;
+            overflow: hidden;
+            height: 320px;
+            background: var(--cream);
+        }
+        .product-card-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition-smooth);
+        }
+        .product-card:hover .product-card-image img {
+            transform: scale(1.04);
+        }
+        .product-badge {
+            position: absolute;
+            top: 16px;
+            left: 16px;
+            background: var(--gold);
+            color: var(--white);
+            padding: 0.2rem 1.2rem;
+            font-size: 0.65rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            border-radius: 40px;
+            font-weight: 500;
+        }
+        .product-wishlist {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(8px);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition-smooth);
+            cursor: pointer;
+            border: none;
+            font-size: 1.1rem;
+        }
+        .product-wishlist:hover {
+            background: var(--white);
+            transform: scale(1.1);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+        }
+        .product-card-body {
+            padding: 1.8rem 1.8rem 2rem;
+        }
+        .product-card-title {
+            font-family: var(--font-serif);
+            font-size: 1.2rem;
+            font-weight: 600;
+            letter-spacing: -0.01em;
+        }
+        .product-card-code {
+            font-size: 0.7rem;
+            color: var(--gold-matte);
+            letter-spacing: 0.1em;
+            margin-top: 0.2rem;
+            font-weight: 400;
+        }
+        .product-card-price {
+            font-family: var(--font-sans);
+            font-weight: 500;
+            font-size: 1.1rem;
+            margin-top: 0.8rem;
+            color: var(--black);
+        }
+        .product-card-actions {
+            display: flex;
+            gap: 0.6rem;
+            margin-top: 1rem;
+            flex-wrap: wrap;
+        }
+        .btn-sm {
+            padding: 0.3rem 1.2rem;
+            font-size: 0.7rem;
+            border-radius: 40px;
+            border: 1px solid var(--black);
+            background: transparent;
+            transition: var(--transition-smooth);
+            cursor: pointer;
+            font-family: var(--font-sans);
+            letter-spacing: 0.06em;
+        }
+        .btn-sm:hover {
+            background: var(--black);
+            color: var(--ivory);
+        }
+        .btn-sm-gold {
+            border-color: var(--gold);
+            color: var(--gold-matte);
+        }
+        .btn-sm-gold:hover {
+            background: var(--gold);
+            color: var(--white);
+            border-color: var(--gold);
+        }
+
+        /* ============================================================
+           CATEGORIES · LUXURY TILES
+           ============================================================ */
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.8rem;
+            margin-top: 2.5rem;
+        }
+        .category-item {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            aspect-ratio: 4/5;
+            background: var(--cream);
+            transition: var(--transition-smooth);
+            cursor: pointer;
+        }
+        .category-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition-smooth);
+        }
+        .category-item:hover img {
+            transform: scale(1.06);
+        }
+        .category-item::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(0deg, rgba(0, 0, 0, 0.2) 0%, transparent 60%);
+        }
+        .category-label {
+            position: absolute;
+            bottom: 24px;
+            left: 24px;
+            color: var(--white);
+            font-family: var(--font-serif);
+            font-size: 1.3rem;
+            font-weight: 600;
+            letter-spacing: 0.02em;
+            z-index: 2;
+            text-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        /* ============================================================
+           LOOKBOOK · EDITORIAL
+           ============================================================ */
+        .lookbook {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr 1fr;
+            gap: 1.2rem;
+            margin-top: 2rem;
+        }
+        .lookbook-item {
+            border-radius: 16px;
+            overflow: hidden;
+            aspect-ratio: 3/4;
+            background: var(--beige);
+            transition: var(--transition-smooth);
+        }
+        .lookbook-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition-smooth);
+        }
+        .lookbook-item:hover img {
+            transform: scale(1.04);
+        }
+
+        /* ============================================================
+           WHY CHOOSE US · STATS · TESTIMONIALS
+           ============================================================ */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            margin: 3rem 0;
+            text-align: center;
+        }
+        .stat-number {
+            font-family: var(--font-serif);
+            font-size: 2.8rem;
+            font-weight: 600;
+            color: var(--gold-matte);
+        }
+        .stat-label {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            opacity: 0.7;
+        }
+
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+        .testimonial-card {
+            background: var(--white);
+            padding: 2.2rem;
+            border-radius: 24px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.03);
+            font-style: italic;
+            font-family: var(--font-serif);
+            font-size: 1.1rem;
+            line-height: 1.7;
+            color: var(--black-soft);
+            border: 1px solid rgba(200, 164, 126, 0.08);
+        }
+        .testimonial-card span {
+            display: block;
+            margin-top: 1rem;
+            font-style: normal;
+            font-family: var(--font-sans);
+            font-weight: 500;
+            font-size: 0.9rem;
+            color: var(--gold-matte);
+        }
+
+        /* ============================================================
+           NEWSLETTER · CONTACT
+           ============================================================ */
+        .newsletter-box {
+            background: var(--black);
+            color: var(--ivory);
+            padding: 4rem 3rem;
+            border-radius: 32px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            gap: 1.2rem;
+            margin: 3rem 0;
+        }
+        .newsletter-box input {
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            padding: 0.9rem 1.8rem;
+            border-radius: 60px;
+            color: var(--white);
+            width: 100%;
+            max-width: 400px;
+            font-family: var(--font-sans);
+            font-weight: 300;
+            letter-spacing: 0.04em;
+            outline: none;
+            transition: var(--transition-smooth);
+        }
+        .newsletter-box input::placeholder {
+            color: rgba(255, 255, 255, 0.4);
+        }
+        .newsletter-box input:focus {
+            border-color: var(--gold);
+            background: rgba(255, 255, 255, 0.08);
+        }
+        .newsletter-box .btn-lux {
+            background: var(--gold-matte);
+            color: var(--black);
+            border: none;
+        }
+        .newsletter-box .btn-lux:hover {
+            background: var(--gold);
+        }
+
+        /* ============================================================
+           FOOTER · LUXURY
+           ============================================================ */
+        .footer {
+            background: var(--black);
+            color: var(--ivory);
+            padding: 4rem 2.5rem 2rem;
+            margin-top: 2rem;
+        }
+        .footer-inner {
+            max-width: 1440px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 3rem;
+        }
+        .footer-logo {
+            width: 70px;
+            margin-bottom: 1rem;
+            filter: brightness(0.9) saturate(0.6);
+        }
+        .footer p {
+            font-weight: 300;
+            opacity: 0.6;
+            font-size: 0.9rem;
+            line-height: 1.7;
+        }
+        .footer h4 {
+            font-family: var(--font-serif);
+            font-weight: 500;
+            letter-spacing: 0.05em;
+            margin-bottom: 1rem;
+            font-size: 1rem;
+            color: var(--gold-light);
+        }
+        .footer ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.7rem;
+        }
+        .footer ul li a {
+            opacity: 0.5;
+            transition: var(--transition-smooth);
+            font-weight: 300;
+            font-size: 0.9rem;
+        }
+        .footer ul li a:hover {
+            opacity: 1;
+            color: var(--gold-light);
+        }
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            margin-top: 3rem;
+            padding-top: 2rem;
+            text-align: center;
+            opacity: 0.3;
+            font-size: 0.7rem;
+            letter-spacing: 0.1em;
+        }
+
+        /* ============================================================
+           RESPONSIVE · MOBILE FIRST
+           ============================================================ */
+        @media (max-width: 1024px) {
+            .product-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .category-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .lookbook {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .testimonial-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+            .footer-inner {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 0 1.2rem;
+            }
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                background: rgba(250, 246, 240, 0.95);
+                backdrop-filter: blur(20px);
+                position: absolute;
+                top: 78px;
+                left: 0;
+                width: 100%;
+                padding: 2rem 1.5rem;
+                gap: 1.8rem;
+                border-bottom: 1px solid rgba(200, 164, 126, 0.1);
+            }
+            .nav-links.open {
+                display: flex;
+            }
+            .menu-toggle {
+                display: flex;
+            }
+            .hero-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+                text-align: center;
+                padding: 2rem 0;
+            }
+            .hero-desc {
+                max-width: 100%;
+            }
+            .hero-cta {
+                justify-content: center;
+            }
+            .hero-image img {
+                max-width: 100%;
+            }
+            .brand-story {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+                padding: 3rem 1.2rem;
+            }
+            .section {
+                padding: 3rem 1.2rem;
+            }
+            .product-grid {
+                grid-template-columns: 1fr;
+            }
+            .category-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+            .stats-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+            .testimonial-grid {
+                grid-template-columns: 1fr;
+            }
+            .footer-inner {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            .lookbook {
+                grid-template-columns: 1fr 1fr;
+            }
+            .newsletter-box {
+                padding: 2.5rem 1.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-title {
+                font-size: 2.6rem;
+            }
+            .category-grid {
+                grid-template-columns: 1fr;
+            }
+            .lookbook {
+                grid-template-columns: 1fr;
+            }
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+            .nav-actions .whatsapp-btn span {
+                display: none;
+            }
+        }
+
+        /* ============================================================
+           UTILITY · REVEAL ANIMATION
+           ============================================================ */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 1s ease, transform 1s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .stagger>* {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+        .stagger.visible>*:nth-child(1) {
+            transition-delay: 0.05s;
+        }
+        .stagger.visible>*:nth-child(2) {
+            transition-delay: 0.15s;
+        }
+        .stagger.visible>*:nth-child(3) {
+            transition-delay: 0.25s;
+        }
+        .stagger.visible>*:nth-child(4) {
+            transition-delay: 0.35s;
+        }
+        .stagger.visible>* {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
 </head>
 <body>
-  <!-- PAGE LOADER -->
-  <div id="page-loader">
-    <div class="loader-logo">TAHERA</div>
-    <div class="loader-bar"></div>
-  </div>
 
-  <!-- CUSTOM CURSOR (desktop) -->
-  <div class="custom-cursor" id="customCursor"></div>
-
-  <!-- NAVBAR -->
-  <nav class="navbar navbar-expand-lg fixed-top" id="mainNav">
-    <div class="container">
-      <a class="navbar-brand" href="#">TAHERA<span class="gold-dot">.</span></a>
-      <button class="navbar-toggler border-0" type="button" data-bs-toggle="offcanvas" data-bs-target="#mobileMenu">
-        <i class="bi bi-list" style="font-size:1.8rem;"></i>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ms-auto align-items-lg-center">
-          <li class="nav-item"><a class="nav-link active" href="#home">Home</a></li>
-          <li class="nav-item"><a class="nav-link" href="#collections">Collections</a></li>
-          <li class="nav-item"><a class="nav-link" href="#categories">Categories</a></li>
-          <li class="nav-item"><a class="nav-link" href="#featured">Featured</a></li>
-          <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
-          <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
-          <li class="nav-item"><a class="nav-link" href="#"><i class="bi bi-search"></i></a></li>
-          <li class="nav-item"><a class="nav-link" href="#" id="whatsappNavBtn"><i class="bi bi-whatsapp"></i></a></li>
-        </ul>
-      </div>
+    <!-- ============================================================
+    LOADER
+    ============================================================ -->
+    <div id="loader" role="status" aria-label="Loading">
+        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='45' fill='none' stroke='%23c8a47e' stroke-width='1.5'/%3E%3Cpath d='M50 10 A40 40 0 0 1 90 50' fill='none' stroke='%23c8a47e' stroke-width='2'/%3E%3C/svg%3E" alt="TAHERA" class="loader-logo">
+        <div class="loader-line"></div>
     </div>
-  </nav>
-  <!-- Offcanvas mobile -->
-  <div class="offcanvas offcanvas-end" tabindex="-1" id="mobileMenu">
-    <div class="offcanvas-header">
-      <h5 class="offcanvas-title playfair">TAHERA</h5>
-      <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+
+    <!-- ============================================================
+    ANNOUNCEMENT BAR
+    ============================================================ -->
+    <div class="announcement" role="banner">
+        <span>✧ complimentary shipping · bespoke service ✧</span>
     </div>
-    <div class="offcanvas-body">
-      <ul class="nav flex-column">
-        <li class="nav-item"><a class="nav-link active" href="#home">Home</a></li>
-        <li class="nav-item"><a class="nav-link" href="#collections">Collections</a></li>
-        <li class="nav-item"><a class="nav-link" href="#categories">Categories</a></li>
-        <li class="nav-item"><a class="nav-link" href="#featured">Featured</a></li>
-        <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
-        <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
-      </ul>
-    </div>
-  </div>
 
-  <!-- HERO -->
-  <section id="home" class="hero-section">
-    <div class="hero-gold-abstract"></div>
-    <i class="bi bi-flower1 floating-leaf" style="top:15%;left:5%;"></i>
-    <i class="bi bi-flower2 floating-leaf" style="bottom:20%;right:8%;animation-delay:1.5s;"></i>
-    <div class="container hero-content">
-      <div class="row align-items-center">
-        <div class="col-lg-6">
-          <span class="text-uppercase small gold-text" style="letter-spacing:0.2rem;">Luxury Fashion House</span>
-          <h1 class="mt-3 playfair">Pakistani Elegance <br>Curated for <span class="gold-text">Bangladesh</span></h1>
-          <p class="lead mt-4" style="font-weight:300;max-width:500px;">Timeless, minimal, sophisticated — discover the new standard of luxury pret, wedding, and party wear.</p>
-          <div class="mt-5">
-            <a href="#collections" class="btn btn-luxury me-3">Explore Collection</a>
-            <a href="#featured" class="btn btn-outline-luxury">Shop Now</a>
-          </div>
-          <div class="row mt-5 hero-stats g-4">
-            <div class="col-4"><span>1200+</span><small class="d-block text-muted">Premium Designs</small></div>
-            <div class="col-4"><span>850+</span><small class="d-block text-muted">Happy Clients</small></div>
-            <div class="col-4"><span>4.9★</span><small class="d-block text-muted">Rating</small></div>
-          </div>
-        </div>
-        <div class="col-lg-6 d-none d-lg-block">
-          <img src="https://images.unsplash.com/photo-1618354691373-d851c5c3a990?w=800&h=900&fit=crop" class="img-fluid shadow-lg" alt="Tahera luxury fashion" style="object-fit:cover;height:620px;width:100%;">
-        </div>
-      </div>
-    </div>
-  </section>
+    <!-- ============================================================
+    NAVBAR · STICKY · GLASS
+    ============================================================ -->
+    <nav class="navbar" role="navigation" aria-label="Main navigation">
+        <div class="navbar-inner">
+            <!-- logo -->
+            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 40'%3E%3Ctext x='0' y='30' font-family='Playfair Display, serif' font-size='28' font-weight='600' fill='%231a1715' letter-spacing='6'%3ETAHERA%3C/text%3E%3C/svg%3E" alt="TAHERA" class="nav-logo">
 
-  <!-- FEATURE STRIP -->
-  <div class="feature-strip">
-    <div class="container">
-      <div class="row text-center">
-        <div class="col-md col-6 feature-item"><i class="bi bi-truck"></i> Free Delivery</div>
-        <div class="col-md col-6 feature-item"><i class="bi bi-diamond"></i> Premium Quality</div>
-        <div class="col-md col-6 feature-item"><i class="bi bi-shield-check"></i> Secure Shopping</div>
-        <div class="col-md col-6 feature-item"><i class="bi bi-gift"></i> Luxury Packaging</div>
-        <div class="col-md col-6 feature-item"><i class="bi bi-headset"></i> Best Support</div>
-      </div>
-    </div>
-  </div>
+            <!-- desktop links -->
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#collection">Collection</a></li>
+                <li><a href="#story">Story</a></li>
+                <li><a href="#lookbook">Lookbook</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
 
-  <!-- ABOUT -->
-  <section id="about" class="section-padding ivory-bg">
-    <div class="container">
-      <div class="row g-5 align-items-center">
-        <div class="col-lg-6">
-          <img src="https://images.unsplash.com/photo-1567401893414-76b7b1e5a7a5?w=800&h=600&fit=crop" class="img-fluid shadow" alt="Tahera about" style="height:500px;width:100%;object-fit:cover;">
-        </div>
-        <div class="col-lg-6">
-          <span class="gold-text text-uppercase small">About Tahera</span>
-          <h2 class="playfair display-5">Where heritage meets <span class="gold-text">modern luxury</span></h2>
-          <p class="mt-4" style="font-weight:300;">TAHERA is a celebration of Pakistani craftsmanship, reimagined for the contemporary woman. Every piece tells a story of elegance, from luxurious lawns to opulent wedding ensembles. We curate for those who value timeless sophistication.</p>
-          <div class="row mt-5">
-            <div class="col-6"><strong class="gold-text">Mission</strong><p class="small">Empower women through refined design.</p></div>
-            <div class="col-6"><strong class="gold-text">Vision</strong><p class="small">Become the leading luxury fashion house in South Asia.</p></div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- COLLECTIONS -->
-  <section id="collections" class="section-padding cream-bg">
-    <div class="container">
-      <h2 class="section-title text-center playfair">Our Collections</h2>
-      <div class="row g-4 mt-4">
-        <div class="col-md-3 col-6"><div class="card card-luxury"><img src="https://images.unsplash.com/photo-1539008835657-9e8e9680c956?w=400&h=500&fit=crop" alt="Luxury Lawn"><div class="card-body text-center"><h5 class="playfair">Luxury Lawn</h5><a href="#" class="btn btn-outline-luxury btn-sm">Explore</a></div></div></div>
-        <div class="col-md-3 col-6"><div class="card card-luxury"><img src="https://images.unsplash.com/photo-1583744946564-b52d1e3899d3?w=400&h=500&fit=crop" alt="Luxury Eid"><div class="card-body text-center"><h5 class="playfair">Luxury Eid</h5><a href="#" class="btn btn-outline-luxury btn-sm">Explore</a></div></div></div>
-        <div class="col-md-3 col-6"><div class="card card-luxury"><img src="https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=400&h=500&fit=crop" alt="Party Wear"><div class="card-body text-center"><h5 class="playfair">Party Wear</h5><a href="#" class="btn btn-outline-luxury btn-sm">Explore</a></div></div></div>
-        <div class="col-md-3 col-6"><div class="card card-luxury"><img src="https://images.unsplash.com/photo-1585487000160-6ebcfceb0d03?w=400&h=500&fit=crop" alt="Wedding"><div class="card-body text-center"><h5 class="playfair">Wedding</h5><a href="#" class="btn btn-outline-luxury btn-sm">Explore</a></div></div></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- FEATURED PRODUCTS (12) -->
-  <section id="featured" class="section-padding ivory-bg">
-    <div class="container">
-      <h2 class="section-title text-center playfair">Featured <span class="gold-text">Pieces</span></h2>
-      <div class="d-flex flex-wrap justify-content-center gap-2 mt-4" id="categoryFilter">
-        <button class="filter-btn active" data-filter="all">All</button>
-        <button class="filter-btn" data-filter="lawn">Lawn</button>
-        <button class="filter-btn" data-filter="pret">Pret</button>
-        <button class="filter-btn" data-filter="wedding">Wedding</button>
-        <button class="filter-btn" data-filter="party">Party Wear</button>
-        <button class="filter-btn" data-filter="eid">Eid</button>
-      </div>
-      <div class="row g-4 mt-3" id="productGrid"></div>
-    </div>
-  </section>
-
-  <!-- WHY CHOOSE US -->
-  <section class="section-padding beige-bg">
-    <div class="container">
-      <h2 class="section-title text-center playfair">Why Choose <span class="gold-text">Tahera</span></h2>
-      <div class="row g-4 mt-4 text-center">
-        <div class="col-md-4"><i class="bi bi-gem" style="font-size:3rem;color:var(--primary-gold);"></i><h5 class="mt-3 playfair">Premium Quality</h5><p>Finest fabrics, impeccable tailoring.</p></div>
-        <div class="col-md-4"><i class="bi bi-star" style="font-size:3rem;color:var(--primary-gold);"></i><h5 class="mt-3 playfair">Designer Collection</h5><p>Curated by international fashion houses.</p></div>
-        <div class="col-md-4"><i class="bi bi-credit-card" style="font-size:3rem;color:var(--primary-gold);"></i><h5 class="mt-3 playfair">Affordable Luxury</h5><p>Exclusivity without the exorbitant price.</p></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- LOOKBOOK -->
-  <section class="section-padding cream-bg">
-    <div class="container">
-      <h2 class="section-title text-center playfair">Lookbook</h2>
-      <div class="row g-3 lookbook-grid mt-3">
-        <div class="col-4 col-md-3 grid-item"><img src="https://images.unsplash.com/photo-1618354691373-d851c5c3a990?w=300&h=400&fit=crop" alt="lookbook"></div>
-        <div class="col-4 col-md-3 grid-item"><img src="https://images.unsplash.com/photo-1583744946564-b52d1e3899d3?w=300&h=400&fit=crop" alt="lookbook"></div>
-        <div class="col-4 col-md-3 grid-item"><img src="https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=300&h=400&fit=crop" alt="lookbook"></div>
-        <div class="col-4 col-md-3 grid-item"><img src="https://images.unsplash.com/photo-1539008835657-9e8e9680c956?w=300&h=400&fit=crop" alt="lookbook"></div>
-        <div class="col-4 col-md-3 grid-item"><img src="https://images.unsplash.com/photo-1585487000160-6ebcfceb0d03?w=300&h=400&fit=crop" alt="lookbook"></div>
-        <div class="col-4 col-md-3 grid-item"><img src="https://images.unsplash.com/photo-1567401893414-76b7b1e5a7a5?w=300&h=400&fit=crop" alt="lookbook"></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- CONTACT & NEWSLETTER -->
-  <section id="contact" class="section-padding ivory-bg">
-    <div class="container">
-      <div class="row g-5">
-        <div class="col-lg-6">
-          <h2 class="playfair display-6">Connect with <span class="gold-text">Tahera</span></h2>
-          <p class="mt-3">We'd love to hear from you. Reach out for styling advice, orders, or collaborations.</p>
-          <div class="mt-4"><i class="bi bi-geo-alt gold-text"></i> House 12, Road 4, Gulshan, Dhaka</div>
-          <div class="mt-2"><i class="bi bi-telephone gold-text"></i> +880 1712 345678</div>
-          <div class="mt-2"><i class="bi bi-envelope gold-text"></i> hello@tahera.pk</div>
-          <div class="mt-4 d-flex gap-3">
-            <a href="#" class="btn btn-outline-luxury btn-sm"><i class="bi bi-facebook"></i></a>
-            <a href="#" class="btn btn-outline-luxury btn-sm"><i class="bi bi-instagram"></i></a>
-            <a href="#" class="btn btn-outline-luxury btn-sm"><i class="bi bi-whatsapp"></i></a>
-          </div>
-        </div>
-        <div class="col-lg-6">
-          <h5 class="playfair">Newsletter</h5>
-          <p>Subscribe for exclusive previews and private sales.</p>
-          <div class="input-group">
-            <input type="email" class="form-control newsletter-input" placeholder="Your email address">
-            <button class="btn btn-luxury">Subscribe</button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- FOOTER -->
-  <footer class="dark-bg text-white py-5">
-    <div class="container text-center">
-      <a class="navbar-brand text-white" href="#">TAHERA<span class="gold-dot">.</span></a>
-      <div class="footer-gold-divider mx-auto"></div>
-      <div class="row mt-4">
-        <div class="col-md-4"><a href="#" class="text-white-50 text-decoration-none">Home</a></div>
-        <div class="col-md-4"><a href="#" class="text-white-50 text-decoration-none">Collections</a></div>
-        <div class="col-md-4"><a href="#" class="text-white-50 text-decoration-none">Contact</a></div>
-      </div>
-      <div class="mt-4 small text-white-50">© 2026 TAHERA. All rights reserved. Pakistani Elegance.</div>
-    </div>
-  </footer>
-
-  <!-- FLOATING BUTTONS -->
-  <a href="https://wa.me/923145703357" target="_blank" class="floating-btn whatsapp"><i class="bi bi-whatsapp"></i></a>
-  <div class="floating-btn backtotop" id="backToTop"><i class="bi bi-chevron-up"></i></div>
-
-  <!-- Bootstrap JS -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-  <script>
-    (function() {
-      // ----- LOADER -----
-      window.addEventListener('load', function() {
-        document.getElementById('page-loader').classList.add('fade-out');
-      });
-
-      // ----- CUSTOM CURSOR (desktop) -----
-      const cursor = document.getElementById('customCursor');
-      if (window.innerWidth > 1024) {
-        document.addEventListener('mousemove', e => {
-          cursor.style.left = e.clientX + 'px';
-          cursor.style.top = e.clientY + 'px';
-        });
-        document.querySelectorAll('a, button, .card-luxury, .grid-item, .filter-btn').forEach(el => {
-          el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
-          el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
-        });
-      } else { cursor.style.display = 'none'; }
-
-      // ----- STICKY NAVBAR -----
-      const nav = document.getElementById('mainNav');
-      window.addEventListener('scroll', () => { nav.classList.toggle('scrolled', window.scrollY > 60); });
-
-      // ----- BACK TO TOP -----
-      document.getElementById('backToTop').addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
-
-      // ----- PRODUCT DATA (12 items) -----
-      const products = [
-        { name: 'Zari Embroidered Lawn', category: 'lawn', code: 'TL-101', price: 'BDT 9,800', img: 'https://images.unsplash.com/photo-1539008835657-9e8e9680c956?w=400&h=500&fit=crop', badge: 'New' },
-        { name: 'Silk Chiffon Pret', category: 'pret', code: 'TP-204', price: 'BDT 12,500', img: 'https://images.unsplash.com/photo-1583744946564-b52d1e3899d3?w=400&h=500&fit=crop', badge: 'Best Seller' },
-        { name: 'Gold Wedding Gown', category: 'wedding', code: 'TW-312', price: 'BDT 45,000', img: 'https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=400&h=500&fit=crop', badge: 'Luxury' },
-        { name: 'Party Cape Dress', category: 'party', code: 'TPP-408', price: 'BDT 18,200', img: 'https://images.unsplash.com/photo-1585487000160-6ebcfceb0d03?w=400&h=500&fit=crop', badge: '' },
-        { name: 'Eid Luxury Lawn', category: 'eid', code: 'TE-501', price: 'BDT 11,300', img: 'https://images.unsplash.com/photo-1618354691373-d851c5c3a990?w=400&h=500&fit=crop', badge: 'Eid Special' },
-        { name: 'Embroidered Organza', category: 'pret', code: 'TP-212', price: 'BDT 14,900', img: 'https://images.unsplash.com/photo-1567401893414-76b7b1e5a7a5?w=400&h=500&fit=crop', badge: '' },
-        { name: 'Net Wedding Lehenga', category: 'wedding', code: 'TW-315', price: 'BDT 62,000', img: 'https://images.unsplash.com/photo-1585487000160-6ebcfceb0d03?w=400&h=500&fit=crop', badge: 'Premium' },
-        { name: 'Luxury Lawn Suit', category: 'lawn', code: 'TL-108', price: 'BDT 8,200', img: 'https://images.unsplash.com/photo-1539008835657-9e8e9680c956?w=400&h=500&fit=crop', badge: '' },
-        { name: 'Pearl Embellished Party', category: 'party', code: 'TPP-416', price: 'BDT 21,500', img: 'https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=400&h=500&fit=crop', badge: 'New' },
-        { name: 'Eid Silk Pret', category: 'eid', code: 'TE-509', price: 'BDT 13,400', img: 'https://images.unsplash.com/photo-1583744946564-b52d1e3899d3?w=400&h=500&fit=crop', badge: '' },
-        { name: 'Mughal Inspired Wedding', category: 'wedding', code: 'TW-321', price: 'BDT 55,000', img: 'https://images.unsplash.com/photo-1618354691373-d851c5c3a990?w=400&h=500&fit=crop', badge: 'Exclusive' },
-        { name: 'Casual Luxury Pret', category: 'pret', code: 'TP-220', price: 'BDT 10,800', img: 'https://images.unsplash.com/photo-1567401893414-76b7b1e5a7a5?w=400&h=500&fit=crop', badge: '' }
-      ];
-
-      const grid = document.getElementById('productGrid');
-      function renderProducts(filter = 'all') {
-        const filtered = filter === 'all' ? products : products.filter(p => p.category === filter);
-        grid.innerHTML = filtered.map((p, idx) => `
-          <div class="col-lg-3 col-md-4 col-sm-6 product-item" data-category="${p.category}">
-            <div class="card card-luxury h-100">
-              <div style="position:relative;overflow:hidden;">
-                <img src="${p.img}" class="card-img-top" alt="${p.name}" loading="lazy">
-                ${p.badge ? `<span class="product-badge position-absolute top-0 start-0 m-2">${p.badge}</span>` : ''}
-                <span class="position-absolute top-0 end-0 m-3 wishlist-icon"><i class="bi bi-heart"></i></span>
-              </div>
-              <div class="card-body">
-                <div class="d-flex justify-content-between"><span class="product-code">${p.code}</span><span class="text-warning">★★★★☆</span></div>
-                <h6 class="playfair mt-1">${p.name}</h6>
-                <div class="d-flex justify-content-between align-items-center mt-2">
-                  <span class="product-price">${p.price}</span>
-                  <div><button class="btn btn-sm btn-outline-luxury quick-view" data-name="${p.name}" data-code="${p.code}" data-price="${p.price}" data-img="${p.img}">Quick View</button></div>
+            <!-- actions -->
+            <div class="nav-actions">
+                <svg viewBox="0 0 24 24" aria-label="Search"><circle cx="11" cy="11" r="7"/><line x1="16" y1="16" x2="22" y2="22"/></svg>
+                <svg viewBox="0 0 24 24" aria-label="Wishlist"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+                <a href="https://wa.me/923145703357" target="_blank" rel="noopener" class="whatsapp-btn" aria-label="WhatsApp"><span>WhatsApp</span> <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a>
+                <div class="menu-toggle" id="menuToggle" aria-label="Menu" role="button" tabindex="0">
+                    <span></span><span></span><span></span>
                 </div>
-              </div>
             </div>
-          </div>
-        `).join('');
-        // Quick view -> modal simulation (buy now)
-        document.querySelectorAll('.quick-view').forEach(btn => {
-          btn.addEventListener('click', function(e) {
-            e.stopPropagation();
-            const name = this.dataset.name;
-            const code = this.dataset.code;
-            const price = this.dataset.price;
-            const url = encodeURIComponent(window.location.href);
-            const msg = `Assalam-o-Alaikum,%0AI want to order this product.%0AProduct Name: ${encodeURIComponent(name)}%0AProduct Code: ${encodeURIComponent(code)}%0APrice: ${encodeURIComponent(price)}%0AProduct Link: ${url}%0APlease confirm availability.%0AThank you.`;
-            window.open(`https://wa.me/923145703357?text=${msg}`, '_blank');
-          });
-        });
-      }
-      renderProducts();
+        </div>
+    </nav>
 
-      // Category filter
-      document.querySelectorAll('.filter-btn').forEach(btn => {
-        btn.addEventListener('click', function() {
-          document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-          this.classList.add('active');
-          renderProducts(this.dataset.filter);
-        });
-      });
+    <!-- ============================================================
+    HERO · CAMPAIGN
+    ============================================================ -->
+    <section class="hero" id="hero">
+        <div class="hero-bg"></div>
+        <div class="hero-grid">
+            <div class="hero-text">
+                <div class="hero-sub">Spring · 2025</div>
+                <h1 class="hero-title">The <em>Art</em> of <br>Elegance</h1>
+                <p class="hero-desc">Where heritage meets modernity — each piece tells a story of refined craftsmanship and timeless luxury.</p>
+                <div class="hero-cta">
+                    <button class="btn-lux">Explore Collection</button>
+                    <button class="btn-lux btn-outline">Lookbook</button>
+                </div>
+            </div>
+            <div class="hero-image">
+                <img src="https://images.unsplash.com/photo-1539008835657-9e8e9680c956?w=800&q=80" alt="TAHERA luxury campaign" loading="lazy">
+                <div class="floating-gold"></div>
+            </div>
+        </div>
+    </section>
 
-      // Navbar WhatsApp
-      document.getElementById('whatsappNavBtn').addEventListener('click', function(e) {
-        e.preventDefault();
-        window.open('https://wa.me/923145703357', '_blank');
-      });
+    <!-- ============================================================
+    BRAND STORY
+    ============================================================ -->
+    <section class="brand-story reveal" id="story">
+        <img src="https://images.unsplash.com/photo-1556905055-8f358a7a47b2?w=800&q=80" alt="TAHERA atelier" loading="lazy">
+        <div class="brand-story-content">
+            <div class="section-tag">Heritage</div>
+            <h2 class="section-title">The TAHERA <br>Maison</h2>
+            <p class="section-desc">Founded on the principles of artisanal excellence, TAHERA redefines contemporary luxury. Each garment is a canvas — celebrating the dialogue between tradition and the avant-garde.</p>
+            <button class="btn-lux" style="align-self:flex-start;">Discover</button>
+        </div>
+    </section>
 
-      // Floating WhatsApp
-      document.querySelector('.floating-btn.whatsapp').addEventListener('click', function(e) {
-        e.preventDefault();
-        window.open('https://wa.me/923145703357', '_blank');
-      });
+    <!-- ============================================================
+    FEATURED COLLECTION · PRODUCTS
+    ============================================================ -->
+    <section class="section reveal" id="collection">
+        <div class="section-tag">Curated</div>
+        <h2 class="section-title">Featured Collection</h2>
+        <div class="product-grid stagger">
+            <!-- card 1 -->
+            <div class="product-card">
+                <div class="product-card-image">
+                    <img src="https://images.unsplash.com/photo-1539109136881-3be0616acf4b?w=600&q=80" alt="Silk Gown" loading="lazy">
+                    <span class="product-badge">New</span>
+                    <button class="product-wishlist" aria-label="Add to wishlist">♡</button>
+                </div>
+                <div class="product-card-body">
+                    <div class="product-card-title">Étoile Silk Gown</div>
+                    <div class="product-card-code">TH-2045 · IVORY</div>
+                    <div class="product-card-price">$1,280</div>
+                    <div class="product-card-actions">
+                        <button class="btn-sm btn-sm-gold">Quick View</button>
+                        <button class="btn-sm">Buy Now</button>
+                    </div>
+                </div>
+            </div>
+            <!-- card 2 -->
+            <div class="product-card">
+                <div class="product-card-image">
+                    <img src="https://images.unsplash.com/photo-1566174053879-31528523f8ae?w=600&q=80" alt="Tailored Blazer" loading="lazy">
+                    <span class="product-badge" style="background:var(--black);">Bestseller</span>
+                    <button class="product-wishlist" aria-label="Add to wishlist">♡</button>
+                </div>
+                <div class="product-card-body">
+                    <div class="product-card-title">Cavalier Blazer</div>
+                    <div class="product-card-code">TH-1123 · CHARCOAL</div>
+                    <div class="product-card-price">$1,890</div>
+                    <div class="product-card-actions">
+                        <button class="btn-sm btn-sm-gold">Quick View</button>
+                        <button class="btn-sm">Buy Now</button>
+                    </div>
+                </div>
+            </div>
+            <!-- card 3 -->
+            <div class="product-card">
+                <div class="product-card-image">
+                    <img src="https://images.unsplash.com/photo-1581044777550-4cfa60707c03?w=600&q=80" alt="Pleated Dress" loading="lazy">
+                    <button class="product-wishlist" aria-label="Add to wishlist">♡</button>
+                </div>
+                <div class="product-card-body">
+                    <div class="product-card-title">Luna Pleated Dress</div>
+                    <div class="product-card-code">TH-3091 · CHAMPAGNE</div>
+                    <div class="product-card-price">$1,450</div>
+                    <div class="product-card-actions">
+                        <button class="btn-sm btn-sm-gold">Quick View</button>
+                        <button class="btn-sm">Buy Now</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-      // Smooth scroll for nav links (basic)
-      document.querySelectorAll('.nav-link[href^="#"]').forEach(link => {
-        link.addEventListener('click', function(e) {
-          const target = document.querySelector(this.getAttribute('href'));
-          if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth' }); }
-        });
-      });
+    <!-- ============================================================
+    LUXURY CATEGORIES
+    ============================================================ -->
+    <section class="section reveal">
+        <div class="section-tag">Edit</div>
+        <h2 class="section-title">Shop by Category</h2>
+        <div class="category-grid stagger">
+            <div class="category-item"><img src="https://images.unsplash.com/photo-1539008835657-9e8e9680c956?w=400&q=80" alt="Dresses"><span class="category-label">Dresses</span></div>
+            <div class="category-item"><img src="https://images.unsplash.com/photo-1556905055-8f358a7a47b2?w=400&q=80" alt="Outerwear"><span class="category-label">Outerwear</span></div>
+            <div class="category-item"><img src="https://images.unsplash.com/photo-1566174053879-31528523f8ae?w=400&q=80" alt="Tailoring"><span class="category-label">Tailoring</span></div>
+            <div class="category-item"><img src="https://images.unsplash.com/photo-1581044777550-4cfa60707c03?w=400&q=80" alt="Accessories"><span class="category-label">Accessories</span></div>
+        </div>
+    </section>
 
-    })();
-  </script>
+    <!-- ============================================================
+    LOOKBOOK · EDITORIAL
+    ============================================================ -->
+    <section class="section reveal" id="lookbook">
+        <div class="section-tag">Inspiration</div>
+        <h2 class="section-title">The Lookbook</h2>
+        <div class="lookbook stagger">
+            <div class="lookbook-item"><img src="https://images.unsplash.com/photo-1539109136881-3be0616acf4b?w=400&q=80" alt="Look 1"></div>
+            <div class="lookbook-item"><img src="https://images.unsplash.com/photo-1556905055-8f358a7a47b2?w=400&q=80" alt="Look 2"></div>
+            <div class="lookbook-item"><img src="https://images.unsplash.com/photo-1566174053879-31528523f8ae?w=400&q=80" alt="Look 3"></div>
+            <div class="lookbook-item"><img src="https://images.unsplash.com/photo-1581044777550-4cfa60707c03?w=400&q=80" alt="Look 4"></div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    STATISTICS · WHY CHOOSE US
+    ============================================================ -->
+    <section class="section reveal">
+        <div class="section-tag">Maison</div>
+        <h2 class="section-title">By the Numbers</h2>
+        <div class="stats-grid stagger">
+            <div><div class="stat-number" data-count="12">0</div><div class="stat-label">Years of Excellence</div></div>
+            <div><div class="stat-number" data-count="280">0</div><div class="stat-label">Artisanal Pieces</div></div>
+            <div><div class="stat-number" data-count="4.9">0</div><div class="stat-label">Client Rating</div></div>
+            <div><div class="stat-number" data-count="34">0</div><div class="stat-label">Global Boutiques</div></div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    TESTIMONIALS
+    ============================================================ -->
+    <section class="section reveal">
+        <div class="section-tag">Testimonials</div>
+        <h2 class="section-title">What Our Clients Say</h2>
+        <div class="testimonial-grid stagger">
+            <div class="testimonial-card">“TAHERA is not just clothing; it’s an experience. Every stitch whispers luxury.” <span>— A. Khan, Vogue</span></div>
+            <div class="testimonial-card">“The craftsmanship is unparalleled. I feel like royalty in every piece.” <span>— L. Sinclair, Editor</span></div>
+            <div class="testimonial-card">“A modern classic — TAHERA redefines what it means to dress with intention.” <span>— M. Dupont, Stylist</span></div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    NEWSLETTER
+    ============================================================ -->
+    <section class="section reveal" id="contact">
+        <div class="newsletter-box">
+            <div class="section-tag" style="color:var(--gold-light);">Newsletter</div>
+            <h2 style="font-family:var(--font-serif);font-size:clamp(1.8rem,4vw,3rem);">Join the Inner Circle</h2>
+            <p style="opacity:0.6;max-width:400px;">Receive exclusive previews, private sale access, and maison stories.</p>
+            <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:0.8rem;width:100%;max-width:500px;">
+                <input type="email" placeholder="Your email address" aria-label="Email address">
+                <button class="btn-lux" style="background:var(--gold-matte);color:var(--black);">Subscribe</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    FOOTER · LUXURY
+    ============================================================ -->
+    <footer class="footer" role="contentinfo">
+        <div class="footer-inner">
+            <div>
+                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 40'%3E%3Ctext x='0' y='30' font-family='Playfair Display, serif' font-size='28' font-weight='600' fill='%23faf6f0' letter-spacing='6'%3ETAHERA%3C/text%3E%3C/svg%3E" alt="TAHERA" class="footer-logo">
+                <p>Luxury atelier since 2013. <br>Bespoke elegance for the discerning.</p>
+            </div>
+            <div><h4>Explore</h4><ul><li><a href="#">New Arrivals</a></li><li><a href="#">Bestsellers</a></li><li><a href="#">Lookbook</a></li></ul></div>
+            <div><h4>Service</h4><ul><li><a href="#">Concierge</a></li><li><a href="#">Returns</a></li><li><a href="#">Contact</a></li></ul></div>
+            <div><h4>Connect</h4><ul><li><a href="#">Instagram</a></li><li><a href="#">Pinterest</a></li><li><a href="#">WhatsApp</a></li></ul></div>
+        </div>
+        <div class="footer-bottom">© TAHERA · crafted with precision</div>
+    </footer>
+
+    <!-- ============================================================
+    JAVASCRIPT · LUXURY INTERACTIONS
+    ============================================================ -->
+    <script>
+        (function() {
+            'use strict';
+
+            /* ============================================================
+               LOADER
+            ============================================================ */
+            const loader = document.getElementById('loader');
+            window.addEventListener('load', function() {
+                loader.classList.add('hide');
+            });
+
+            /* ============================================================
+               MOBILE MENU TOGGLE
+            ============================================================ */
+            const toggle = document.getElementById('menuToggle');
+            const navLinks = document.getElementById('navLinks');
+            toggle.addEventListener('click', function(e) {
+                navLinks.classList.toggle('open');
+                this.classList.toggle('active');
+            });
+
+            /* ============================================================
+               SCROLL REVEAL · INTERSECTION OBSERVER
+            ============================================================ */
+            const reveals = document.querySelectorAll('.reveal, .stagger');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        // if stagger, children become visible via css
+                    }
+                });
+            }, { threshold: 0.15, rootMargin: '0px 0px -30px 0px' });
+
+            reveals.forEach(el => observer.observe(el));
+
+            /* ============================================================
+               COUNTER ANIMATION (stat numbers)
+            ============================================================ */
+            const counters = document.querySelectorAll('.stat-number');
+            const counterObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const el = entry.target;
+                        const target = parseInt(el.getAttribute('data-count'), 10);
+                        let current = 0;
+                        const increment = target / 60;
+                        const timer = setInterval(() => {
+                            current += increment;
+                            if (current >= target) {
+                                el.textContent = target;
+                                clearInterval(timer);
+                            } else {
+                                el.textContent = Math.floor(current);
+                            }
+                        }, 20);
+                        counterObserver.unobserve(el);
+                    }
+                });
+            }, { threshold: 0.5 });
+
+            counters.forEach(c => counterObserver.observe(c));
+
+            /* ============================================================
+               QUICK VIEW / BUY NOW PLACEHOLDER (demo)
+            ============================================================ */
+            document.querySelectorAll('.btn-sm-gold, .btn-sm').forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    if (this.textContent.trim() === 'Quick View') {
+                        alert('✨ TAHERA · Quick View \n(glass morphism popup with slider)');
+                    } else if (this.textContent.trim() === 'Buy Now') {
+                        const productName = this.closest('.product-card-body').querySelector(
+                        '.product-card-title').textContent;
+                        const code = this.closest('.product-card-body').querySelector('.product-card-code')
+                            .textContent;
+                        const price = this.closest('.product-card-body').querySelector('.product-card-price')
+                            .textContent;
+                        const url = window.location.href;
+                        const msg =
+                            `TAHERA · Purchase%0AProduct: ${productName}%0ACode: ${code}%0APrice: ${price}%0AURL: ${url}`;
+                        window.open(`https://wa.me/923145703357?text=${msg}`, '_blank');
+                    }
+                });
+            });
+
+            /* ============================================================
+               WHATSAPP BUTTON (global)
+            ============================================================ */
+            document.querySelectorAll('.whatsapp-btn').forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    // already link
+                });
+            });
+
+            /* ============================================================
+               SEARCH (demo)
+            ============================================================ */
+            document.querySelector('.nav-actions svg:first-child')?.addEventListener('click', function() {
+                const query = prompt('🔍 Search TAHERA · by title, code, or category');
+                if (query) alert(`Searching for: "${query}" (instant filter demo)`);
+            });
+
+            /* ============================================================
+               WISHLIST (demo)
+            ============================================================ */
+            document.querySelectorAll('.product-wishlist').forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    this.textContent = this.textContent === '♡' ? '♥' : '♡';
+                    this.style.color = this.textContent === '♥' ? '#c8a47e' : '';
+                });
+            });
+
+            /* ============================================================
+               CLOSE MOBILE MENU ON LINK CLICK
+            ============================================================ */
+            navLinks.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    navLinks.classList.remove('open');
+                });
+            });
+
+        })();
+    </script>
 </body>
 </html>
