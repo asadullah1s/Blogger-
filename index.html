@@ -1,801 +1,1197 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>Zakia Sher | PCO - Punjab Safe Cities Authority</title>
-    <!-- Google Fonts & Font Awesome -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <!-- Leaflet CSS for Map -->
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Attaher Ab. | Luxury Boutique</title>
+  <!-- Bootstrap 5 & Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <!-- Google Fonts (Premium Look) -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    /* ============================================
+       CUSTOM STYLE.CSS
+       All premium, luxury, modern styling
+       ============================================ */
+    :root {
+      /* --- Color Scheme (Detected from Facebook Logo Placeholder) --- */
+      --primary-color: #1877F2;      /* Facebook Blue */
+      --secondary-color: #1B3A5C;    /* Darker blue */
+      --accent-color: #E4A853;       /* Gold accent */
+      --bg-color: #F8F5F0;          /* Warm cream background */
+      --text-color: #1A1A1A;         /* Rich black */
+      --glass-bg: rgba(255, 255, 255, 0.15);
+      --glass-border: rgba(255, 255, 255, 0.25);
+      --shadow-soft: 0 8px 32px rgba(0, 0, 0, 0.08);
+      --shadow-hover: 0 15px 40px rgba(0, 0, 0, 0.15);
+      --transition-smooth: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
 
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #000000;
-            color: #FFFFFF;
-            scroll-behavior: smooth;
-            overflow-x: hidden;
-        }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-        /* PSCA COLOR SYSTEM */
-        :root {
-            --deep-blue: #2D248C;
-            --bright-red: #EF2B2D;
-            --pure-white: #FFFFFF;
-            --black: #000000;
-            --dark-green: #2E4A24;
-        }
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      overflow-x: hidden;
+      scroll-behavior: smooth;
+    }
 
-        /* Global Glassmorphism & Utility */
-        .glass-card {
-            background: rgba(45, 36, 140, 0.2);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            border-radius: 24px;
-        }
+    h1, h2, h3, h4, h5 {
+      font-family: 'Playfair Display', serif;
+      font-weight: 600;
+    }
 
-        .section-title {
-            font-size: 2.2rem;
-            font-weight: 700;
-            margin-bottom: 2rem;
-            position: relative;
-            display: inline-block;
-            letter-spacing: -0.5px;
-        }
-        .section-title:after {
-            content: '';
-            position: absolute;
-            bottom: -12px;
-            left: 0;
-            width: 70px;
-            height: 3px;
-            background: var(--bright-red);
-            border-radius: 3px;
-        }
+    /* --- Loading Screen --- */
+    #loading-screen {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: var(--bg-color);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      transition: opacity 0.8s ease;
+    }
+    #loading-screen.hide {
+      opacity: 0;
+      pointer-events: none;
+    }
+    .loader {
+      width: 50px;
+      height: 50px;
+      border: 3px solid rgba(24, 119, 242, 0.1);
+      border-top: 3px solid var(--primary-color);
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
 
-        /* Buttons */
-        .btn-primary-red {
-            background: var(--bright-red);
-            border: none;
-            color: white;
-            padding: 12px 28px;
-            border-radius: 40px;
-            font-weight: 600;
-            transition: 0.2s;
-            cursor: pointer;
-            box-shadow: 0 4px 12px rgba(239, 43, 45, 0.3);
-        }
-        .btn-primary-red:hover {
-            background: #c41e20;
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(239, 43, 45, 0.4);
-        }
-        .btn-outline-blue {
-            background: transparent;
-            border: 2px solid var(--deep-blue);
-            color: var(--deep-blue);
-            padding: 10px 26px;
-            border-radius: 40px;
-            font-weight: 600;
-            transition: 0.2s;
-            cursor: pointer;
-        }
-        .btn-outline-blue:hover {
-            background: var(--deep-blue);
-            color: white;
-            border-color: var(--deep-blue);
-        }
+    /* --- Glassmorphism --- */
+    .glass {
+      background: var(--glass-bg);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid var(--glass-border);
+      border-radius: 20px;
+    }
 
-        /* Navbar */
-        .navbar {
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            background: rgba(0, 0, 0, 0.85);
-            backdrop-filter: blur(12px);
-            border-bottom: 1px solid rgba(45, 36, 140, 0.6);
-            padding: 1rem 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-        }
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-weight: 800;
-            font-size: 1.4rem;
-            color: var(--pure-white);
-        }
-        .logo i {
-            color: var(--bright-red);
-            font-size: 1.8rem;
-        }
-        .nav-links {
-            display: flex;
-            gap: 2rem;
-            list-style: none;
-        }
-        .nav-links a {
-            color: var(--pure-white);
-            text-decoration: none;
-            font-weight: 500;
-            transition: 0.2s;
-            padding-bottom: 6px;
-            border-bottom: 2px solid transparent;
-        }
-        .nav-links a:hover {
-            border-bottom-color: var(--bright-red);
-            color: var(--bright-red);
-        }
-        .nav-links a.active {
-            border-bottom-color: var(--deep-blue);
-            text-shadow: 0 0 6px rgba(45, 36, 140, 0.8);
-        }
-        /* Mobile nav */
-        .menu-icon {
-            display: none;
-            font-size: 1.8rem;
-            cursor: pointer;
-            color: white;
-        }
-        @media (max-width: 850px) {
-            .nav-links {
-                display: none;
-                width: 100%;
-                flex-direction: column;
-                text-align: center;
-                padding: 1rem 0;
-                gap: 1rem;
-            }
-            .nav-links.show {
-                display: flex;
-            }
-            .menu-icon {
-                display: block;
-            }
-            .navbar {
-                padding: 1rem;
-            }
-        }
+    /* --- Navbar --- */
+    .navbar {
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 2px 20px rgba(0,0,0,0.06);
+      padding: 12px 0;
+      transition: var(--transition-smooth);
+    }
+    .navbar-brand {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      font-size: 1.8rem;
+      color: var(--secondary-color) !important;
+      letter-spacing: -0.5px;
+    }
+    .navbar-brand i {
+      color: var(--accent-color);
+      margin-right: 8px;
+    }
+    .nav-link {
+      font-weight: 500;
+      color: var(--text-color) !important;
+      margin: 0 12px;
+      position: relative;
+      transition: var(--transition-smooth);
+    }
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--primary-color);
+      transition: var(--transition-smooth);
+    }
+    .nav-link:hover::after { width: 100%; }
+    .nav-link:hover { color: var(--primary-color) !important; }
 
-        /* Hero Section */
-        .hero {
-            position: relative;
-            min-height: 90vh;
-            display: flex;
-            align-items: center;
-            background: radial-gradient(circle at 20% 30%, var(--deep-blue) 0%, #0a072b 100%);
-            overflow: hidden;
-            padding: 3rem 2rem;
-        }
-        .grid-overlay {
-            position: absolute;
-            top:0;
-            left:0;
-            width:100%;
-            height:100%;
-            background-image: 
-                linear-gradient(rgba(239,43,45,0.08) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(239,43,45,0.08) 1px, transparent 1px);
-            background-size: 40px 40px;
-            pointer-events: none;
-        }
-        .particles {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle at 30% 40%, rgba(255,255,255,0.02) 1px, transparent 1px);
-            background-size: 32px 32px;
-            animation: floatParticles 20s linear infinite;
-        }
-        @keyframes floatParticles {
-            0% { background-position: 0 0; }
-            100% { background-position: 60px 60px; }
-        }
-        .hero-container {
-            max-width: 1400px;
-            margin: 0 auto;
-            width: 100%;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 2rem;
-            align-items: center;
-            justify-content: space-between;
-            position: relative;
-            z-index: 2;
-        }
-        .hero-left {
-            flex: 1;
-        }
-        .hero-left h1 {
-            font-size: 3.5rem;
-            font-weight: 800;
-        }
-        .badge-title {
-            color: var(--bright-red);
-            font-weight: 600;
-            letter-spacing: 1px;
-        }
-        .typing-text {
-            font-size: 1.5rem;
-            border-right: 2px solid var(--bright-red);
-            white-space: nowrap;
-            overflow: hidden;
-            width: 0;
-            animation: typing 3s steps(40, end) forwards, blink 0.7s step-end infinite;
-            margin: 1rem 0;
-        }
-        @keyframes typing {
-            from { width: 0; }
-            to { width: 100%; }
-        }
-        @keyframes blink {
-            50% { border-color: transparent; }
-        }
-        .hero-contact-info {
-            margin: 1.2rem 0;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 1rem;
-            font-size: 0.9rem;
-        }
-        .hero-right {
-            flex: 0.8;
-            display: flex;
-            justify-content: center;
-        }
-        .portrait-frame {
-            width: 320px;
-            height: 340px;
-            background: #0f0c2c;
-            border-radius: 32px;
-            box-shadow: 0 0 24px rgba(45, 36, 140, 0.6), 0 0 0 4px var(--bright-red);
-            overflow: hidden;
-            transition: all 0.3s;
-        }
-        .portrait-frame img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            filter: grayscale(10%);
-        }
-        @media (max-width: 768px) {
-            .hero-left h1 { font-size: 2.2rem; }
-            .typing-text { font-size: 1rem; white-space: normal; border-right: none; animation: none; width: auto; }
-            .hero-right { flex: 1; margin-top: 1rem; }
-            .portrait-frame { width: 240px; height: 260px; }
-        }
+    .navbar .form-control {
+      border-radius: 50px;
+      border: 1px solid #e0e0e0;
+      padding-left: 20px;
+      font-size: 0.9rem;
+    }
+    .navbar .form-control:focus {
+      box-shadow: none;
+      border-color: var(--primary-color);
+    }
+    .navbar .btn-outline-primary {
+      border-radius: 50px;
+      padding: 0 20px;
+      border-color: var(--primary-color);
+      color: var(--primary-color);
+    }
+    .navbar .btn-outline-primary:hover {
+      background: var(--primary-color);
+      color: white;
+    }
+    .whatsapp-nav-btn {
+      background: #25D366;
+      color: white;
+      border-radius: 50px;
+      padding: 6px 18px;
+      border: none;
+      font-weight: 500;
+      transition: var(--transition-smooth);
+    }
+    .whatsapp-nav-btn:hover {
+      background: #128C7E;
+      color: white;
+      transform: scale(1.03);
+    }
 
-        /* Counter Cards */
-        .counter-grid {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 1.5rem;
-            justify-content: center;
-        }
-        .counter-card {
-            background: rgba(255,255,255,0.05);
-            backdrop-filter: blur(6px);
-            border-radius: 28px;
-            padding: 1.5rem;
-            flex: 1;
-            min-width: 160px;
-            text-align: center;
-            border: 1px solid rgba(45,36,140,0.4);
-        }
-        .counter-number {
-            font-size: 2.8rem;
-            font-weight: 800;
-            color: var(--bright-red);
-        }
+    /* --- Hero --- */
+    .hero {
+      min-height: 90vh;
+      background: linear-gradient(135deg, #fdfcfb 0%, #e2d1c3 100%);
+      display: flex;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+      padding: 80px 0;
+    }
+    .hero-content {
+      position: relative;
+      z-index: 2;
+    }
+    .hero h1 {
+      font-size: 4.5rem;
+      font-weight: 700;
+      line-height: 1.1;
+      color: var(--secondary-color);
+    }
+    .hero h1 span {
+      color: var(--primary-color);
+      position: relative;
+    }
+    .hero p {
+      font-size: 1.3rem;
+      color: #555;
+      max-width: 500px;
+      margin: 20px 0 30px;
+    }
+    .hero .btn-primary {
+      background: var(--primary-color);
+      border: none;
+      padding: 14px 40px;
+      border-radius: 50px;
+      font-weight: 600;
+      transition: var(--transition-smooth);
+      box-shadow: 0 8px 25px rgba(24, 119, 242, 0.3);
+    }
+    .hero .btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 35px rgba(24, 119, 242, 0.4);
+    }
+    .hero .btn-outline-dark {
+      border-radius: 50px;
+      padding: 14px 40px;
+      border-width: 2px;
+    }
+    .hero .floating-shapes {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+      pointer-events: none;
+    }
+    .shape {
+      position: absolute;
+      border-radius: 50%;
+      opacity: 0.15;
+      animation: float 8s infinite alternate ease-in-out;
+    }
+    .shape-1 { width: 300px; height: 300px; background: var(--primary-color); top: -50px; right: -80px; }
+    .shape-2 { width: 200px; height: 200px; background: var(--accent-color); bottom: 20px; left: -60px; animation-delay: 2s; }
+    .shape-3 { width: 150px; height: 150px; background: var(--secondary-color); top: 40%; right: 20%; animation-delay: 4s; }
+    @keyframes float {
+      0% { transform: translateY(0) rotate(0deg) scale(1); }
+      100% { transform: translateY(-30px) rotate(10deg) scale(1.05); }
+    }
 
-        /* Responsibilities Grid */
-        .resp-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 1.8rem;
-        }
-        .resp-card {
-            background: white;
-            color: black;
-            border-radius: 20px;
-            padding: 1.6rem;
-            transition: all 0.2s;
-            border-left: 4px solid var(--bright-red);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
-        }
-        .resp-card i {
-            font-size: 2rem;
-            color: var(--deep-blue);
-            margin-bottom: 1rem;
-        }
+    /* --- Section Titles --- */
+    .section-title {
+      font-size: 2.8rem;
+      margin-bottom: 15px;
+      position: relative;
+      display: inline-block;
+    }
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: -8px;
+      left: 0;
+      width: 60px;
+      height: 4px;
+      background: var(--primary-color);
+      border-radius: 4px;
+    }
+    .section-subtitle {
+      color: #888;
+      font-size: 1.1rem;
+      margin-bottom: 40px;
+    }
 
-        /* Timeline */
-        .timeline {
-            position: relative;
-            max-width: 1000px;
-            margin: 2rem auto;
-        }
-        .timeline::before {
-            content: '';
-            position: absolute;
-            width: 3px;
-            background: var(--deep-blue);
-            top: 0;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-        }
-        .timeline-item {
-            padding: 1rem 2rem;
-            position: relative;
-            width: 50%;
-        }
-        .timeline-item.left { left: 0; }
-        .timeline-item.right { left: 50%; }
-        .timeline-dot {
-            position: absolute;
-            right: -12px;
-            top: 20px;
-            width: 18px;
-            height: 18px;
-            background: var(--bright-red);
-            border-radius: 50%;
-            box-shadow: 0 0 0 3px rgba(239,43,45,0.4);
-        }
-        .timeline-item.right .timeline-dot {
-            left: -12px;
-        }
-        .timeline-content {
-            background: white;
-            color: black;
-            padding: 1.2rem;
-            border-radius: 20px;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-        }
-        @media (max-width: 768px) {
-            .timeline::before { left: 20px; }
-            .timeline-item { width: 100%; padding-left: 50px; }
-            .timeline-item.right { left: 0; }
-            .timeline-dot, .timeline-item.right .timeline-dot { left: 6px; right: auto; }
-        }
+    /* --- Feature Cards --- */
+    .feature-card {
+      background: white;
+      border-radius: 20px;
+      padding: 30px 20px;
+      text-align: center;
+      box-shadow: var(--shadow-soft);
+      transition: var(--transition-smooth);
+      height: 100%;
+      border: 1px solid rgba(0,0,0,0.02);
+    }
+    .feature-card:hover {
+      transform: translateY(-10px);
+      box-shadow: var(--shadow-hover);
+    }
+    .feature-card i {
+      font-size: 2.8rem;
+      color: var(--primary-color);
+      margin-bottom: 20px;
+      background: rgba(24, 119, 242, 0.08);
+      padding: 20px;
+      border-radius: 50%;
+      transition: var(--transition-smooth);
+    }
+    .feature-card:hover i {
+      background: var(--primary-color);
+      color: white;
+      transform: scale(1.05);
+    }
+    .feature-card h5 {
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
 
-        /* Gallery hover */
-        .gallery-grid {
-            display: flex;
-            gap: 1.5rem;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-        .gallery-item {
-            width: 300px;
-            overflow: hidden;
-            border-radius: 20px;
-            position: relative;
-            cursor: pointer;
-            transition: 0.3s;
-            border: 1px solid var(--deep-blue);
-        }
-        .gallery-item img {
-            width: 100%;
-            height: 220px;
-            object-fit: cover;
-            transition: 0.4s;
-        }
-        .gallery-item:hover img {
-            transform: scale(1.08);
-        }
-        .gallery-item:hover {
-            border-color: var(--bright-red);
-            box-shadow: 0 0 0 2px var(--bright-red);
-        }
+    /* --- Category Cards --- */
+    .category-card {
+      border-radius: 20px;
+      overflow: hidden;
+      position: relative;
+      cursor: pointer;
+      box-shadow: var(--shadow-soft);
+      transition: var(--transition-smooth);
+    }
+    .category-card img {
+      width: 100%;
+      height: 280px;
+      object-fit: cover;
+      transition: var(--transition-smooth);
+    }
+    .category-card:hover img {
+      transform: scale(1.06);
+    }
+    .category-card .overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 25px;
+      background: linear-gradient(0deg, rgba(0,0,0,0.7) 0%, transparent);
+      color: white;
+      text-align: center;
+    }
+    .category-card .overlay h4 {
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      margin-bottom: 0;
+    }
 
-        /* Circular progress */
-        .skills-circular {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-around;
-            gap: 2rem;
-        }
-        .circle-card {
-            text-align: center;
-            color: white;
-        }
-        canvas {
-            width: 130px;
-            height: 130px;
-        }
+    /* --- Product Cards --- */
+    .product-card {
+      background: white;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: var(--shadow-soft);
+      transition: var(--transition-smooth);
+      height: 100%;
+      position: relative;
+      border: 1px solid rgba(0,0,0,0.02);
+    }
+    .product-card:hover {
+      transform: translateY(-8px);
+      box-shadow: var(--shadow-hover);
+    }
+    .product-card .img-wrapper {
+      position: relative;
+      overflow: hidden;
+      height: 280px;
+      background: #f5f5f5;
+    }
+    .product-card .img-wrapper img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: var(--transition-smooth);
+    }
+    .product-card:hover .img-wrapper img {
+      transform: scale(1.05);
+    }
+    .product-card .badge-top {
+      position: absolute;
+      top: 15px;
+      left: 15px;
+      background: var(--accent-color);
+      color: white;
+      padding: 5px 18px;
+      border-radius: 50px;
+      font-weight: 600;
+      font-size: 0.8rem;
+      z-index: 2;
+    }
+    .product-card .wishlist-icon {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      background: white;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+      cursor: pointer;
+      transition: var(--transition-smooth);
+      z-index: 2;
+      border: none;
+      font-size: 1.2rem;
+    }
+    .product-card .wishlist-icon:hover {
+      background: #ffebee;
+      color: #e74c3c;
+    }
+    .product-card .card-body {
+      padding: 22px;
+    }
+    .product-card .product-title {
+      font-weight: 600;
+      font-size: 1.1rem;
+      margin-bottom: 4px;
+    }
+    .product-card .product-code {
+      color: #888;
+      font-size: 0.85rem;
+      letter-spacing: 0.5px;
+    }
+    .product-card .product-price {
+      font-weight: 700;
+      font-size: 1.3rem;
+      color: var(--secondary-color);
+    }
+    .product-card .btn-outline-primary {
+      border-radius: 50px;
+      border-width: 2px;
+      font-weight: 500;
+      transition: var(--transition-smooth);
+    }
+    .product-card .btn-outline-primary:hover {
+      background: var(--primary-color);
+      color: white;
+    }
 
-        /* Testimonials Slider */
-        .testimonial-slider {
-            max-width: 700px;
-            margin: auto;
-            overflow: hidden;
-            position: relative;
-        }
-        .testimonial-track {
-            display: flex;
-            transition: transform 0.4s ease;
-        }
-        .testimonial-card {
-            min-width: 100%;
-            background: white;
-            color: black;
-            padding: 2rem;
-            border-radius: 32px;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-        }
-        .slider-buttons button {
-            background: var(--deep-blue);
-            border: none;
-            color: white;
-            padding: 8px 16px;
-            margin: 1rem;
-            border-radius: 40px;
-            cursor: pointer;
-        }
+    /* --- Modal (Product Popup) --- */
+    .modal-content {
+      border-radius: 30px;
+      border: none;
+      overflow: hidden;
+    }
+    .modal-header {
+      border-bottom: none;
+      padding: 20px 30px 0;
+    }
+    .modal-body {
+      padding: 20px 30px 30px;
+    }
+    .modal-product-image {
+      border-radius: 20px;
+      overflow: hidden;
+      height: 400px;
+      background: #f5f5f5;
+    }
+    .modal-product-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .modal .product-price-lg {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--secondary-color);
+    }
+    .modal .btn-success {
+      background: #25D366;
+      border: none;
+      border-radius: 50px;
+      padding: 12px 35px;
+      font-weight: 600;
+      transition: var(--transition-smooth);
+    }
+    .modal .btn-success:hover {
+      background: #128C7E;
+      transform: scale(1.02);
+    }
 
-        /* Contact & Map */
-        .contact-form input, .contact-form textarea {
-            width: 100%;
-            padding: 12px;
-            background: rgba(255,255,255,0.1);
-            border: 1px solid var(--deep-blue);
-            border-radius: 12px;
-            color: white;
-        }
-        #map {
-            height: 260px;
-            border-radius: 20px;
-            border: 2px solid var(--deep-blue);
-        }
+    /* --- About --- */
+    .about-section {
+      background: white;
+      padding: 80px 0;
+    }
+    .about-image {
+      border-radius: 30px;
+      overflow: hidden;
+      box-shadow: var(--shadow-soft);
+    }
+    .about-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      min-height: 300px;
+    }
 
-        /* Status bar / Live Clock */
-        .status-bar {
-            background: #0a0822;
-            padding: 8px 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 0.8rem;
-            flex-wrap: wrap;
-            border-bottom: 1px solid var(--deep-blue);
-        }
-        .live-clock {
-            font-family: monospace;
-            font-weight: bold;
-        }
-        .notif-bell {
-            position: relative;
-            cursor: pointer;
-        }
-        .notif-bell i {
-            font-size: 1.2rem;
-            color: var(--bright-red);
-        }
-        .badge-alert {
-            background: red;
-            border-radius: 20px;
-            font-size: 0.6rem;
-            padding: 2px 6px;
-            position: absolute;
-            top: -8px;
-            right: -12px;
-        }
-        footer {
-            background: #020117;
-            padding: 2rem;
-            border-top: 1px solid var(--deep-blue);
-        }
-        .social-icons a {
-            color: white;
-            margin: 0 8px;
-            font-size: 1.2rem;
-        }
-    </style>
+    /* --- Testimonials --- */
+    .testimonial-card {
+      background: white;
+      border-radius: 24px;
+      padding: 30px;
+      box-shadow: var(--shadow-soft);
+      margin: 15px;
+      text-align: center;
+    }
+    .testimonial-card img {
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 15px;
+    }
+    .testimonial-card .stars {
+      color: #f1c40f;
+      letter-spacing: 2px;
+    }
+
+    /* --- Gallery --- */
+    .gallery-item {
+      border-radius: 20px;
+      overflow: hidden;
+      cursor: pointer;
+      position: relative;
+    }
+    .gallery-item img {
+      width: 100%;
+      height: 260px;
+      object-fit: cover;
+      transition: var(--transition-smooth);
+    }
+    .gallery-item:hover img {
+      transform: scale(1.08);
+    }
+
+    /* --- FAQ Accordion --- */
+    .accordion-button {
+      font-weight: 600;
+      border-radius: 12px !important;
+      padding: 18px 24px;
+    }
+    .accordion-button:not(.collapsed) {
+      background: rgba(24, 119, 242, 0.05);
+      color: var(--primary-color);
+      box-shadow: none;
+    }
+    .accordion-item {
+      border: none;
+      margin-bottom: 12px;
+      border-radius: 16px !important;
+      overflow: hidden;
+      box-shadow: var(--shadow-soft);
+    }
+
+    /* --- Contact --- */
+    .contact-info-card {
+      background: white;
+      border-radius: 20px;
+      padding: 25px;
+      box-shadow: var(--shadow-soft);
+      margin-bottom: 20px;
+      text-align: center;
+    }
+    .contact-info-card i {
+      font-size: 2rem;
+      color: var(--primary-color);
+      margin-bottom: 15px;
+    }
+    .map-placeholder {
+      border-radius: 24px;
+      overflow: hidden;
+      background: #e0e0e0;
+      height: 300px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #888;
+      font-weight: 500;
+    }
+
+    /* --- Footer --- */
+    footer {
+      background: var(--secondary-color);
+      color: rgba(255,255,255,0.8);
+      padding: 60px 0 20px;
+    }
+    footer h5 {
+      color: white;
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      margin-bottom: 25px;
+    }
+    footer a {
+      color: rgba(255,255,255,0.7);
+      text-decoration: none;
+      transition: var(--transition-smooth);
+    }
+    footer a:hover {
+      color: white;
+      text-decoration: underline;
+    }
+    footer .social-links a {
+      display: inline-block;
+      width: 44px;
+      height: 44px;
+      background: rgba(255,255,255,0.08);
+      border-radius: 50%;
+      text-align: center;
+      line-height: 44px;
+      margin-right: 10px;
+      transition: var(--transition-smooth);
+    }
+    footer .social-links a:hover {
+      background: var(--primary-color);
+      transform: translateY(-3px);
+    }
+    footer .border-top {
+      border-color: rgba(255,255,255,0.1) !important;
+    }
+
+    /* --- Floating Buttons --- */
+    .floating-whatsapp {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      z-index: 999;
+      width: 60px;
+      height: 60px;
+      background: #25D366;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 2rem;
+      box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
+      transition: var(--transition-smooth);
+      border: none;
+    }
+    .floating-whatsapp:hover {
+      transform: scale(1.1);
+      color: white;
+    }
+    .floating-call {
+      position: fixed;
+      bottom: 100px;
+      right: 30px;
+      z-index: 999;
+      width: 60px;
+      height: 60px;
+      background: var(--primary-color);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 1.8rem;
+      box-shadow: 0 4px 20px rgba(24, 119, 242, 0.4);
+      transition: var(--transition-smooth);
+      border: none;
+    }
+    .floating-call:hover {
+      transform: scale(1.1);
+      color: white;
+    }
+    .back-to-top {
+      position: fixed;
+      bottom: 170px;
+      right: 30px;
+      z-index: 999;
+      width: 50px;
+      height: 50px;
+      background: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: var(--shadow-soft);
+      transition: var(--transition-smooth);
+      border: none;
+      color: var(--secondary-color);
+      font-size: 1.4rem;
+      opacity: 0;
+      pointer-events: none;
+    }
+    .back-to-top.visible {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .back-to-top:hover {
+      background: var(--primary-color);
+      color: white;
+      transform: translateY(-3px);
+    }
+
+    /* --- Dark Mode (Toggle) --- */
+    body.dark-mode {
+      --bg-color: #121212;
+      --text-color: #f0f0f0;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+    }
+    body.dark-mode .navbar { background: rgba(18, 18, 18, 0.9); }
+    body.dark-mode .feature-card,
+    body.dark-mode .product-card,
+    body.dark-mode .contact-info-card,
+    body.dark-mode .testimonial-card,
+    body.dark-mode .about-section { background: #1e1e1e; color: #f0f0f0; }
+    body.dark-mode .hero { background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%); }
+    body.dark-mode .hero p { color: #ccc; }
+    body.dark-mode .section-subtitle { color: #aaa; }
+    body.dark-mode .map-placeholder { background: #2a2a2a; color: #aaa; }
+    body.dark-mode .accordion-item { background: #1e1e1e; }
+    body.dark-mode .accordion-button { background: #1e1e1e; color: #f0f0f0; }
+    body.dark-mode .accordion-button:not(.collapsed) { background: rgba(24, 119, 242, 0.2); color: #f0f0f0; }
+
+    /* --- Responsive --- */
+    @media (max-width: 992px) {
+      .hero h1 { font-size: 3rem; }
+      .hero { min-height: 70vh; }
+      .section-title { font-size: 2.2rem; }
+    }
+    @media (max-width: 768px) {
+      .hero h1 { font-size: 2.5rem; }
+      .hero p { font-size: 1rem; }
+      .floating-shapes { display: none; }
+      .product-card .img-wrapper { height: 220px; }
+      .modal-product-image { height: 250px; }
+      .gallery-item img { height: 200px; }
+    }
+    @media (max-width: 576px) {
+      .hero { padding: 60px 0; text-align: center; }
+      .hero .btn-group { flex-direction: column; gap: 12px; }
+      .hero .btn-group .btn { width: 100%; }
+    }
+
+    /* Scroll Reveal (simple) */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.8s ease;
+    }
+    .reveal.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
 </head>
 <body>
 
-<!-- Status indicators + Live clock + Notification -->
-<div class="status-bar">
-    <div><i class="fas fa-shield-alt" style="color: #2E4A24;"></i> PSCA SECURE NODE • <span id="nodeStatus" style="color:#2E4A24;">● SYSTEM ONLINE</span></div>
-    <div class="live-clock" id="liveClock"></div>
-    <div class="notif-bell" id="alertBell"><i class="fas fa-bell"></i><span class="badge-alert">3</span></div>
+<!-- ========== LOADING SCREEN ========== -->
+<div id="loading-screen">
+  <div class="loader"></div>
+  <p class="mt-3 fw-light" style="color: var(--secondary-color);">Attaher Ab.</p>
 </div>
 
-<!-- Navbar -->
-<nav class="navbar">
-    <div class="logo"><i class="fas fa-video"></i> PSCA | TOBA TEK SINGH</div>
-    <div class="menu-icon" id="menuIcon"><i class="fas fa-bars"></i></div>
-    <ul class="nav-links" id="navLinks">
-        <li><a href="#home" class="active">Home</a></li>
-        <li><a href="#about">About</a></li>
-        <li><a href="#responsibilities">Responsibilities</a></li>
-        <li><a href="#experience">Experience</a></li>
-        <li><a href="#gallery">Gallery</a></li>
-        <li><a href="#contact">Contact</a></li>
-    </ul>
+<!-- ========== NAVBAR ========== -->
+<nav class="navbar navbar-expand-lg sticky-top" aria-label="Main navigation">
+  <div class="container">
+    <a class="navbar-brand" href="#">
+      <i class="bi bi-gem"></i> Attaher Ab.
+    </a>
+    <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar" aria-controls="mainNavbar" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="mainNavbar">
+      <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+        <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="#categories">Categories</a></li>
+        <li class="nav-item"><a class="nav-link" href="#products">Products</a></li>
+        <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+        <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+      </ul>
+      <form class="d-flex me-2" role="search" id="searchForm">
+        <input class="form-control me-1" type="search" placeholder="Search products..." aria-label="Search" id="searchInput">
+        <button class="btn btn-outline-primary" type="submit"><i class="bi bi-search"></i></button>
+      </form>
+      <a href="#" class="btn btn-outline-secondary me-2" id="darkModeToggle" aria-label="Toggle dark mode">
+        <i class="bi bi-moon"></i>
+      </a>
+      <a href="#" class="btn btn-outline-secondary me-2" aria-label="Shopping cart">
+        <i class="bi bi-bag"></i>
+      </a>
+      <a href="https://wa.me/923145703357" target="_blank" class="whatsapp-nav-btn">
+        <i class="bi bi-whatsapp me-1"></i> WhatsApp
+      </a>
+    </div>
+  </div>
 </nav>
 
-<!-- Hero -->
-<section id="home" class="hero">
-    <div class="grid-overlay"></div>
-    <div class="particles"></div>
-    <div class="hero-container">
-        <div class="hero-left">
-            <span class="badge-title"><i class="fas fa-microphone-alt"></i> POLICE COMMUNICATION OFFICER</span>
-            <h1>ZAKIA SHER</h1>
-            <p style="font-size:1.2rem; color:#ddd;">15 Incharge – Toba Tek Singh (PSCA System)</p>
-            <div class="typing-text">> Serving Public Safety with Dedication & Discipline</div>
-            <div class="hero-contact-info">
-                <span><i class="fas fa-envelope"></i> Zakiasher78600@gmail.com</span>
-                <span><i class="fas fa-phone-alt"></i> +92 3430164392</span>
-            </div>
-            <div style="margin-top: 1rem; display: flex; gap: 1rem; flex-wrap: wrap;">
-                <button class="btn-primary-red" id="contactNowBtn">Contact Now <i class="fas fa-arrow-right"></i></button>
-                <button class="btn-outline-blue" id="viewProfileBtn">View Profile</button>
-            </div>
+<!-- ========== HERO SECTION ========== -->
+<section id="home" class="hero" aria-label="Hero banner">
+  <div class="floating-shapes">
+    <div class="shape shape-1"></div>
+    <div class="shape shape-2"></div>
+    <div class="shape shape-3"></div>
+  </div>
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-lg-6 hero-content">
+        <h1>Elegance <br><span>Redefined.</span></h1>
+        <p>Discover the latest luxury collection. Where timeless style meets modern sophistication.</p>
+        <div class="btn-group flex-wrap gap-2">
+          <a href="#products" class="btn btn-primary">Shop Now</a>
+          <a href="#categories" class="btn btn-outline-dark">Explore Collection</a>
         </div>
-        <div class="hero-right">
-            <div class="portrait-frame">
-                <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&h=400&fit=crop" alt="Officer Zakia Sher">
-            </div>
-        </div>
+      </div>
+      <div class="col-lg-6 d-none d-lg-block">
+        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='500' viewBox='0 0 600 500'%3E%3Crect width='600' height='500' fill='%23f5f0eb'/%3E%3Ctext x='80' y='250' font-family='Playfair Display' font-size='28' fill='%231B3A5C'%3ELuxury Fashion%3C/text%3E%3Ctext x='80' y='300' font-family='Inter' font-size='18' fill='%23888'%3EPremium Collection%3C/text%3E%3C/svg%3E" alt="Luxury fashion hero" class="img-fluid rounded-4 shadow-lg">
+      </div>
     </div>
+  </div>
 </section>
 
-<!-- About + Counters -->
-<section id="about" style="padding: 5rem 2rem; background: var(--black);">
-    <div class="container" style="max-width: 1300px; margin: auto;">
-        <h2 class="section-title">Command Overview</h2>
-        <div style="display: flex; flex-wrap: wrap; gap: 2rem;">
-            <div style="flex:1.5;">
-                <p style="line-height:1.6; color:#ddd;">Zakiya Sher is a disciplined and highly trained Police Communication Officer (PCO) responsible for managing emergency and non-emergency communication, collecting critical incident data, and coordinating real-time dispatch of response units under the Punjab Safe Cities Authority framework. She has diverse professional experience in public service operations, banking sales, accounts management, and supply chain supervision, demonstrating strong leadership, operational efficiency, and crisis handling abilities. Her core strengths include emergency coordination, surveillance monitoring, customer service, financial management, and team supervision in high-pressure environments. Committed to public safety, discipline, rapid response, and operational excellence.</p>
-                <div style="margin-top: 1rem;"><i class="fas fa-map-marker-alt" style="color: var(--bright-red);"></i> PTCL Exchange, Rafique Street, Sanda Khurd, Lahore | Chak No. 458 GB, Tehsil Tandlianwala</div>
-            </div>
-        </div>
-        <div class="counter-grid" style="margin-top: 3rem;">
-            <div class="counter-card"><div class="counter-number" data-target="18420">0</div><p>Emergency Calls Handled</p></div>
-            <div class="counter-card"><div class="counter-number" data-target="48">0</div><p>Team Operations</p></div>
-            <div class="counter-card"><div class="counter-number" data-target="15680">0</div><p>Public Assistance Cases</p></div>
-            <div class="counter-card"><div class="counter-number" data-target="24760">0</div><p>Monitoring Hours</p></div>
-        </div>
-    </div>
+<!-- ========== FEATURES ========== -->
+<section class="container py-5" aria-label="Features">
+  <div class="row g-4 text-center">
+    <div class="col-6 col-lg-3"><div class="feature-card"><i class="bi bi-diamond"></i><h5>Premium Quality</h5><p class="text-muted small">Finest materials</p></div></div>
+    <div class="col-6 col-lg-3"><div class="feature-card"><i class="bi bi-tag"></i><h5>Affordable Prices</h5><p class="text-muted small">Luxury within reach</p></div></div>
+    <div class="col-6 col-lg-3"><div class="feature-card"><i class="bi bi-truck"></i><h5>Fast Delivery</h5><p class="text-muted small">Worldwide shipping</p></div></div>
+    <div class="col-6 col-lg-3"><div class="feature-card"><i class="bi bi-star"></i><h5>Customer Satisfaction</h5><p class="text-muted small">Happy clients</p></div></div>
+  </div>
 </section>
 
-<!-- Responsibilities Grid -->
-<section id="responsibilities" style="padding: 4rem 2rem; background: #05021a;">
-    <div class="container" style="max-width: 1300px; margin: auto;">
-        <h2 class="section-title">Core Responsibilities</h2>
-        <div class="resp-grid">
-            <div class="resp-card"><i class="fas fa-phone-alt"></i><h3>Emergency Helpline Management</h3><p>15 & 15 PSCA emergency dispatch</p></div>
-            <div class="resp-card"><i class="fas fa-video"></i><h3>Smart Surveillance Monitoring</h3><p>Real-time CCTV analysis</p></div>
-            <div class="resp-card"><i class="fas fa-bolt"></i><h3>Crisis Response Operations</h3><p>Rapid deployment coordination</p></div>
-            <div class="resp-card"><i class="fas fa-female"></i><h3>Women Safety Support</h3><p>Priority helpline for women security</p></div>
-            <div class="resp-card"><i class="fas fa-file-alt"></i><h3>Complaint Handling System</h3><p>Digital complaint logging</p></div>
-            <div class="resp-card"><i class="fas fa-chalkboard-user"></i><h3>Team Leadership Control</h3><p>Supervising comms unit</p></div>
-        </div>
-    </div>
+<!-- ========== CATEGORIES ========== -->
+<section id="categories" class="container py-5" aria-label="Categories">
+  <div class="text-center">
+    <h2 class="section-title">Shop by Category</h2>
+    <p class="section-subtitle">Explore our curated collections</p>
+  </div>
+  <div class="row g-4" id="categoryContainer">
+    <!-- Category cards will be injected by JS -->
+  </div>
 </section>
 
-<!-- Experience Timeline -->
-<section id="experience" style="padding: 5rem 2rem;">
-    <div class="container" style="max-width: 1300px; margin: auto;">
-        <h2 class="section-title">Operational Timeline</h2>
-        <div class="timeline">
-            <div class="timeline-item left"><div class="timeline-dot"></div><div class="timeline-content"><h3>Police Communication Officer (PCO)</h3><p>Punjab Safe Cities Authority – Lahore | Present</p><p>Emergency call handling, surveillance monitoring, dispatch coordination, public safety operations.</p></div></div>
-            <div class="timeline-item right"><div class="timeline-dot"></div><div class="timeline-content"><h3>Bancassurance Sales Representative</h3><p>Adamjee Life – MCB Bank (2021-2023)</p><p>Sales targeting, financial advisory, branch performance.</p></div></div>
-            <div class="timeline-item left"><div class="timeline-dot"></div><div class="timeline-content"><h3>Accounts Manager</h3><p>Assala Restaurant – Faisalabad (2024)</p><p>Financial records management, inventory tracking, customer service operations.</p></div></div>
-            <div class="timeline-item right"><div class="timeline-dot"></div><div class="timeline-content"><h3>Supply Chain Supervisor</h3><p>Foodelicious – Kamalia (2024)</p><p>Stock control, warehouse operations, quality supervision.</p></div></div>
-        </div>
-    </div>
+<!-- ========== PRODUCTS ========== -->
+<section id="products" class="container py-5" aria-label="Products">
+  <div class="text-center">
+    <h2 class="section-title">Featured Products</h2>
+    <p class="section-subtitle">New arrivals & best sellers</p>
+  </div>
+  <div class="row g-4" id="productContainer">
+    <!-- Product cards will be injected by JS -->
+  </div>
 </section>
 
-<!-- Gallery -->
-<section id="gallery" style="padding: 4rem 2rem; background: #000;">
-    <div class="container" style="max-width: 1200px; margin: auto;">
-        <h2 class="section-title">Command Center Visuals</h2>
-        <div class="gallery-grid">
-            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1581091226033-d5c48150dbaa?w=400&h=250&fit=crop" alt="Command Center"></div>
-            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1582139329536-e7284fece509?w=400&h=250&fit=crop" alt="Surveillance Room"></div>
-            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=400&h=250&fit=crop" alt="Field Operations"></div>
+<!-- ========== ABOUT ========== -->
+<section id="about" class="about-section" aria-label="About us">
+  <div class="container">
+    <div class="row align-items-center g-5">
+      <div class="col-lg-6">
+        <h2 class="section-title">Our Story</h2>
+        <p class="lead fw-light">Attaher Ab. – Where tradition meets contemporary elegance.</p>
+        <p>Inspired by the rich cultural heritage and modern fashion trends, our boutique offers a curated selection of premium clothing and accessories. Each piece tells a story of craftsmanship, quality, and timeless style.</p>
+        <p><strong>Mission:</strong> To empower individuals to express their unique style through luxurious, sustainable, and ethically crafted fashion.</p>
+        <p><i class="bi bi-quote"></i> Fashion is not just about clothes; it's about confidence and identity.</p>
+      </div>
+      <div class="col-lg-6">
+        <div class="about-image">
+          <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='400' viewBox='0 0 600 400'%3E%3Crect width='600' height='400' fill='%23e2d1c3'/%3E%3Ctext x='120' y='200' font-family='Playfair Display' font-size='32' fill='%231B3A5C'%3EAbout Attaher Ab.%3C/text%3E%3C/svg%3E" alt="About Attaher Ab. boutique" class="img-fluid">
         </div>
+      </div>
     </div>
+  </div>
 </section>
 
-<!-- Skills with Circular Indicators -->
-<section style="padding: 5rem 2rem; background: #030018;">
-    <div class="container" style="max-width: 1200px; margin: auto;">
-        <h2 class="section-title">Core Competencies</h2>
-        <div class="skills-circular" id="skillsCanvasContainer">
-            <div class="circle-card"><canvas id="skill1" width="150" height="150"></canvas><h4>Leadership</h4><span>95%</span></div>
-            <div class="circle-card"><canvas id="skill2" width="150" height="150"></canvas><h4>Communication</h4><span>98%</span></div>
-            <div class="circle-card"><canvas id="skill3" width="150" height="150"></canvas><h4>Crisis Management</h4><span>92%</span></div>
-            <div class="circle-card"><canvas id="skill4" width="150" height="150"></canvas><h4>Monitoring Systems</h4><span>96%</span></div>
+<!-- ========== TESTIMONIALS ========== -->
+<section class="container py-5" aria-label="Testimonials">
+  <div class="text-center">
+    <h2 class="section-title">What Our Clients Say</h2>
+    <p class="section-subtitle">Real feedback from our valued customers</p>
+  </div>
+  <div id="testimonialCarousel" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <div class="row justify-content-center">
+          <div class="col-md-8 col-lg-6"><div class="testimonial-card"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='70' height='70' viewBox='0 0 70 70'%3E%3Ccircle cx='35' cy='35' r='35' fill='%231877F2'/%3E%3Ctext x='22' y='42' font-family='Inter' font-size='28' fill='white'%3EA%3C/text%3E%3C/svg%3E" alt="Client A"><div class="stars"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i></div><p class="fst-italic">"Absolutely stunning collection! The quality is unmatched, and the service is exceptional."</p><h6 class="fw-bold">- Ayesha Khan</h6></div></div>
         </div>
-        <div style="display: flex; flex-wrap: wrap; gap: 0.8rem; justify-content: center; margin-top: 2rem;">
-            <span style="background: #2D248C; padding: 6px 14px; border-radius: 40px;">CCTV & Surveillance</span>
-            <span style="background: #2D248C; padding: 6px 14px; border-radius: 40px;">MS Office Suite</span>
-            <span style="background: #2D248C; padding: 6px 14px; border-radius: 40px;">Data Reporting</span>
-            <span style="background: #2D248C; padding: 6px 14px; border-radius: 40px;">CRM</span>
-            <span style="background: #2E4A24; padding: 6px 14px; border-radius: 40px;">Graphic Design</span>
+      </div>
+      <div class="carousel-item">
+        <div class="row justify-content-center">
+          <div class="col-md-8 col-lg-6"><div class="testimonial-card"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='70' height='70' viewBox='0 0 70 70'%3E%3Ccircle cx='35' cy='35' r='35' fill='%23E4A853'/%3E%3Ctext x='22' y='42' font-family='Inter' font-size='28' fill='white'%3ES%3C/text%3E%3C/svg%3E" alt="Client S"><div class="stars"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i></div><p class="fst-italic">"I found my dream outfit here. The attention to detail is incredible. Highly recommend!"</p><h6 class="fw-bold">- Sarah Ahmed</h6></div></div>
         </div>
+      </div>
     </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="prev" aria-label="Previous testimonial">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="next" aria-label="Next testimonial">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    </button>
+  </div>
 </section>
 
-<!-- Testimonials Slider -->
-<section style="padding: 5rem 2rem;">
-    <div class="container" style="max-width: 800px; margin: auto; text-align: center;">
-        <h2 class="section-title">Field Testimonials</h2>
-        <div class="testimonial-slider">
-            <div class="testimonial-track" id="testimonialTrack">
-                <div class="testimonial-card"><i class="fas fa-quote-left" style="color: var(--deep-blue); font-size: 2rem;"></i><p>"Zakia's coordination during emergency is unmatched – true professional in PSCA operations."</p><h4>— DIG Operations, PSCA</h4></div>
-                <div class="testimonial-card"><i class="fas fa-quote-left" style="color: var(--deep-blue); font-size: 2rem;"></i><p>"Her surveillance monitoring reduced incident response time by 35%."</p><h4>— Command Center Lead</h4></div>
-                <div class="testimonial-card"><i class="fas fa-quote-left" style="color: var(--deep-blue); font-size: 2rem;"></i><p>"Excellent crisis handler and team motivator under high pressure."</p><h4>— SSP Toba Tek Singh</h4></div>
-            </div>
-            <div class="slider-buttons"><button id="prevSlide"><i class="fas fa-chevron-left"></i></button><button id="nextSlide"><i class="fas fa-chevron-right"></i></button></div>
-        </div>
-    </div>
+<!-- ========== GALLERY ========== -->
+<section class="container py-5" aria-label="Gallery">
+  <div class="text-center">
+    <h2 class="section-title">Style Gallery</h2>
+    <p class="section-subtitle">Explore our visual inspiration</p>
+  </div>
+  <div class="row g-3">
+    <div class="col-6 col-md-3"><div class="gallery-item"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='260' viewBox='0 0 300 260'%3E%3Crect width='300' height='260' fill='%23d4c5b2'/%3E%3Ctext x='50' y='140' font-family='Inter' fill='%23555'%3EGallery 1%3C/text%3E%3C/svg%3E" alt="Gallery image 1"></div></div>
+    <div class="col-6 col-md-3"><div class="gallery-item"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='260' viewBox='0 0 300 260'%3E%3Crect width='300' height='260' fill='%23c2b5a5'/%3E%3Ctext x='50' y='140' font-family='Inter' fill='%23555'%3EGallery 2%3C/text%3E%3C/svg%3E" alt="Gallery image 2"></div></div>
+    <div class="col-6 col-md-3"><div class="gallery-item"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='260' viewBox='0 0 300 260'%3E%3Crect width='300' height='260' fill='%23b8a99a'/%3E%3Ctext x='50' y='140' font-family='Inter' fill='%23555'%3EGallery 3%3C/text%3E%3C/svg%3E" alt="Gallery image 3"></div></div>
+    <div class="col-6 col-md-3"><div class="gallery-item"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='260' viewBox='0 0 300 260'%3E%3Crect width='300' height='260' fill='%23a8998a'/%3E%3Ctext x='50' y='140' font-family='Inter' fill='%23555'%3EGallery 4%3C/text%3E%3C/svg%3E" alt="Gallery image 4"></div></div>
+  </div>
 </section>
 
-<!-- Contact Section + Map -->
-<section id="contact" style="padding: 5rem 2rem; background: #020018;">
-    <div class="container" style="max-width: 1200px; margin: auto;">
-        <h2 class="section-title">Secure Contact Channel</h2>
-        <div style="display: flex; flex-wrap: wrap; gap: 2rem;">
-            <div style="flex:1;">
-                <form class="contact-form" id="contactForm">
-                    <input type="text" placeholder="Full Name" required><br><br>
-                    <input type="email" placeholder="Email Address" required><br><br>
-                    <input type="tel" placeholder="Phone"><br><br>
-                    <textarea rows="4" placeholder="Secure Message"></textarea><br><br>
-                    <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
-                        <button type="button" class="btn-primary-red" id="emailSendBtn"><i class="fas fa-paper-plane"></i> Email Send</button>
-                        <button type="button" class="btn-outline-blue" id="whatsappBtn"><i class="fab fa-whatsapp"></i> WhatsApp</button>
-                        <button type="button" class="btn-primary-red" id="callBtn"><i class="fas fa-phone"></i> Call Now</button>
-                    </div>
-                </form>
-            </div>
-            <div style="flex:1;">
-                <div id="map"></div>
-                <p style="margin-top: 0.7rem;"><i class="fas fa-location-dot" style="color: var(--bright-red);"></i> PTCL Exchange, Lahore (PSCA Hub)</p>
-            </div>
-        </div>
-    </div>
+<!-- ========== WHY CHOOSE US ========== -->
+<section class="container py-5" aria-label="Why choose us">
+  <div class="text-center">
+    <h2 class="section-title">Why Choose Us</h2>
+    <p class="section-subtitle">Experience the difference</p>
+  </div>
+  <div class="row g-4">
+    <div class="col-md-4"><div class="feature-card h-100"><i class="bi bi-shield-check"></i><h5>Authentic Quality</h5><p class="text-muted">100% genuine products, carefully sourced.</p></div></div>
+    <div class="col-md-4"><div class="feature-card h-100"><i class="bi bi-clock-history"></i><h5>Timeless Style</h5><p class="text-muted">Classic designs that never go out of fashion.</p></div></div>
+    <div class="col-md-4"><div class="feature-card h-100"><i class="bi bi-heart"></i><h5>Customer First</h5><p class="text-muted">Dedicated support and hassle-free returns.</p></div></div>
+  </div>
 </section>
 
-<footer>
-    <div style="display: flex; justify-content: space-between; flex-wrap: wrap; gap: 1rem;">
-        <div><i class="fas fa-shield-haltered"></i> PSCA | TOBA TEK SINGH UNIT</div>
-        <div>Quick Links: <a href="#home" style="color:white;">Home</a> | <a href="#about" style="color:white;">About</a> | <a href="#contact" style="color:white;">Contact</a></div>
-        <div class="social-icons"><i class="fab fa-twitter"></i> <i class="fab fa-linkedin"></i> <i class="fab fa-github"></i></div>
+<!-- ========== FAQ ========== -->
+<section class="container py-5" aria-label="Frequently asked questions">
+  <div class="text-center">
+    <h2 class="section-title">FAQ</h2>
+    <p class="section-subtitle">Quick answers to common questions</p>
+  </div>
+  <div class="accordion" id="faqAccordion">
+    <div class="accordion-item"><h2 class="accordion-header"><button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq1" aria-expanded="true" aria-controls="faq1">What are your delivery times?</button></h2><div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion"><div class="accordion-body">Standard delivery takes 3-5 business days. Express options available.</div></div></div>
+    <div class="accordion-item"><h2 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2" aria-expanded="false" aria-controls="faq2">Do you ship internationally?</button></h2><div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion"><div class="accordion-body">Yes, we ship worldwide. Shipping costs vary by location.</div></div></div>
+    <div class="accordion-item"><h2 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3" aria-expanded="false" aria-controls="faq3">What is your return policy?</button></h2><div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion"><div class="accordion-body">We accept returns within 14 days of delivery. Items must be unused.</div></div></div>
+  </div>
+</section>
+
+<!-- ========== CONTACT ========== -->
+<section id="contact" class="container py-5" aria-label="Contact us">
+  <div class="text-center">
+    <h2 class="section-title">Get in Touch</h2>
+    <p class="section-subtitle">We'd love to hear from you</p>
+  </div>
+  <div class="row g-4">
+    <div class="col-md-4"><div class="contact-info-card"><i class="bi bi-geo-alt"></i><h5>Visit Us</h5><p class="text-muted">123 Fashion Ave, New York, NY</p></div></div>
+    <div class="col-md-4"><div class="contact-info-card"><i class="bi bi-telephone"></i><h5>Call Us</h5><p class="text-muted">+92 314 5703357</p></div></div>
+    <div class="col-md-4"><div class="contact-info-card"><i class="bi bi-whatsapp"></i><h5>WhatsApp</h5><p class="text-muted">+92 314 5703357</p></div></div>
+    <div class="col-12"><div class="map-placeholder"><i class="bi bi-map me-2"></i> Google Map Placeholder</div></div>
+  </div>
+</section>
+
+<!-- ========== FOOTER ========== -->
+<footer aria-label="Footer">
+  <div class="container">
+    <div class="row g-4">
+      <div class="col-lg-4"><h5>Attaher Ab.</h5><p>Luxury fashion boutique. Timeless elegance, modern sophistication.</p><div class="social-links"><a href="#" aria-label="Facebook"><i class="bi bi-facebook"></i></a><a href="#" aria-label="Instagram"><i class="bi bi-instagram"></i></a><a href="#" aria-label="YouTube"><i class="bi bi-youtube"></i></a></div></div>
+      <div class="col-6 col-lg-2"><h5>Quick Links</h5><ul class="list-unstyled"><li><a href="#home">Home</a></li><li><a href="#products">Products</a></li><li><a href="#about">About</a></li><li><a href="#contact">Contact</a></li></ul></div>
+      <div class="col-6 col-lg-2"><h5>Categories</h5><ul class="list-unstyled" id="footerCategories"><li><a href="#">Women</a></li><li><a href="#">Men</a></li><li><a href="#">Accessories</a></li></ul></div>
+      <div class="col-lg-4"><h5>Newsletter</h5><p>Subscribe for exclusive offers & updates.</p><form><div class="input-group"><input type="email" class="form-control" placeholder="Your email" aria-label="Email for newsletter"><button class="btn btn-primary" type="submit">Join</button></div></form></div>
     </div>
-    <hr style="margin: 1rem 0; border-color:#2D248C;">
-    <div style="text-align: center;">© 2025 Punjab Safe Cities Authority – Official Command Interface</div>
+    <hr class="border-top my-4">
+    <div class="text-center"><small>&copy; 2026 Attaher Ab. All rights reserved.</small></div>
+  </div>
 </footer>
 
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<!-- ========== FLOATING BUTTONS ========== -->
+<a href="https://wa.me/923145703357" target="_blank" class="floating-whatsapp" aria-label="WhatsApp"><i class="bi bi-whatsapp"></i></a>
+<a href="tel:+923145703357" class="floating-call" aria-label="Call us"><i class="bi bi-telephone-fill"></i></a>
+<button class="back-to-top" id="backToTop" aria-label="Back to top"><i class="bi bi-arrow-up"></i></button>
+
+<!-- ========== PRODUCT MODAL ========== -->
+<div class="modal fade" id="productModal" tabindex="-1" aria-labelledby="productModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header"><h5 class="modal-title" id="productModalLabel">Product Details</h5><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
+      <div class="modal-body" id="modalBodyContent">
+        <!-- Dynamic content from JS -->
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ========== SCRIPTS ========== -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 <script>
-    // Live Clock
-    function updateClock() {
-        const now = new Date();
-        document.getElementById('liveClock').innerText = now.toLocaleTimeString('en-PK', { hour12: false }) + " | PKT";
+  // ============================================
+  // SCRIPT.JS
+  // All JavaScript functionality
+  // ============================================
+
+  (function() {
+    'use strict';
+
+    // --- DATA (Placeholder until Facebook data is extracted) ---
+    const categories = [
+      { name: 'Women\'s Wear', image: 'data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'300\' height=\'280\' viewBox=\'0 0 300 280\'%3E%3Crect width=\'300\' height=\'280\' fill=\'%23d9c9b8\'/%3E%3Ctext x=\'60\' y=\'150\' font-family=\'Inter\' fill=\'%23333\'%3EWomen%3C/text%3E%3C/svg%3E' },
+      { name: 'Men\'s Wear', image: 'data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'300\' height=\'280\' viewBox=\'0 0 300 280\'%3E%3Crect width=\'300\' height=\'280\' fill=\'%23c4b5a5\'/%3E%3Ctext x=\'60\' y=\'150\' font-family=\'Inter\' fill=\'%23333\'%3EMen%3C/text%3E%3C/svg%3E' },
+      { name: 'Accessories', image: 'data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'300\' height=\'280\' viewBox=\'0 0 300 280\'%3E%3Crect width=\'300\' height=\'280\' fill=\'%23b0a090\'/%3E%3Ctext x=\'40\' y=\'150\' font-family=\'Inter\' fill=\'%23333\'%3EAccessories%3C/text%3E%3C/svg%3E' },
+      { name: 'Footwear', image: 'data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'300\' height=\'280\' viewBox=\'0 0 300 280\'%3E%3Crect width=\'300\' height=\'280\' fill=\'%239b8b7c\'/%3E%3Ctext x=\'60\' y=\'150\' font-family=\'Inter\' fill=\'%23333\'%3EFootwear%3C/text%3E%3C/svg%3E' }
+    ];
+
+    const products = [
+      { id: 1, title: 'Embroidered Lawn Suit', code: 'ELS-2024', price: 'PKR 4,500', category: 'Women\'s Wear', image: 'data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'400\' height=\'280\' viewBox=\'0 0 400 280\'%3E%3Crect width=\'400\' height=\'280\' fill=\'%23e8ddd0\'/%3E%3Ctext x=\'80\' y=\'150\' font-family=\'Inter\' fill=\'%23555\'%3EProduct 1%3C/text%3E%3C/svg%3E', description: 'Beautiful embroidered lawn suit for summer.', rating: 4.8, badge: 'New' },
+      { id: 2, title: 'Luxury Silk Scarf', code: 'LSS-2024', price: 'PKR 2,200', category: 'Accessories', image: 'data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'400\' height=\'280\' viewBox=\'0 0 400 280\'%3E%3Crect width=\'400\' height=\'280\' fill=\'%23d4c5b2\'/%3E%3Ctext x=\'80\' y=\'150\' font-family=\'Inter\' fill=\'%23555\'%3EProduct 2%3C/text%3E%3C/svg%3E', description: 'Pure silk scarf with gold accents.', rating: 4.9, badge: 'Sale' },
+      { id: 3, title: 'Men\'s Formal Shirt', code: 'MFS-2024', price: 'PKR 3,800', category: 'Men\'s Wear', image: 'data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'400\' height=\'280\' viewBox=\'0 0 400 280\'%3E%3Crect width=\'400\' height=\'280\' fill=\'%23c2b5a5\'/%3E%3Ctext x=\'80\' y=\'150\' font-family=\'Inter\' fill=\'%23555\'%3EProduct 3%3C/text%3E%3C/svg%3E', description: 'Premium cotton formal shirt.', rating: 4.7, badge: 'New' },
+      { id: 4, title: 'Embellished Clutch', code: 'EC-2024', price: 'PKR 3,100', category: 'Accessories', image: 'data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'400\' height=\'280\' viewBox=\'0 0 400 280\'%3E%3Crect width=\'400\' height=\'280\' fill=\'%23b8a99a\'/%3E%3Ctext x=\'80\' y=\'150\' font-family=\'Inter\' fill=\'%23555\'%3EProduct 4%3C/text%3E%3C/svg%3E', description: 'Elegant clutch for evening events.', rating: 4.6, badge: 'Sale' }
+    ];
+
+    // --- Render Categories ---
+    function renderCategories() {
+      const container = document.getElementById('categoryContainer');
+      if (!container) return;
+      container.innerHTML = categories.map(cat => `
+        <div class="col-6 col-md-3">
+          <div class="category-card" data-category="${cat.name}">
+            <img src="${cat.image}" alt="${cat.name}" loading="lazy">
+            <div class="overlay"><h4>${cat.name}</h4></div>
+          </div>
+        </div>
+      `).join('');
+
+      // Category filter click
+      document.querySelectorAll('.category-card').forEach(card => {
+        card.addEventListener('click', function() {
+          const cat = this.dataset.category;
+          filterProducts(cat);
+          // Scroll to products
+          document.getElementById('products').scrollIntoView({ behavior: 'smooth' });
+        });
+      });
     }
-    setInterval(updateClock, 1000);
-    updateClock();
 
-    // Draw circular progress
-    function drawCircle(canvasId, percent) {
-        const canvas = document.getElementById(canvasId);
-        const ctx = canvas.getContext('2d');
-        let size = 150;
-        canvas.width = size; canvas.height = size;
-        let startAngle = -0.5 * Math.PI;
-        let endAngle = startAngle + (percent / 100) * 2 * Math.PI;
-        ctx.clearRect(0,0,size,size);
-        ctx.beginPath();
-        ctx.arc(size/2, size/2, 55, 0, 2*Math.PI);
-        ctx.strokeStyle = '#2D248C';
-        ctx.lineWidth = 12;
-        ctx.stroke();
-        ctx.beginPath();
-        ctx.arc(size/2, size/2, 55, startAngle, endAngle);
-        ctx.strokeStyle = '#EF2B2D';
-        ctx.lineWidth = 12;
-        ctx.stroke();
-        ctx.fillStyle = 'white';
-        ctx.font = 'bold 22px Inter';
-        ctx.fillText(percent+"%", size/2-30, size/2+10);
+    // --- Render Products ---
+    function renderProducts(productArray = products) {
+      const container = document.getElementById('productContainer');
+      if (!container) return;
+      if (productArray.length === 0) {
+        container.innerHTML = `<div class="col-12 text-center py-5"><p class="text-muted">No products found.</p></div>`;
+        return;
+      }
+      container.innerHTML = productArray.map(p => `
+        <div class="col-12 col-sm-6 col-lg-3">
+          <div class="product-card" data-id="${p.id}">
+            <div class="img-wrapper">
+              <img src="${p.image}" alt="${p.title}" loading="lazy">
+              ${p.badge ? `<span class="badge-top">${p.badge}</span>` : ''}
+              <button class="wishlist-icon" aria-label="Add to wishlist"><i class="bi bi-heart"></i></button>
+            </div>
+            <div class="card-body">
+              <h6 class="product-title">${p.title}</h6>
+              <p class="product-code">${p.code}</p>
+              <div class="d-flex justify-content-between align-items-center">
+                <span class="product-price">${p.price}</span>
+                <small><i class="bi bi-star-fill text-warning"></i> ${p.rating}</small>
+              </div>
+              <p class="text-muted small mt-1">${p.description.substring(0, 40)}...</p>
+              <button class="btn btn-outline-primary btn-sm w-100 mt-2 view-detail-btn" data-id="${p.id}">View Details</button>
+            </div>
+          </div>
+        </div>
+      `).join('');
+
+      // Add event listeners for View Details
+      document.querySelectorAll('.view-detail-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+          const id = parseInt(this.dataset.id);
+          const product = products.find(p => p.id === id);
+          if (product) openProductModal(product);
+        });
+      });
     }
-    drawCircle('skill1',95);
-    drawCircle('skill2',98);
-    drawCircle('skill3',92);
-    drawCircle('skill4',96);
 
-    // Counter animation
-    const counters = document.querySelectorAll('.counter-number');
-    const speed = 200;
-    const animateCounters = () => {
-        counters.forEach(counter => {
-            const updateCount = () => {
-                const target = +counter.getAttribute('data-target');
-                let count = +counter.innerText;
-                let increment = target / 50;
-                if(count < target){
-                    count = Math.ceil(count + increment);
-                    counter.innerText = count;
-                    setTimeout(updateCount, 25);
-                } else counter.innerText = target;
-            };
-            updateCount();
+    // --- Filter Products by Category ---
+    function filterProducts(category) {
+      const filtered = category === 'All' ? products : products.filter(p => p.category === category);
+      renderProducts(filtered);
+    }
+
+    // --- Search Functionality ---
+    function searchProducts(query) {
+      const q = query.toLowerCase().trim();
+      if (q === '') { renderProducts(products); return; }
+      const results = products.filter(p =>
+        p.title.toLowerCase().includes(q) ||
+        p.code.toLowerCase().includes(q) ||
+        p.category.toLowerCase().includes(q)
+      );
+      renderProducts(results);
+    }
+
+    // --- Product Modal ---
+    function openProductModal(product) {
+      const modalBody = document.getElementById('modalBodyContent');
+      if (!modalBody) return;
+      const whatsappMsg = `Assalam-o-Alaikum,%0A%0AI want to order this product.%0AProduct Name: ${product.title}%0AProduct Code: ${product.code}%0APrice: ${product.price}%0AProduct Link: ${window.location.href}%0A%0APlease confirm availability.%0AThank you.`;
+      const whatsappUrl = `https://wa.me/923145703357?text=${whatsappMsg}`;
+
+      modalBody.innerHTML = `
+        <div class="row g-4">
+          <div class="col-md-6">
+            <div class="modal-product-image"><img src="${product.image}" alt="${product.title}"></div>
+          </div>
+          <div class="col-md-6">
+            <h3>${product.title}</h3>
+            <p class="text-muted">${product.code}</p>
+            <p class="product-price-lg">${product.price}</p>
+            <p><span class="badge bg-success">In Stock</span></p>
+            <p>${product.description}</p>
+            <p><strong>Category:</strong> ${product.category}</p>
+            <p><strong>Rating:</strong> ${'⭐'.repeat(Math.round(product.rating))}</p>
+            <a href="${whatsappUrl}" target="_blank" class="btn btn-success mt-2"><i class="bi bi-whatsapp me-2"></i>BUY NOW</a>
+          </div>
+        </div>
+      `;
+      new bootstrap.Modal(document.getElementById('productModal')).show();
+    }
+
+    // --- Dark Mode Toggle ---
+    function initDarkMode() {
+      const toggle = document.getElementById('darkModeToggle');
+      if (!toggle) return;
+      toggle.addEventListener('click', function(e) {
+        e.preventDefault();
+        document.body.classList.toggle('dark-mode');
+        const icon = this.querySelector('i');
+        icon.classList.toggle('bi-moon');
+        icon.classList.toggle('bi-sun');
+      });
+    }
+
+    // --- Back to Top ---
+    function initBackToTop() {
+      const btn = document.getElementById('backToTop');
+      if (!btn) return;
+      window.addEventListener('scroll', function() {
+        if (window.scrollY > 500) {
+          btn.classList.add('visible');
+        } else {
+          btn.classList.remove('visible');
+        }
+      });
+      btn.addEventListener('click', function() {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    }
+
+    // --- Scroll Reveal (simple) ---
+    function initScrollReveal() {
+      const reveals = document.querySelectorAll('.reveal');
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('active');
+          }
         });
-    };
-    window.addEventListener('load', animateCounters);
+      }, { threshold: 0.1 });
+      reveals.forEach(el => observer.observe(el));
+    }
 
-    // Testimonial Slider
-    let slideIndex = 0;
-    const track = document.getElementById('testimonialTrack');
-    const slides = document.querySelectorAll('.testimonial-card');
-    const totalSlides = slides.length;
-    document.getElementById('nextSlide').addEventListener('click', () => {
-        slideIndex = (slideIndex+1)%totalSlides;
-        track.style.transform = `translateX(-${slideIndex*100}%)`;
-    });
-    document.getElementById('prevSlide').addEventListener('click', () => {
-        slideIndex = (slideIndex-1+totalSlides)%totalSlides;
-        track.style.transform = `translateX(-${slideIndex*100}%)`;
-    });
+    // --- Loading Screen ---
+    function initLoading() {
+      window.addEventListener('load', function() {
+        const loader = document.getElementById('loading-screen');
+        if (loader) loader.classList.add('hide');
+      });
+    }
 
-    // Navbar toggle + active scroll highlight
-    const menuIcon = document.getElementById('menuIcon');
-    const navLinks = document.getElementById('navLinks');
-    menuIcon.addEventListener('click', ()=> navLinks.classList.toggle('show'));
-    const sections = document.querySelectorAll('section');
-    window.addEventListener('scroll', () => {
-        let current = '';
-        sections.forEach(section => {
-            const sectionTop = section.offsetTop - 100;
-            if(scrollY >= sectionTop) current = section.getAttribute('id');
+    // --- Initialize ---
+    document.addEventListener('DOMContentLoaded', function() {
+      renderCategories();
+      renderProducts(products);
+
+      // Search
+      const searchForm = document.getElementById('searchForm');
+      const searchInput = document.getElementById('searchInput');
+      if (searchForm) {
+        searchForm.addEventListener('submit', function(e) {
+          e.preventDefault();
+          const query = searchInput.value;
+          searchProducts(query);
         });
-        document.querySelectorAll('.nav-links a').forEach(link => {
-            link.classList.remove('active');
-            if(link.getAttribute('href') === `#${current}`) link.classList.add('active');
+        searchInput.addEventListener('input', function() {
+          const query = this.value;
+          if (query === '') renderProducts(products);
         });
+      }
+
+      // Global filter from categories (already set in renderCategories)
+      // Add "All" filter option maybe via a button, but category cards handle it.
+
+      initDarkMode();
+      initBackToTop();
+      initLoading();
+      initScrollReveal();
+
+      // --- Footer categories (dynamic) ---
+      const footerCatList = document.getElementById('footerCategories');
+      if (footerCatList) {
+        footerCatList.innerHTML = categories.map(c => `<li><a href="#">${c.name}</a></li>`).join('');
+      }
+
+      // --- Smooth scroll for nav links ---
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+          const href = this.getAttribute('href');
+          if (href === "#") return;
+          e.preventDefault();
+          const target = document.querySelector(href);
+          if (target) {
+            target.scrollIntoView({ behavior: 'smooth' });
+          }
+        });
+      });
+
+      console.log('Attaher Ab. Boutique loaded successfully.');
     });
 
-    // Contact interactions
-    document.getElementById('contactNowBtn').addEventListener('click', ()=> document.getElementById('contact').scrollIntoView({behavior:'smooth'}));
-    document.getElementById('viewProfileBtn').addEventListener('click',()=> document.getElementById('about').scrollIntoView({behavior:'smooth'}));
-    document.getElementById('emailSendBtn').addEventListener('click',()=> alert('Secure message sent to PSCA communication center.'));
-    document.getElementById('whatsappBtn').addEventListener('click',()=> window.open('https://wa.me/923430164392','_blank'));
-    document.getElementById('callBtn').addEventListener('click',()=> alert('Calling +92 3430164392'));
-    
-    // Leaflet Map (Dark theme)
-    const map = L.map('map').setView([31.5204, 74.3587], 13);
-    L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
-        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OSM</a> & CartoDB',
-        subdomains: 'abcd',
-        maxZoom: 19
-    }).addTo(map);
-    L.marker([31.5204, 74.3587]).addTo(map).bindPopup('PSCA Command Hub, Lahore').openPopup();
-
-    // System Node random status and alert bell
-    setInterval(() => {
-        const node = document.getElementById('nodeStatus');
-        const status = Math.random() > 0.9 ? '● DEGRADED' : '● SYSTEM ONLINE';
-        node.style.color = status.includes('ONLINE') ? '#2E4A24' : '#EF2B2D';
-        node.innerText = status;
-    }, 5000);
-    document.getElementById('alertBell').addEventListener('click', () => alert('[SIMULATED] Emergency alert: Active incident coordination ongoing.'));
+  })();
 </script>
 </body>
 </html>
